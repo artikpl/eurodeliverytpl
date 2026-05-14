@@ -1,0 +1,77 @@
+{% set withRoad = false %}
+{% set withFuel = false %}
+{% set withEnergy = false %}
+{% for key in keys %}
+    {% set variant = attribute(pricelist,key) %}
+    {% if isset(variant.surcharges.road) %}{% set withRoad=true %}{% endif %}
+    {% if isset(variant.surcharges.fuel) %}{% set withFuel=true %}{% endif %}
+    {% if isset(variant.surcharges.energy) %}{% set withEnergy=true %}{% endif %}
+{% endfor %}
+{% set cols = (withRoad ? 1 : 0) + (withFuel ? 1 : 0) + (withEnergy ? 1 : 0) %}
+<div class="table-details-wrapper">
+<table class="table-details">
+    <thead>
+        <tr>
+            <th{% if cols>0 %} rowspan="2"{% endif %}>Nazwa</th>
+            {% if cols>0 %}
+                <th>Bazowa</th>
+                <th colspan="{{ cols }}">Opłata</th>
+
+            {% endif %}
+            <th{% if cols>0 %} rowspan="2"{% endif %}>Netto</th>
+            <th{% if cols>0 %} rowspan="2"{% endif %}>Brutto</th>
+        </tr>
+
+        {% if cols>0 %}
+        <tr>
+            <th>Netto</th>
+            {% if withFuel %}
+                <th>paliwowa</th>
+            {% endif %}
+            {% if withEnergy %}
+                <th>energetyczna</th>
+            {% endif %}
+            {% if withRoad %}
+                <th>drogowa</th>
+            {% endif %}
+        </tr>
+        {% endif %}
+    </thead>
+    <tbody>
+    {% for key in keys %}
+        {% set variant = attribute(pricelist,key) %}
+        {% set base = round(variant.price.amount,2) %}
+        {% set net = round(variant.price.amount,2) %}
+        {% set gross = round(net*1.23, 2) %}
+        <tr>
+            <td>{% if str_ends_with(variant.product.name, variant.name) === false %}{{ variant.product.name }}, {% endif %}{{ variant.name }}</td>
+            <td class="text-end">{{ number_format(base) }}</td>
+            {% if cols>0 %}
+                {% for skey in ['fuel','road','energy'] %}
+                    {% set surcharge = attribute(variant.surcharges,skey) %}
+                    {% if isset(surcharge) %}
+                        {% if surcharge.percentage %}
+                            {% set base = round(base*(1+surcharge.amount),2) %}
+                        {% else %}
+                            {% set base = round(base+surcharge.price.amount,2) %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {% set gross = round(base*1.23, 2) %}
+                {% if withFuel %}
+                    {{ include('pricelist-table-surcharge.twig', {surcharge: variant.surcharges.fuel}) }}
+                {% endif %}
+                {% if withEnergy %}
+                    {{ include('pricelist-table-surcharge.twig', {surcharge: variant.surcharges.energy}) }}
+                {% endif %}
+                {% if withRoad %}
+                    {{ include('pricelist-table-surcharge.twig', {surcharge: variant.surcharges.road}) }}
+                {% endif %}
+                <td class="text-end">{{ number_format(base) }}</td>
+            {% endif %}
+            <td class="text-end">{{ number_format(gross) }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>

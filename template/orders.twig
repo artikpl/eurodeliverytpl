@@ -1,0 +1,129 @@
+{% extends "logged.twig" %}
+{% block breadcrumbs %}{% endblock %}
+{% block header %}Integracje{% endblock %}
+{% block inner %}
+    <div class="row mb-1">
+        <div class="col">
+            <button name="add-integrations" type="button">Dodaj integracje</button>
+        </div>
+    </div>
+    <div class="filter" style="display: none;">
+        <form name="filter">
+            <label>
+                Źródło: <select name="source">
+                    <option value="0"></option>
+                    {% for integration in data.integrations %}
+                        <option value="{{ integration.id }}">{{ integration.type.name }}, {{ integration.name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label>
+                Status: <select name="status"></select>
+            </label>
+        </form>
+    </div>
+    <div class="table-details-wrapper" style="display: none;">
+        <table class="table-details" width="100%">
+            <thead>
+            <tr class="text-center">
+                <th>ID</th>
+                <th>
+                    <p>Metoda płatności</p>
+                    <p>Metoda dostawy</p>
+                </th>
+                <th>
+                    <p>Kupujący</p>
+                    <p>Kraj</p>
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for shipment in data.shipments %}
+                {% set total=0 %}
+                {% for item in shipment.priceItems %}
+                    {% set total = total+round(item.price.amount*item.quantity,2) %}
+                {% endfor %}
+                {% set gross=round(total*1.23,2) %}
+                <tr{% if isset(shipment.cancellation) %} style="opacity: 0.5; cursor: not-allowed"{% endif %}>
+                    <td class="wa text-center">
+                        {% if empty(shipment.cancellation) %}
+                            <label>
+                                <input type="checkbox" name="ids[]" value="{{ shipment.id }}"/>
+                            </label>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <a href="/przesylki/{{ shipment.id }}">{{ shipment.id }}</a>
+                    </td>
+                    <td class="text-center text-nowrap">
+                        <p>{{ date('Y-m-d H:i', shipment.added.time) }}</p>
+                        <p>{{ shipment.dispatchDate }}</p>
+                    </td>
+                    <td class="text-center">
+                        <p><span class="courier-name courier-name-1">{{ shipment.service.carrier.name }}</span></p>
+                        {% if isset(shipment.waybill.number) %}
+                            <p><a href="/sledzenie/{{ shipment.waybill.number }}/{{ shipment.waybill.service.carrier.code }}" target="_blank">{{ shipment.waybill.number }}</a></p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <strong>{{ shipment.addresses.recipient.firstname }} {{ shipment.addresses.recipient.lastname }} {{ shipment.addresses.recipient.company }}</strong><br>
+                        {{ shipment.addresses.recipient.city }}
+                        <p class="shipment-error"></p>
+                    </td>
+                    <td class="text-end">
+                        {# <span class="net"{% if total<=0 %} style="display: none;"{% endif %}>{{ number_format(total) }} zł</span><br> #}
+                        <p><strong class="gross text-nowrap"{% if total<=0 %} style="display: none;"{% endif %}>{{ number_format(gross) }} zł</strong></p>
+                        {% if isset(shipment.options.cod.amount) %}
+                            <p><em class="text-nowrap">{{ number_format(shipment.options.cod.amount)}} zł</em></p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if isset(shipment.cancellation) %}
+                            <strong>anulowana</strong>
+                        {% else %}
+                            <strong>{{ shipment.waybill.status.type.title }}</strong>
+                        {% endif %}
+
+                    </td>
+                    <td class="text-nowrap text-end">
+                        <p>
+                            <a href="/przesylki/{{ shipment.id }}">Szczegóły</a>
+                        </p>
+                        {% if isset(shipment.waybill.number) %}
+                            <p><a href="/przesylki/{{ shipment.id }}/ponow">Wyślij ponownie</a></p>
+                            {% if empty(shipment.cancellation) %}
+                                <p>
+                                    <a href="/przesylki/{{ shipment.id }}/etykieta" target="_blank">Etykieta</a>
+                                    <a href="/przesylki/{{ shipment.id }}/protokol" target="_blank">Protokół</a>
+                                </p>
+                            {% endif %}
+                        {% else %}
+                            <p>
+                                <a href="/przesylki/{{ shipment.id }}/edycja">Edytuj</a>
+                            </p>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}</tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block bottomcontent %}
+    <script type="text/javascript" src="/js/Modal.js?{{ time() }}"></script>
+    <script type="text/javascript" src="/js/orders.js?{{ time() }}"></script>
+    <script type="text/javascript">const integrations = {{ data.integrations|json_encode|raw }};</script>
+    <template>Celem ułatwienia Waszej pracy udostępniamy dwa sposoby integracji z naszymi usługami:
+        <p><strong>Wewnętrzne</strong> - Zamówienia pobierane są do naszego systemu i z jego poziomu następuje rejestracja przesyłek</p>
+        <div class="internal-integrations"></div>
+        <p><strong>Zewnętrzne</strong> - Przesyłki są rejestrowane z poziomu systemu z którego aktualnie korzystacie</p>
+        <div class="external-integrations">
+            <p class="mb-1 text-center">
+                <button type="button" class="w-50" data-type="brokersystem">Base.com</button>
+            </p>
+            <p class="mb-1 text-center">
+                <button type="button" class="w-50" data-type="idosellisf">IdoSell</button>
+            </p>
+        </div>
+    </template>
+{% endblock %}

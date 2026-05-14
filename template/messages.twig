@@ -1,0 +1,16 @@
+{% if hasErrors() %}
+    <div class="messages error">
+        {% for error in getErrors() %}
+            <p>{{ error.message }}</p>
+        {% endfor %}
+        {{ flushErrors() }}
+    </div>
+{% endif %}
+{% if hasNotifications() %}
+    <div class="messages success">
+        {% for notification in getNotifications() %}
+            <p>{{ notification }}</p>
+        {% endfor %}
+        {{ flushNotifications() }}
+    </div>
+{% endif %}

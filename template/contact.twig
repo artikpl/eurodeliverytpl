@@ -1,0 +1,90 @@
+{% extends "unlogged.twig" %}
+{% block breadcrumbs %}<a href="/">Strona główna</a> &gt; <a href="/kontakt">Kontakt</a>{% endblock %}
+{% block header %}Kontakt{% endblock %}
+{% block inner %}<div class="row">
+            <div class="col-md-6 mx-md-auto">
+
+
+
+                <p><strong>Skontaktuj się z nami&nbsp;</strong></p>
+
+                <p>Masz pytanie? Chcesz szybko zorganizować wysyłkę lub potrzebujesz pomocy? Jesteśmy tutaj, aby Ci pom&oacute;c!</p>
+
+                <p>Możesz się z nami skontaktować w spos&oacute;b, kt&oacute;ry najbardziej Ci odpowiada &ndash; mailowo lub telefonicznie. Wybierz, co dla Ciebie wygodniejsze.</p>
+
+                <p><strong>Kontakt telefoniczny</strong></p>
+
+                <p>Zadzwoń do nas:&nbsp;<strong>884 091 911</strong> &ndash; nie zostaniesz połączony z botem ani z centralą &ndash; Twoje połączenie odbierze&nbsp;Opiekun. Jeżeli w danym momencie będzie zajęty, oddzwoni do Ciebie niezwłocznie po zakończeniu rozmowy.&nbsp;Tw&oacute;j Opiekun jest dostępny w dni robocze w godzinach 8:00&ndash;16:00 i chętnie odpowie na wszystkie pytania.</p>
+
+                <p><strong>Kontakt mailowy</strong></p>
+
+                <p>Wolisz napisać? Wyślij zapytanie na adres mailowy: <strong>kontakt@eurodelivery</strong> lub wypełnij kr&oacute;tki formularz poniżej, a my odpowiemy najszybciej, jak to będzie możliwe.</p>
+
+                <p><strong>Dbamy o to, aby kontakt z nami był prosty, szybki i skuteczny.</strong></p>
+
+                <p>&nbsp;</p>
+
+                <p><strong>EuroDelivery SP. Z O.O.</strong></p>
+
+                <p>Dworska
+
+
+
+                    <br />
+                    Opole</p>
+
+                <p>NIP: 0123456789</p>
+
+                <p>e-mail: <a href="mailto:kontakt@eurodelivery">kontakt@eurodelivery</a><br />
+                    telefon: <a href="tel:500600700">500600700</a></p>
+
+                <br><br>
+                <div class="contact-form-box">
+                    <form method="post">
+                        <h3>Formularz kontaktowy</h3>
+                        <label>
+                            <span>Imię i nazwisko:</span>
+                            <input type="text" name="name">
+                        </label>
+                        <label>
+                            <span>E-mail:</span>
+                            <input type="email" name="email">
+                        </label>
+                        <label>
+                            <span>Numer klienta:</span>
+                            <input type="number" name="party" min="1" step="1">
+                        </label>
+                        <label>
+                            <span>Telefon:</span>
+                            <input type="text" name="phone">
+                        </label>
+                        <label>
+                            <span>Temat:</span>
+                            <select name="topic">
+                                <option>Przesyłka nie została odebrana</option>
+                                <option>Reklamacja</option>
+                                <option>Nie mogę zlokalizować mojej przesyłki</option>
+                                <option>Informacja na temat usług</option>
+                                <option>Inny</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span>Treść:</span>
+                            <textarea name="content"></textarea>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="accept" value="1" style="float: left;
+    margin-right: 10px;
+    position: relative;
+    top: 3px;"/>
+                            Wyrażam zgodę na przetwarzanie moich danych osobowych przez EuroDelivery Sp. z o. o. w celu obsługi mojego zapytania. Więcej informacji w <a href="/polityka-prywatnosci">Polityce Prywatności</a>.
+                        </label>
+
+                        <div class="required-label">Pola <strong>pogrubione</strong> są wymagane.</div>    <br>
+                        <button type="submit">Wyślij wiadomość</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+{% block bottomcontent %}{% endblock %}

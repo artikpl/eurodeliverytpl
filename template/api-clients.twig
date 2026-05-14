@@ -1,0 +1,66 @@
+{% extends "logged.twig" %}
+{% block breadcrumbs %}{% endblock %}
+{% block header %}API{% endblock %}
+{% block inner %}
+    <div class="row row-mb-1">
+        <div class="col">
+            Aby móc skorzystać z naszego API zapoznaj się z jego <a href="/api/docs">dokumentacją</a> a następnie utwórz dane autoryzacyjne w poniższym formularzu by móc wdrożyć je w Twoim systemie.
+        </div>
+    </div>
+    <div class="row mb-1">
+        <div class="col">
+            <button name="add-client" type="button" style="display: none;">Utwórz klienta</button>
+        </div>
+    </div>
+
+    <div class="table-details-wrapper" >
+        <table class="table-details api-clients" width="100%">
+            <thead>
+            <tr class="text-center">
+                <th>Client ID</th>
+                <th>Nazwa</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block bottomcontent %}
+    <script type="text/javascript" src="/js/Modal.js?{{ time() }}"></script>
+    <script type="text/javascript">const clients = {{ data.clients|json_encode|raw }};</script>
+    <script type="text/javascript" src="/js/api-clients.js?{{ time() }}"></script></script>
+    <template>
+        <form name="new-client">
+            <table class="text-center">
+                <tr>
+                    <td>Nazwa</td>
+                    <td><input type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="alert alert-info">Po zapisaniu otrzymasz Client ID oraz Client Secret które potrzebnę są przy integracji z naszym API</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">
+                            Zapisz
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <table class="saved" style="display: none;">
+            <tr>
+                <td>Client ID</td>
+                <td><input type="text" name="client_id"></td>
+            </tr>
+            <tr>
+                <td>Client Secret</td>
+                <td><input type="text" name="client_secret"></td>
+            </tr>
+        </table>
+    </template>
+{% endblock %}

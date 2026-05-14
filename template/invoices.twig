@@ -1,0 +1,66 @@
+{% extends "logged.twig" %}
+{% block breadcrumbs %}<a href="/">Strona główna</a> &gt; <a href="/panel-klienta">Panel klienta</a> &gt; <a href="/faktury">Faktury</a>{% endblock %}
+{% block header %}Faktury{% endblock %}
+{% block inner %}
+
+    {# <form action="/faktura" class="filter-form" novalidate="novalidate" id="FakturaIndexForm" method="post" accept-charset="utf-8"><div style="display:none;"><input type="hidden" name="_method" value="POST"/></div><input type="hidden" name="data[Faktura][usun_filtr]" id="clear-filter-field" value="0"/>
+    <div class="input text required"><label for="FakturaNumer">Numer:</label><input name="data[Faktura][numer]" maxlength="20" type="text" id="FakturaNumer" required="required"/></div><div class="input text"><label for="FakturaKwotaOd">Kwota netto od:</label><input name="data[Faktura][kwota_od]" type="text" id="FakturaKwotaOd"/></div><div class="input text"><label for="FakturaKwotaDo">Kwota netto do:</label><input name="data[Faktura][kwota_do]" type="text" id="FakturaKwotaDo"/></div><div class="input text"><label for="FakturaData2">Data:</label><input name="data[Faktura][data1]" class="datepicker" id="FakturaData2" type="text"/></div><div class="input select"><label for="FakturaOplacona">Opłacona:</label><select name="data[Faktura][oplacona]" id="FakturaOplacona">
+                    <option value="">-każda-</option>
+                    <option value="tak">tak</option>
+                    <option value="nie">nie</option>
+                </select></div><div>
+                <input class="button" type="submit" value="Filtruj"/><button class="button button-grey clear-filter-button" type="submit">Usuń filtr</button></div>
+        </form> #}
+    {% if empty(data.invoices) %}
+        Brak faktur
+    {% else %}
+        <div class="table-details-wrapper">
+        <table class="table-details text-center">
+            <thead>
+                <tr>
+                    <th>{# <a href="/faktura/index/sort:Faktura.id/direction:asc">#}ID{# </a>#}</th>
+                    <th>{#<a href="/faktura/index/sort:Faktura.numer/direction:asc">#}Numer{# </a>#}</th>
+                    <th>
+                        {#<a href="/faktura/index/sort:Faktura.kwota_netto/direction:asc">#}<p>Kwota netto</p>{# </a>#}
+                        {#<a href="/faktura/index/sort:Faktura.kwota_brutto/direction:asc">#}<p>Kwota brutto</p>{# </a>#}</th>
+                    <th>
+                        {#<a href="/faktura/index/sort:Faktura.zaplacono/direction:asc">#}<p>Zapłacono</p>{# </a>#}
+                        {#<a href="/faktura/index/sort:Faktura.pozostalo/direction:asc">#}<p>Pozostało</p>{# </a>#}</th>
+                    <th>
+                        {#<a href="/faktura/index/sort:Faktura.data_wystawienia/direction:asc" class="desc">#}Data wystawienia{# </a><br />#}
+                        {#<a href="/faktura/index/sort:Faktura.termin_platnosci/direction:asc">Termin płatności</a>#}			</th>
+                    <th>{#<a href="/faktura/index/sort:Faktura.oplacona/direction:asc">#}Opłacona{# </a>#}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            {% for invoice in data.invoices %}
+                <tr>
+                    <td>{{ invoice.id }}</td>
+                    <td>{{ invoice.number }}</td>
+                    <td class="text-end">
+                        <p>{{ number_format(invoice.net)}} zł</p>
+                        <p>{{ number_format(invoice.gross)}} zł</p>
+                    </td>
+                    <td class="text-end">
+                        <p>{{ number_format(invoice.paidSum)}} zł</p>
+                        <p><strong>{{ number_format(invoice.left)}} zł</strong></p>
+                    </td>
+                    <td>
+                        {{ invoice.issue_date }}
+                        {# <br />2025-12-07				 #}</td>
+                    <td>{% if invoice.paid %}tak{% else %}nie{% endif %}</td>
+                    <td>
+                        <p><a href="/faktury/{{ invoice.id }}/pdf" target="_blank">Pobierz</a></p>
+                        {% if invoice.hasSpecification>0 %}<p><a href="/faktury/{{ invoice.id }}/specyfikacja">Specyfikacja</a></p>{% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        </div>
+
+        {# <div class="pager">
+            <span class="prev"> </span><span class="next"> </span><br />
+            <div class="counter">Strona 1 z 1, wyświetlono pozycje od 1 do 3, łącznie pozycji: 3.</div>
+        </div> #}
+    {% endif %}
+{% endblock %}

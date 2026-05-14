@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+    <title>EuroDelivery</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="" />
+    <meta name="language" content="pl" />
+</head>
+<body>
+<div id="content_iframe">
+    <script id="dpd-widget" type="text/javascript">
+        function pointSelected(pointID) {
+            parent.OrderForm.setPointFromMap({{ data.direction|json_encode|raw }}, pointID, pointID);
+        }
+    </script>
+    <script type="text/javascript" src="//pudofinder.dpd.com.pl/source/dpd_widget.js?key=21f76bdf82355542ab6694a0523d6086&swip_box=1"></script>
+
+</div>
+<script type="text/javascript" src="/js/jquery-4.0.0.min.js"></script>
+<script type="text/javascript" src="/vendor/jquery-ui-1.13.2.custom/jquery-ui.min.js">
+
+</script><script type="text/javascript" src="/vendor/ui.datepicker-pl.js"></script>
+</body>
+</html>

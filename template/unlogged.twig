@@ -1,0 +1,8 @@
+{% extends "core.twig" %}
+{% block content %}
+    <div class="container">
+        <h1>{% block header %} {% endblock %}</h1>
+        {{ include('messages.twig') }}
+        {% block inner %} {% endblock %}
+    </div>
+{% endblock %}

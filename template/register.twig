@@ -1,0 +1,97 @@
+{% extends "unlogged.twig" %}
+{% block breadcrumbs %}<a href="/">Strona główna</a> &gt; <a href="/rejestracja">Załóż Konto</a>{% endblock %}
+{% block header %}Załóż konto{% endblock %}
+{% block inner %}<div class="row">
+            <div class="col-lg-6">
+                <form name="register" method='post' style="display: none;">
+                    <label>
+                        <span>E-mail:</span>
+                        <input name="email" maxlength="200" type="email" required="required"/>
+                    </label>
+                    <label>
+                        <span>Hasło:</span>
+                        <input name="password" type="password" required="required"/>
+                    </label>
+                    <label>
+                        <span>Powtórz hasło:</span>
+                        <input name="password2" type="password" required="required"/>
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="check-all" value="1"/>
+                        Zaznacz wszystko
+                    </label>
+                    <label>
+                        <input type="checkbox" name="terms" value="1"/>
+                        &nbsp;Akceptuję <a href="/strona/regulamin">regulamin</a> serwisu internetowego.
+                    </label>
+                    <label>
+                        <input type="checkbox" name="rodo" value="1"/>
+                        Oświadczam, iż ukończyłem/am 18 rok życia i zgadzam się na przetwarzanie moich danych osobowych przez EuroDelivery Sp. z o. o.,
+                            Podanie danych jest dobrowolne.
+                            Podstawą przetwarzania danych jest moja zgoda. Mam prawo wycofania zgody w dowolnym momencie. Dane osobowe będą przetwarzane do czasu odwołania zgody.
+                            Mam prawo żądania od administratora dostępu do moich danych osobowych, ich sprostowania,
+                            usunięcia lub ograniczenia przetwarzania, a także prawo wniesienia skargi do organu nadzorczego.
+                            Strona stosuje profilowanie użytkowników m.in. za pośrednictwem plików cookies, w tym analitycznych, o czym więcej w <a href="/polityka-prywatnosci">Polityce Prywatności</a>
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="newsletter" value="1"/>
+                        Chcę otrzymywać informacje o zmianach, nowościach i promocjach
+                    </label>
+                    <button type="submit">Załóż konto</button>
+                </form>
+            </div>
+            <div class="col-lg-6 login-guide">
+                <div class="row mt-5 mt-lg-4">
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="number">1</div>
+                            <div class="title">Podaj dokładne wymiary i wagę paczki</div>
+                            <div class="content">Dzięki temu unikniesz niespodziewanych dopłat i opóźnień w dostawie.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="number">2</div>
+                            <div class="title">Wypełnij wszystkie dane adresowe</div>
+                            <div class="content">Dokładność w tym kroku zwiększa szansę na szybką i bezpieczną dostawę.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="number">3</div>
+                            <div class="title">Wybierz sposób nadania przesyłki</div>
+                            <div class="content">Odbiór przez kuriera, nadanie w paczkomacie, nadanie w punkcie. Decyzja należy do Ciebie!</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="number">4</div>
+                            <div class="title">Opłać wysyłkę, przygotuj paczkę i dokumenty</div>
+                            <div class="content">Wydrukuj etykietę, naklej ją na przesyłkę i przekaż kurierowi protokół do podpisu - to Twoje potwierdzenie odbioru.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+{% block bottomcontent %}<script>
+    const inputs = {
+        terms: $('[name=terms]'),
+        rodo: $('[name=rodo]'),
+        newsletter: $('[name=newsletter]'),
+        all: $('[name=check-all]'),
+    };
+    inputs.all.change(function() {
+        const checked = this.all.is(':checked');
+        this.terms.prop('checked', checked);
+        this.rodo.prop('checked', checked);
+        this.newsletter.prop('checked', checked);
+    }.bind(inputs));
+    $([inputs.terms,inputs.rodo,inputs.newsletter]).change(function() {
+        const all = this.terms.is(':checked') && this.rodo.is(':checked') && this.newsletter.is(':checked');
+        this.all.prop('checked', all);
+    }.bind(inputs));
+    $('form').show();
+</script>{% endblock %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+    <title>EuroDelivery</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="" />
+    <meta name="language" content="pl" />
+    <script>
+        (function (o, r, l, e, n) {
+            o[l] = o[l] || [];
+            var f = r.getElementsByTagName('head')[0];
+            var j = r.createElement('script');
+            j.async = true;
+            j.src = e + 'widget.js?token=' + n + '&v=1.0.0&t=' + Math.floor(new Date().getTime() / 1000);
+            f.insertBefore(j, f.firstChild);
+        })(window, document, 'orlenpaczka', 'https://mapa.orlenpaczka.pl/', 'bb85fe0f99a3fa4346cbab944895d49ffe67216d5c14cac7efb97ca63d0794426f3e564d6c38e732f8c6b8b55858bdc4650530156b6c05e612bb88e0');
+    </script>
+</head>
+<body>
+<div id="content_iframe">
+
+
+    <div class="orlen-widget" data-target="#punktId" data-label="#punktOpis"></div>
+
+    <input name="punktId" type="hidden" id="punktId" value="" />
+    <input name="punktOpis" type="hidden" id="punktOpis" value="" />
+
+</div>
+<script>
+    ti = null;
+    ti = setInterval(function() {
+        if($('#punktId').val() != '') {
+            clearInterval(ti);
+            parent.OrderForm.setPointFromMap('{{ data.direction }}', $('#punktId').val(), $('#punktOpis').val());
+        }
+    }, 500);
+</script>
+</body>
+</html>

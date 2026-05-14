@@ -1,0 +1,209 @@
+{% extends "core.twig" %}
+{% block headerparent %}{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="headers">
+        <p>Logistyka dla firmy i klientów indywidualnych</p>
+        <p class="last">szybko, wygodnie i bezpiecznie</p>
+    </div>
+    <div class="calculator">
+        <div class="cheader">Informacje o przesyłce</div>
+        <div class="cbody">
+            <form name="topForm">
+                <div class="row m-0">
+                    <div class="col-lg-2">
+                        <div class="row p-1">
+                            <div class="col-12">
+                                <label class="shipment-type">
+                                    <input type="radio" name="parcel-type" value="envelope">
+                                    <span class="material-icons">email</span>
+                                    Koperta
+                                </label>
+                            </div>
+                            <div class="col-12">
+                                <label class="shipment-type">
+                                    <input type="radio" name="parcel-type" value="parcel">
+                                    <span class="material-icons">inventory_2</span>
+                                    Paczka
+                                </label>
+                            </div>
+                            <div class="col-12">
+                                <label class="shipment-type">
+                                    <input type="radio" name="parcel-type" value="pallet">
+                                    <span class="material-icons">pallet</span>
+                                    Paleta
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="row">
+                            <div class="col-12 col-sm-7">
+                                <div class="row">
+                                    <div class="col-12 col-sm-8">
+                                        <label>
+                                            Opakowanie
+                                            <select name="parcels[0].nonstandard">
+                                                <option value="0">Standardowe</option>
+                                                <option value="1">Niestandardowe</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label>
+                                            Waga
+                                            <input name="parcels[0].weight" type="number" min="0.1" step="0.1" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6 col-sm-4">
+                                        <label>
+                                            Długość
+                                            <input name="parcels[0].length" type="number" min="1" step="1" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="col-6 col-sm-4">
+                                        <label>
+                                            Szerokość
+                                            <input name="parcels[0].width" type="number" min="1" step="1" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="col-6 col-sm-4">
+                                        <label>
+                                            Wysokość
+                                            <input name="parcels[0].height" type="number" min="1" step="1" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-5">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>
+                                            Skąd
+                                            <select name="sender.country">
+                                                {% for country in getEuCountries('PL') %}
+                                                    <option value="{{ country.iso }}"{% if country.selected %} selected {% endif %}>{{ country.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div class="col-6">
+                                        <label>
+                                            <span class="text-nowrap">Kod pocztowy</span>
+                                            <input type="text" name="sender.postcode">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>
+                                            Dokąd
+                                            <select name="recipient.country">
+                                                {% for country in getEuCountries('PL') %}
+                                                    <option value="{{ country.iso }}"{% if country.selected %} selected {% endif %}>{{ country.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div class="col-6">
+                                        <label>
+                                            <span class="text-nowrap">Kod pocztowy</span>
+                                            <input type="text" name="recipient.postcode">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 send">
+                        <button type="submit" name="send">
+                            Wyślij
+                        </button>
+                        <p class="gross">Cena od <span></span> zł</p>
+                        <p class="net">(<span></span> zł netto)</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container steps-titles">
+    <p class="title2">Zobacz jakie to proste</p>
+</div>
+<div class="container">
+    <div class="steps row">
+        <div class="col-lg-3 col-md-6 col-12">
+            <div class="icon">1</div>
+            <p class="title">Podaj dokładne wymiary i wagę paczki</p>
+            <p>Dzięki temu unikniesz niespodziewanych dopłat i opóźnień w dostawie.</p>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+            <div class="icon">2</div>
+            <p class="title">Wypełnij wszystkie dane adresowe</p>
+            <p>Dokładność w tym kroku zwiększa szansę na szybką i bezpieczną dostawę.</p>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+            <div class="icon">3</div>
+            <p class="title">Wybierz sposób nadania przesyłki</p>
+            <p>Odbiór przez kuriera, nadanie w paczkomacie, nadanie w punkcie. Decyzja należy do Ciebie!</p>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+            <div class="icon">4</div>
+            <p class="title">Opłać wysyłkę, przygotuj paczkę i dokumenty</p>
+            <p>Wydrukuj etykietę, naklej ją na przesyłkę i przekaż kurierowi protokół do podpisu - to Twoje potwierdzenie odbioru.</p>
+        </div>
+    </div>
+</div>
+{# <div class="middlebar">
+    <div class="container">
+        <h1>Kompleksowa obsługa przesyłek</h1>
+        <p><a href="/rejestracja">Załóż darmowe konto i nadawaj z nami</a></p>
+    </div>
+</div>  #}
+<div class="container steps-titles">
+    <p class="title2">Przewodnik</p>
+</div>
+<div class="container">
+    <div class="row news-list">
+        <div class="col-12 col-md-6 col-lg-4 news">
+            <div>
+                <a href="/strona/to-trzeba-wiedziec-1" class="img">
+                    <img src="/files/strona/1b143faf21784e1fe43c608aba8fd690.jpg" alt="">
+                </a>
+                <a href="/strona/to-trzeba-wiedziec-1" class="title">To trzeba wiedzieć !</a>
+                <div class="short">
+                    <p>Każda firma kurierska stosuje własne kryteria klasyfikacji paczek. Ma to wpływ na koszt wysyłki. W tym miejscu znajdziesz wszystkie kluczowe informacje &ndash; <strong>kr&oacute;tko, przejrzyście i konkretnie.</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 news">
+            <div>
+                <a href="/strona/o-tym-warto-pamietac" class="img">
+                    <img src="/files/strona/5f5ec6584409c6bade9dcef01f1e6b12.jpg" alt="">
+                </a>
+                <a href="/strona/o-tym-warto-pamietac" class="title">O tym warto pamiętać</a>
+                <div class="short">
+                    <p>Praktyczne wskaz&oacute;wki dotyczące działania firm kurierskich. Trochę szerzej o <strong>zasadach, możliwościach i wyjątkach.</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 news">
+            <div>
+                <a href="/strona/to-pomoze-i-przyspieszy" class="img">
+                    <img src="/files/strona/e2560de6ab8fb8256795336c43eb7ac4.jpg" alt="">
+                </a>
+                <a href="/strona/to-pomoze-i-przyspieszy" class="title">To pomoże i przyspieszy...</a>
+                <div class="short">
+                    <p>Przygotowaliśmy w tym miejscu zestaw przydatnych <strong>link&oacute;w i formularzy</strong>. Dzięki temu oszczędzisz czas i szybko załatwisz najważniejsze sprawy &ndash; bez zbędnego szukania.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>
+{% endblock %}
+{% block contentclass %}index{% endblock %}
+{% block bottomcontent %}<script type="text/javascript" src="/js/index.js"></script>{% endblock %}

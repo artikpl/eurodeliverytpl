@@ -1,0 +1,38 @@
+{% extends "logged.twig" %}
+{% block breadcrumbs %}{% endblock %}
+{% block header %}Szablony!{% endblock %}
+{% block inner %}
+    <div class="row mb-1">
+        <div class="col">
+            {% if data.registered is null or data.registered == true %}
+                <a class="btn" href="/szablony/nowy">Nowy2</a>
+            {% endif %}
+        </div>
+    </div>
+    {% if isset(data.templates) %}
+        <div class="table-details-wrapper">
+            <table class="table-details" width="100%">
+                <thead>
+                    <tr class="text-center">
+                        <th class="w-100">Nazwa</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for template in data.templates %}
+                    <tr>
+                        <td class="text-center text-nowrap">
+                            {{ template.name }}
+                        </td>
+                        <td class="text-nowrap text-end">
+                            <p>
+                                <a href="/szablony/{{ template.id }}">Edytuj</a>
+                                <a href="/przesylki/nowa?templateId={{ template.id }}">Wyślij</a>
+                            </p>
+                        </td>
+                    </tr>
+                {% endfor %}</tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}

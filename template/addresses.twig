@@ -1,0 +1,74 @@
+{% extends "logged.twig" %}
+{% block breadcrumbs %}<a href="/">Strona główna</a> &gt; <a href="/panel-klienta">Panel klienta</a> &gt; <a href="/kontakty">Książka adresowa</a>{% endblock %}
+{% block header %}Książka adresowa{% endblock %}
+{% block title %}Książka adresowa{% endblock %}
+{% block inner %}
+{# <form action="/kontakty" class="filter-form" id="AdresIndexForm" method="post" accept-charset="utf-8"><div style="display:none;"><input type="hidden" name="_method" value="POST"/></div><input type="hidden" name="data[Adres][usun_filtr]" id="clear-filter-field" value="0"/><div class="input text"><label for="AdresTekst">Wyszukaj adres:</label><input name="data[Adres][tekst]" value="" type="text" id="AdresTekst"/></div><div>
+                <input class="button" type="submit" value="Filtruj"/><button class="button button-grey clear-filter-button" type="submit">Usuń filtr</button></div>
+        </form>
+
+        <a href="/kontakty/import" class="button">Importuj</a>
+        <a href="/kontakty/eksport" class="button">Eksportuj</a><br /><br /> #}
+
+    <div class="mb-1">
+         <form>
+            <label>
+                Fraza
+                <input type="text" name="query" value="{{ data.query }}" style="width: 20em; display: inline;">
+                <button type="submit">Wyszukaj</button>
+            </label>
+         </form>
+    </div>
+    <div class="row mb-1">
+        <div class="col">
+            <a href="/kontakty/nowy" class="btn">Dodaj adres</a>
+        </div>
+    </div>
+    {% if empty(data.rows) %}
+    <h2>Brak adresów</h2>
+    {% else %}
+        <div class="table-details-wrapper">
+            <table class="table-details">
+                <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Nazwisko, Imię, Firma<br>Kraj, Miasto, Adres</th>
+                        <th>Telefon</th>
+                        <th></th>
+                        {#
+                        <th>
+                            <a href="/kontakty/index/sort:Adres.nazwa/direction:desc" class="asc">Nazwa</a>			</th>
+                        <th>
+                            <a href="/kontakty/index/sort:Adres.nazwisko/direction:asc">Nazwisko</a>
+                            <a href="/kontakty/index/sort:Adres.imie/direction:asc">Imię</a>,
+                            <a href="/kontakty/index/sort:Adres.firma/direction:asc">Firma</a><br />
+                            <a href="/kontakty/index/sort:Adres.miasto/direction:asc">Miasto</a>, <a href="/kontakty/index/sort:Adres.ulica/direction:asc">Ulica</a>			</th>
+                        <th class="ca"><a href="/kontakty/index/sort:Adres.telefon/direction:asc">Telefon</a></th>
+                        <th></th> #}
+                    </tr>
+                </thead>
+                <tbody>
+                {% for row in data.rows %}
+                <tr>
+                    <td>{{row.name}}</td>
+                    <td>
+                        {{row.lastname}} {{row.firstname}} {{row.company}}<br />
+                        {{ row.country.iso }}, {{ row.city}}, {{ row.street}} {{ row.building}} {% if isset(row.apartment) %}/{{ row.apartment }}{% endif %}
+                    </td>
+                    <td >{{ row.phone }}</td>
+                    <td >
+                        <a href="/kontakty/wyslij/{{ row.id }}" id="adres{{ row.id }}" class="wyslijPaczke">Wybierz</a><br />
+                        <a href="/kontakty/{{ row.id }}">Edycja</a> /
+                        <a href="/kontakty/usun/{{ row.id }}" onclick="if (confirm(&quot;Czy na pewno chcesz usun\u0105\u0107 ten adres?&quot;)) { return true; } return false;">Usuń</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+        </table>
+        </div>
+        {# <div class="pager">
+            <span class="prev"> </span><span class="next"> </span><br />
+            <div class="counter">Strona 1 z 1, wyświetlono pozycje od 1 do 1, łącznie pozycji: 1.</div>
+        </div>  #}
+    {% endif %}
+{% endblock %}

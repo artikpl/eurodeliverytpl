@@ -1,0 +1,21 @@
+{% extends "unlogged.twig" %}
+{% block breadcrumbs %}<a href="/">Strona główna</a> &gt; <a href="/przypomnij-haslo">Przypomnij hasło</a>{% endblock %}
+{% block header %}Przypomnij hasło{% endblock %}
+{% block inner %}<div class="col-md-6 offset-md-3">
+    <form action="/przypomnij-haslo" method="post">
+        <div class="row">
+            <div class="col-12">
+                <label>Twój e-mail:
+                    <input name="email" maxlength="200" type="email"required="required">
+                </label>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-12">
+                <button type="submit" class="button">
+                    Wyślij
+                </button>
+            </div>
+        </div>
+    </form>
+</div>{% endblock %}

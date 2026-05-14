@@ -1,0 +1,48 @@
+<div class="parcel">
+    <div class="row">
+        <div class="col-12 col-sm-8 input">
+            <label>
+                Opakowanie
+                <select name="parcels[{{ num }}].nonstandard">
+                    <option value="0">Standardowe</option>
+                    <option value="1" {% if parcel.nonstandard %} selected{% endif %}>Niestandardowe</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="col-12 col-sm-4 input">
+            <label>
+                Ilość
+                <input name="parcels[{{ num }}].quantity" type="number" min="1" step="1">
+            </label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-3 input">
+            <label>
+                Długość
+                <input name="parcels[{{ num }}].length" type="number" min="1" step="1" value="{{ parcel.dimensions.length.value }}">
+            </label>
+        </div>
+        <div class="col-12 col-md-3 input">
+            <label>
+                Szerokość
+                <input name="parcels[{{ num }}].width" type="number" min="1" step="1" value="{{ parcel.dimensions.width.value }}">
+            </label>
+        </div>
+        <div class="col-12 col-md-3 input">
+            <label>
+                Wysokość
+                <input name="parcels[{{ num }}].height" type="number" min="1" step="1" value="{{ parcel.dimensions.height.value }}">
+            </label>
+        </div>
+
+        <div class="col-12 col-md-3 input">
+            <label>
+                Waga
+                <input name="parcels[{{ num }}].weight" type="number" min="0.1" step="0.1" value="{{ parcel.weight.value }}">
+            </label>
+        </div>
+    </div>
+</div>

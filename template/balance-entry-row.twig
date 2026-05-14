@@ -1,0 +1,31 @@
+<tr {% if entry.amount === 0 %} style="opacity: 0.3;"{% endif %}>
+    <td class="text-center">{{ entry.id }}</td>
+    <td class="text-center text-nowrap">{{ date('Y-m-d H:i', entry.time) }}</td>
+    <td>
+        {% if entry.type.code == 'shipment_price_change' %}
+            Zmiana ceny przesyłki
+        {% elseif entry.type.code == 'shipment_cancellation' %}
+            Anulowanie przesyłki
+        {% elseif entry.type.code == 'shipment_payment' %}
+            Opłacenie przesyłki
+        {% elseif entry.type.code == 'invoice_payment' %}
+            Opłacenie faktury <a href="/faktury/{{ entry.invoice.id }}/pdf">{{ entry.invoice.number }}</a>
+        {% elseif entry.type.code == 'charge' %}
+            Doładowanie konta {% if isset(entry.invoice.id) %}Faktura: <a href="/faktury/{{ entry.invoice.id }}/pdf">{{ entry.invoice.number }}</a>{% endif %}
+        {% elseif entry.type.code == 'manual' %}
+            <strong>Ręczna korekta salda</strong>
+        {% else %}
+            {{ entry.type.code }}
+        {% endif %}
+
+        {% if isset(entry.shipment.id) %}
+        <a href="/zamowienie/szczegoly/{{ entry.shipment.id }}">{{ entry.shipment.id}}
+            {% if isset(entry.waybill.number) %}, numer: {{ entry.waybill.number }}{% endif %}
+        </a>
+        {% endif %}
+
+        {% if isset(entry.comment) %}, Komentarz: <i style="font-size: 15px;">{{ entry.comment }}</i>{% endif %}
+    </td>
+    <td class="text-end text-nowrap">{{ number_format(entry.amount) }} {{ entry.currency.iso }}</td>
+    <td class="text-end text-nowrap">{{ number_format(entry.balance) }}</td>
+</tr>

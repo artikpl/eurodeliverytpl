@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <title>{% block title %}{% endblock %}{{ getSystemName() }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ getSystemName() }}" />
+    <meta name="language" content="pl" />
+    <link rel="stylesheet" href="/assets/jquery-ui-1.14.2/jquery-ui.min.css">
+    <link href="/assets/bootstrap-5.3.8/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/assets/css/layout.css?{{ time() }}" rel="stylesheet">
+    {% if getSystemName()==='Log4World' %}
+    <style>
+        :root {
+            --leading-color: #d10026;
+            --leading-hover-color: #ba001d;
+        }
+    </style>
+    {% endif %}
+    <script src="/assets/js/jquery-4.0.0.min.js"></script>
+    <script src="/assets/jquery-ui-1.14.2/jquery-ui.min.js"></script>
+    <script src="/assets/bootstrap-5.3.8/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="/assets/js/socket.io.js" integrity="sha384-os12RL7TkchpNU4llGAbzY7PUFZmljRfkPTcnENGChzVOBpQet4KxH8Y9alymTVF" crossorigin="anonymous"></script>
+    <script src="/assets/js/script.js?{{ time() }}"></script>
+
+    {% block topcontent %}{% endblock %}
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-sm-5 col-md-6 col-lg-3">
+                <a href="/" class="logo">
+                    {% if getSystemName()==='Log4World' %}
+                        <img style="width: 270px;" src="https://log4world.com/wp-content/uploads/2021/04/log4world-logo.svg">
+                    {% else %}
+                        <img src="/img/logo.png" alt="{{ getSystemName() }}">
+                    {% endif %}
+                </a>
+            </div>
+            <div class="col-6 col-md-auto col-sm-7 col-md-6 col-lg-3 session-detail justify-content-md-end">
+                {% if isset(session.party) %}
+                    <div class="party-detail">
+                        <p>Twój numer klienta: <strong class="party-id">{{ session.party.id }}</strong></p>
+
+                        <p>Saldo: <strong class="party-balance">{{ number_format(balance) }}</strong></p>
+                    </div>
+                {% else %}
+                    <ul>
+                        <li><a href="/logowanie">Logowanie</a></li>
+                        <li><a href="/rejestracja">Załóż konto</a></li>
+                    </ul>
+                {% endif %}
+                <div class="d-flex d-lg-none">
+                    <button type="button" name="responsive-menu" class="dropdown-toggle" data-bs-toggle="dropdown">
+                        <span class="material-icons menu">menu</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        {% if empty(session.party) %}
+                            <a href="/logowanie" rel="nofollow">Logowanie</a>
+                            <a href="/rejestracja" rel="nofollow">Załóż konto</a>
+                        {% endif %}
+                        <a href="/przesylki/nowa">Nadaj przesyłkę</a>
+                        {# <a href="/sledzenie">Śledzenie przesyłek</a> #}
+                        <a href="/cennik">Oferta</a>
+                        <a href="/pomoc">Pomoc</a>
+                        <a href="/kontakt">Kontakt</a>
+                        {% if isset(session.party) %}
+                        <a href="/wyloguj">Wyloguj</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 right-menu d-none d-md-flex justify-content-end" >
+                <ul>
+                    <li><a href="/przesylki/nowa" class="active">Nadaj przesyłkę</a></li>
+                    <li><a href="/cennik">Cennik</a></li>
+                    <li><a href="/pomoc">Pomoc</a></li>
+                    <li><a href="/kontakt">Kontakt</a></li>
+
+                    {% if isset(session.party) %}
+                        <li><a href="/wyloguj">Wyloguj</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content {% block contentclass %}{% endblock %}">
+    {% block usermenu %}{% endblock %}
+    {% block headerparent %}{% endblock %}
+    {% block content %}ddddd{% endblock %}
+</div>
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-12">
+                <div class="row">
+                    <div class="col-12 col-sm-4">
+                        <p class="title">EuroDelivery SP. Z O.O.</p>
+                        <p>45-123 Opole</p>
+                        <p>e-mail: <a href="mailto:kontakt@eurodelivery.com">kontakt@eurodelivery.com</a></p>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <p class="title">&nbsp;</p>
+                        <p><a href="/przesylki/nowa">Nadaj paczkę</a></p>
+                        <p><a href="/cennik">Cennik</a></p>
+                        {# <p><a href="/sledzenie">Śledzenie paczki</a></p> #}
+                        <p><a href="/regulamin">Regulamin</a></p>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <p class="title">&nbsp;</p>
+                        <p><a href="/o-nas">O nas</a></p>
+                        {# <p><a href="/aktualnosci">Aktualności</a></p> #}
+                        <p><a href="/polityka-prywatnosci">Polityka prywatności</a></p>
+                        <p><a href="/kontakt">Kontakt</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="copyrights">
+            Wszelkie prawa zastrzeżone © 2026
+        </p>
+    </div>
+</div>
+{% block bottomcontent %}{% endblock %}
+</body>
+</html>
+

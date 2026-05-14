@@ -1,0 +1,826 @@
+{% extends "unlogged.twig" %}
+{% block breadcrumbs %}<a href="/">Strona główna</a> &gt; <a href="/cennik">Cennik krajowy</a>{% endblock %}
+{% block header %}Cennik{% endblock %}
+{% block inner %}
+    <div class="dpd-domestic">
+        <h3>DPD - Koperta</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: ['DPDPLD_ENV_1KG']}) }}
+
+        <h3>DPD - Paczka</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'DPDPLD_PAR_2KG',
+            'DPDPLD_PAR_5KG',
+            'DPDPLD_PAR_10KG',
+            'DPDPLD_PAR_15KG',
+            'DPDPLD_PAR_20KG',
+            'DPDPLD_PAR_25KG',
+            'DPDPLD_PAR_315KG',
+            'DPDPLD_PAR_40KG',
+            'DPDPLD_PAR_50KG'
+        ]}) }}
+        <h3>DPD - Paleta</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'DPDPLD_PAL_40KG',
+            'DPDPLD_PAL_50KG',
+            'DPDPLD_PAL_100KG',
+            'DPDPLD_PAL_200KG',
+            'DPDPLD_PAL_300KG',
+            'DPDPLD_PAL_500KG',
+            'DPDPLD_PAL_700KG',
+        ]}) }}
+        <h3>DPD - Pickup</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'DPDPLP_PAR_2KG',
+            'DPDPLP_PAR_5KG',
+            'DPDPLP_PAR_10KG',
+            'DPDPLP_PAR_15KG',
+            'DPDPLP_PAR_20KG',
+        ]}) }}
+        <h3>DPD - Ubezpieczenie</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'DPDPL_INS_1K',
+            'DPDPL_INS_2K',
+            'DPDPL_INS_3K',
+            'DPDPL_INS_4K',
+            'DPDPL_INS_5K',
+            'DPDPL_INS_10K',
+            'DPDPL_INS_20K',
+            'DPDPL_INS_50K',
+            'DPDPL_INS_100K',
+        ]}) }}
+        <h3>DPD - Pobranie</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'DPDPL_COD_15K',
+        ]}) }}
+        <h3>DPD - Usługi dodatkowe</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'DPDPL_PREPRINTED_LABEL',
+            'DPDPL_SMS',
+            'DPDPL_NDD_LIGHT',
+            'DPDPL_NDD_HEAVY',
+            'DPDPL_NDD_0930',
+            'DPDPL_NDD_1200',
+            'DPDPL_DEL_SAT',
+            'DPDPL_HAND_DELIVERY',
+            'DPDPL_ROD',
+            'DPDPL_EPOD',
+            'DPDPL_PICKUP_EMPTY',
+            'DPDPL_NST_PICKUP',
+            'DPDPL_NST_LIGHT',
+            'DPDPL_NST_HEAVY',
+            'DPDPL_IINS_1K',
+            'DPDPL_IINS_2K',
+            'DPDPL_IINS_3K',
+            'DPDPL_IINS_4K',
+            'DPDPL_IINS_5K',
+            'DPDPL_IINS_20K',
+            'DPDPL_IINS_50K',
+            'DPDPL_NSTI',
+            'DPDPL_EXCEEDING_TECHNICAL',
+            'DPDPL_REPACK',
+            'DPDPL_STORAGE',
+            'DPDPL_STORAGE_PAL',
+            'DPDPL_NEXT_DELIVERY_ATTEMPT',
+            'DPDPL_INVALID_ADDRESS',
+            'DPDPL_UNSORTABLE',
+            'DPDPL_INVALID_PHONE',
+            'DPDPL_VERIFICATION',
+            'DPDPL_WAITING',
+            'DPDPL_HEAVY_DELIVERY_2NDA',
+            'DPDPL_MANUAL_WAYBILL',
+            'DPDPL_HEAVY_DELIVERY_3RDA',
+            'DPDPL_DIRECT_COMMANDS'
+        ]}) }}
+
+        <h3>GLS - Koperta</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: ['GLSPLD_ENV_1KG']}) }}
+
+        <h3>GLS - Paczka</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'GLSPLD_PAR_2KG',
+            'GLSPLD_PAR_5KG',
+            'GLSPLD_PAR_10KG',
+            'GLSPLD_PAR_15KG',
+            'GLSPLD_PAR_20KG',
+            'GLSPLD_PAR_25KG',
+            'GLSPLD_PAR_315KG'
+        ]}) }}
+        <h3>GLS - Ubezpieczenie</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'GLSPL_INS_6K',
+        ]}) }}
+        <h3>GLS - Usługi dodatkowe</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'GLSPL_PICKUP_EMPTY',
+            'GLSPL_SIZE_CHANGE',
+            'GLSPL_NST',
+            'GLSPL_MANUAL_SORT',
+            'GLSPL_UTILIZATION',
+            'GLSPL_PICKUP']}) }}
+
+        <h3>InPost Paczkomat</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'INPOSTPLP_SA',
+            'INPOSTPLP_SB',
+            'INPOSTPLP_SC'
+        ]}) }}
+
+        <h3>InPost Paczkomat - Ubezpieczenie</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'INPOSTPLP_INS_5K',
+            'INPOSTPLP_INS_10K',
+            'INPOSTPLP_INS_20K'
+        ]}) }}
+
+        <h3>InPost Paczkomat - Pobranie</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'INPOSTPLP_COD_5K'
+        ]}) }}
+
+        <h3>InPost Paczkomat - Usługi dodatkowe</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'INPOSTPLP_VERIFICATION',
+            'INPOSTPLP_SIZE_CHANGE',
+            'INPOSTPLP_NST_LIGHT',
+            'INPOSTPLP_NST_HEAVY'
+        ]}) }}
+
+        <h3>DHL - Koperta</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: ['DHLPLD_ENV_1KG']}) }}
+
+        <h3>DHL - Paczka</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: ['DHLPLD_PAR_3KG',
+            'DHLPLD_PAR_5KG',
+            'DHLPLD_PAR_10KG',
+            'DHLPLD_PAR_15KG',
+            'DHLPLD_PAR_20KG',
+            'DHLPLD_PAR_25KG',
+            'DHLPLD_PAR_315KG',
+            'DHLPLD_PAR_40KG',
+            'DHLPLD_PAR_50KG']}) }}
+
+        <h3>DHL - Półpaleta</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: ['DHLPLD_SPAL_40KG',
+            'DHLPLD_SPAL_50KG',
+            'DHLPLD_SPAL_100KG',
+            'DHLPLD_SPAL_200KG']}) }}
+
+        <h3>DHL - Paleta</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: ['DHLPLD_PAL_40KG',
+'DHLPLD_PAL_50KG',
+'DHLPLD_PAL_100KG',
+'DHLPLD_PAL_300KG',
+'DHLPLD_PAL_500KG',
+'DHLPLD_PAL_700KG',
+'DHLPLD_PAL_900KG',
+'DHLPLD_PAL_1000KG']}) }}
+
+        <h3>DHL - Usługi dodatkowe</h3>
+
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: ['DHLPLD_SMS',
+        'DHLPLD_INS_50K',
+        'DHLPLD_HINS_50K',
+        'DHLPLD_INS_100K',
+        'DHLPLD_COD_6500',
+        'DHLPLD_DEL_0900',
+        'DHLPLD_DEL_1200',
+        'DHLPLD_DEL_SAT',
+        'DHLPLD_ROD',
+        'DHLPLD_EPOD',
+        'DHLPLD_PRENOTICE',
+        'DHLPLD_NST_LIGHT',
+        'DHLPLD_NST_HEAVY',
+        'DHLPLD_LONG',
+        'DHLPLD_DWEIGHT_50KG',
+        'DHLPLD_DWEIGHT_110KG',
+        'DHLPLD_DWEIGHT_O110KG']}) }}
+
+        <h3>Orlen Paczka</h3>
+
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: ['ORLENPL_SS',
+            'ORLENPL_SM',
+            'ORLENPL_SL',
+            'ORLENPL_VERIFICATION',
+            'ORLENPL_SIZE_CHANGE',
+            'ORLENPL_NST',
+            'ORLENPL_INS_5K']}) }}
+
+        <h3>InPost Kurier</h3>
+
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: ['INPOSTPLK_STD_ENV_1KG',
+            'INPOSTPLK_STD_PAR_1KG',
+            'INPOSTPLK_STD_PAR_5KG',
+            'INPOSTPLK_STD_PAR_10KG',
+            'INPOSTPLK_STD_PAR_15KG',
+            'INPOSTPLK_STD_PAR_20KG',
+            'INPOSTPLK_STD_PAR_25KG',
+            'INPOSTPLK_STD_PAR_30KG',
+            'INPOSTPLK_STD_PAR_40KG',
+            'INPOSTPLK_STD_PAR_50KG']}) }}
+
+        <h3>InPost Kurier - Ubezpieczenie</h3>
+
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: ['INPOSTPLK_INS_1K',
+            'INPOSTPLK_INS_5K',
+            'INPOSTPLK_INS_10K',
+            'INPOSTPLK_INS_20K',
+            'INPOSTPLK_INS_50K']}) }}
+
+        <h3>InPost Kurier - Pobranie</h3>
+
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: ['INPOSTPLK_COD_5K']}) }}
+
+        <h3>InPost Kurier - Usługi dodatkowe</h3>
+
+{{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: ['INPOSTPLK_ROD',
+        'INPOSTPLK_SMS',
+        'INPOSTPLK_DEL_SAT',
+        'INPOSTPLK_DEL_1720',
+        'INPOSTPLK_DEL_E12',
+        'INPOSTPLK_NST2',
+        'INPOSTPLK_VERIFICATION',
+        'INPOSTPLK_LONG',
+        'INPOSTPLK_NST',
+        'INPOSTPLK_EXTERNAL_REDIRECT',
+        'INPOSTPLK_PICKUP_1',
+        'INPOSTPLK_PICKUP_2',
+        'INPOSTPLK_PICKUP_3',
+        'INPOSTPLK_PICKUP_4']})}}
+
+        <h3>InPost Szybki Zwrot</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'INPOSTPLZ_SA',
+            'INPOSTPLZ_SB',
+            'INPOSTPLZ_SC'
+        ]}) }}
+
+        <h3>InPost Szybki Zwrot - Usługi dodatkowe</h3>
+        {{ include('pricelist-table.twig', {pricelist: data.pricelist, keys: [
+            'INPOSTPLZ_VERIFICATION',
+'INPOSTPLZ_SIZE_CHANGE',
+'INPOSTPLZ_NST_LIGHT',
+'INPOSTPLZ_NST_HEAVY'
+        ]}) }}
+    </div>
+
+
+{# {% for c in getEuCountries('PL') %}
+        {% if not_in_array(c.iso, ['PL','MT','CY']) %}
+            <h3>DPD Eksport - {{ c.name }}</h3>
+            {{ include('EuroDelivery2/pricelist-table.twig', {pricelist: data.pricelist, keys: [
+                'DPDPLE_' ~ c.iso ~ '_PAR_1KG',
+                'DPDPLE_' ~ c.iso ~ '_PAR_3KG',
+                'DPDPLE_' ~ c.iso ~ '_PAR_5KG',
+                'DPDPLE_' ~ c.iso ~ '_PAR_10KG',
+                'DPDPLE_' ~ c.iso ~ '_PAR_15KG',
+                'DPDPLE_' ~ c.iso ~ '_PAR_20KG',
+                'DPDPLE_' ~ c.iso ~ '_PAR_25KG',
+                'DPDPLE_' ~ c.iso ~ '_PAR_31KG',
+            ]}) }}
+        {% endif %}
+    {% endfor %} #}
+
+    {#
+    <div class="row">
+        <div class="col">
+            <a href="/cennik/krajowe" class="btn">Przesyłki krajowe</a>
+            <a href="/cennik/zagreniczne" class="btn">Przesyłki zagraniczne</a>
+        </div>
+    </div>
+    <ul class="pricelist-type-menu">
+        <li></li>
+        <li><a href="/przesylki-zagraniczne" title="Przesyłki zagraniczne" class="button">Przesyłki zagraniczne</a></li>
+    </ul>
+
+    <ul class="pricelist-couriers">
+        <li class=" active">
+            <a href="/cennik/100">
+                <img src="/img/couriers/logo-dpd.png"/><span>DPD</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="/cennik/104">
+                <img src="/img/couriers/logo-dpd.png"/><span>DPD Pickup</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="/cennik/300">
+                <img src="/img/couriers/logo-ups.png"/><span>UPS Standard</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="/cennik/400">
+                <img src="/img/couriers/logo-gls.png"/><span>GLS</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="/cennik/600">
+                <img src="/img/couriers/logo-inpost.png"/><span>InPost Paczkomaty</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="/cennik/800">
+                <img src="/img/couriers/logo-dhl.png"/><span>DHL</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="/cennik/1100">
+                <img src="/img/couriers/logo-orlenPaczka.png"/><span>Orlen Paczka</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="/cennik/1200">
+                <img src="/img/couriers/logo-inpostKurier.png"/><span>InPost Kurier</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="/cennik/1201">
+                <img src="/img/couriers/logo-inpostKurier.png"/><span>InPost Kurier Doręczenie do 12</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="/cennik/3600">
+                <img src="/img/couriers/logo-szybkieZwroty.png"/><span>Szybkie Zwroty</span>
+            </a>
+        </li>
+    </ul>
+
+
+    <h3>koperta</h3>
+    <table class="datalist">
+        <tr>
+            <th class="la" width="15%"></th>
+            <th class="la" width="20%">Waga</th>
+            <th class="la" width="15%">Cena netto</th>
+            <th class="la" width="15%">Cena brutto</th>
+        </tr>
+        <tr>
+            <td class="ca noBorder" >
+                <img src="/img/2_cennik.png" alt="" /><br />
+            </td>
+            <td class="la">do 1.00 kg
+            </td>
+            <td class="la"><strong>19,33 zł</strong></td>
+            <td class="la"><strong>23,78 zł</strong></td>
+        </tr>
+    </table>
+    <br><br>
+    <h3>paczka</h3>
+    <table class="datalist">
+        <tr>
+            <th class="la" width="15%"></th>
+            <th class="la" width="20%">Waga</th>
+            <th class="la" width="15%">Cena netto</th>
+            <th class="la" width="15%">Cena brutto</th>
+        </tr>
+        <tr>
+            <td class="ca noBorder" rowspan="9">
+                <img src="/img/1_cennik.png" alt="" /><br />
+            </td>
+            <td class="la">do 2.00 kg
+            </td>
+            <td class="la"><strong>19,33 zł</strong></td>
+            <td class="la"><strong>23,78 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 5.00 kg
+            </td>
+            <td class="la"><strong>20,19 zł</strong></td>
+            <td class="la"><strong>24,83 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 10.00 kg
+            </td>
+            <td class="la"><strong>20,79 zł</strong></td>
+            <td class="la"><strong>25,57 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 15.00 kg
+            </td>
+            <td class="la"><strong>22,11 zł</strong></td>
+            <td class="la"><strong>27,20 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 20.00 kg
+            </td>
+            <td class="la"><strong>22,34 zł</strong></td>
+            <td class="la"><strong>27,48 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 25.00 kg
+            </td>
+            <td class="la"><strong>23,57 zł</strong></td>
+            <td class="la"><strong>28,99 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 31.50 kg
+            </td>
+            <td class="la"><strong>24,06 zł</strong></td>
+            <td class="la"><strong>29,59 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 40.00 kg
+            </td>
+            <td class="la"><strong>66,05 zł</strong></td>
+            <td class="la"><strong>81,24 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 50.00 kg
+            </td>
+            <td class="la"><strong>71,26 zł</strong></td>
+            <td class="la"><strong>87,65 zł</strong></td>
+        </tr>
+    </table>
+    <br><br>
+    <h3>paleta</h3>
+    <table class="datalist">
+        <tr>
+            <th class="la" width="15%"></th>
+            <th class="la" width="20%">Waga</th>
+            <th class="la" width="15%">Cena netto</th>
+            <th class="la" width="15%">Cena brutto</th>
+        </tr>
+        <tr>
+            <td class="ca noBorder" rowspan="7">
+                <img src="/img/3_cennik.png" alt="" /><br />
+            </td>
+            <td class="la">do 40.00 kg
+            </td>
+            <td class="la"><strong>68,87 zł</strong></td>
+            <td class="la"><strong>84,71 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 50.00 kg
+            </td>
+            <td class="la"><strong>74,06 zł</strong></td>
+            <td class="la"><strong>91,09 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 100.00 kg
+            </td>
+            <td class="la"><strong>160,20 zł</strong></td>
+            <td class="la"><strong>197,05 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 200.00 kg
+            </td>
+            <td class="la"><strong>184,45 zł</strong></td>
+            <td class="la"><strong>226,87 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 300.00 kg
+            </td>
+            <td class="la"><strong>185,09 zł</strong></td>
+            <td class="la"><strong>227,66 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 500.00 kg
+            </td>
+            <td class="la"><strong>202,43 zł</strong></td>
+            <td class="la"><strong>248,99 zł</strong></td>
+        </tr>
+        <tr>
+            <td class="la">do 700.00 kg
+            </td>
+            <td class="la"><strong>270,99 zł</strong></td>
+            <td class="la"><strong>333,32 zł</strong></td>
+        </tr>
+    </table>
+    <br><br>
+    <br><br>
+
+    <h2>Usługi dodatkowe</h2>
+    <table class="datalist">
+        <tr>
+            <th>Usługa</th>
+            <th class="ra">Cena netto</th>
+            <th class="ra">Cena brutto</th>
+        </tr>
+        <tr>
+            <td>Kurier z etykietą</td>
+            <td class="ra" width="180px">
+                0,00 zł                    <td class="ra" width="180px">
+                0,00 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie 0-1000 zł</td>
+            <td class="ra" width="180px">
+                0,00 zł                    <td class="ra" width="180px">
+                0,00 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie 1000-2000 zł</td>
+            <td class="ra" width="180px">
+                0,99 zł                    <td class="ra" width="180px">
+                1,22 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie 10000-20000 zł</td>
+            <td class="ra" width="180px">
+                9,93 zł                    <td class="ra" width="180px">
+                12,21 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie 2000-3000 zł</td>
+            <td class="ra" width="180px">
+                1,80 zł                    <td class="ra" width="180px">
+                2,21 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie 20000-50000 zł</td>
+            <td class="ra" width="180px">
+                20,77 zł                    <td class="ra" width="180px">
+                25,55 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie 3000-4000 zł</td>
+            <td class="ra" width="180px">
+                2,58 zł                    <td class="ra" width="180px">
+                3,17 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie 4000-5000 zł</td>
+            <td class="ra" width="180px">
+                3,58 zł                    <td class="ra" width="180px">
+                4,40 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie 5000-10000 zł</td>
+            <td class="ra" width="180px">
+                6,14 zł                    <td class="ra" width="180px">
+                7,55 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie 50000-100000 zł</td>
+            <td class="ra" width="180px">
+                65,45 zł                    <td class="ra" width="180px">
+                80,50 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Pobranie do 15000 zł.</td>
+            <td class="ra" width="180px">
+                3,99 zł                    <td class="ra" width="180px">
+                4,91 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Serwis SMS</td>
+            <td class="ra" width="180px">
+                0,76 zł                    <td class="ra" width="180px">
+                0,93 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Doręczenie na następny dzień paczki do 31,5 kg.</td>
+            <td class="ra" width="180px">
+                10,54 zł                    <td class="ra" width="180px">
+                12,96 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Doręczenie na następny dzień pow. 31,5 kg.</td>
+            <td class="ra" width="180px">
+                44,09 zł                    <td class="ra" width="180px">
+                54,23 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Doręczenie następnego dnia roboczego do 9.30</td>
+            <td class="ra" width="180px">
+                71,09 zł                    <td class="ra" width="180px">
+                87,44 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Doręczenie następnego dnia roboczego do 12.00</td>
+            <td class="ra" width="180px">
+                38,09 zł                    <td class="ra" width="180px">
+                46,85 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Dostawa w sobotę</td>
+            <td class="ra" width="180px">
+                15,49 zł                    <td class="ra" width="180px">
+                19,05 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Doręczenie do rąk własnych </td>
+            <td class="ra" width="180px">
+                16,09 zł                    <td class="ra" width="180px">
+                19,79 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Zwrot przesyłki do nadawcy</td>
+            <td class="ra" colspan="2">
+                100 % ceny usługi                </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Dokumenty zwrotne</td>
+            <td class="ra" width="180px">
+                8,45 zł                    <td class="ra" width="180px">
+                10,39 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Potwierdzenie nadania/doręczenia przesyłki (wersja elektroniczna)</td>
+            <td class="ra" width="180px">
+                11,09 zł                    <td class="ra" width="180px">
+                13,64 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Dopłata za pusty podjazd kuriera</td>
+            <td class="ra" width="180px">
+                15,09 zł                    <td class="ra" width="180px">
+                18,56 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Dopłata za opakowanie niestandardowe DPD Pickup</td>
+            <td class="ra" width="180px">
+                25,00 zł                    <td class="ra" width="180px">
+                30,75 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Dopłata za przesyłkę niestandardową do 31,5 kg.</td>
+            <td class="ra" width="180px">
+                20,68 zł                    <td class="ra" width="180px">
+                25,44 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Dopłata za przesyłkę niestandardową pow. 31,5 kg</td>
+            <td class="ra" width="180px">
+                27,18 zł                    <td class="ra" width="180px">
+                33,43 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie międzynarodowe 0-1000 zł. </td>
+            <td class="ra" width="180px">
+                0,00 zł                    <td class="ra" width="180px">
+                0,00 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie międzynarodowe 1000-2000 zł.</td>
+            <td class="ra" width="180px">
+                2,85 zł                    <td class="ra" width="180px">
+                3,51 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie międzynarodowe 2000-3000 zł. </td>
+            <td class="ra" width="180px">
+                3,95 zł                    <td class="ra" width="180px">
+                4,86 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie międzynarodowe 3000- 4000 zł</td>
+            <td class="ra" width="180px">
+                7,79 zł                    <td class="ra" width="180px">
+                9,58 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie międzynarodowe 4000-5000 zł.</td>
+            <td class="ra" width="180px">
+                11,18 zł                    <td class="ra" width="180px">
+                13,75 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie międzynarodowe 5000-20000 zł.</td>
+            <td class="ra" width="180px">
+                55,45 zł                    <td class="ra" width="180px">
+                68,20 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ubezpieczenie międzynarodowe od 20000-50000 zł.</td>
+            <td class="ra" width="180px">
+                130,90 zł                    <td class="ra" width="180px">
+                161,01 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Przesyłka niestandardowa międzynarodowa</td>
+            <td class="ra" width="180px">
+                179,20 zł                    <td class="ra" width="180px">
+                220,42 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Przekroczenie ograniczeń technicznych przesyłek zagranicznych</td>
+            <td class="ra" width="180px">
+                179,20 zł                    <td class="ra" width="180px">
+                220,42 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Przepakowanie (dotyczy każdej paczki) </td>
+            <td class="ra" width="180px">
+                16,09 zł                    <td class="ra" width="180px">
+                19,79 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Magazynowanie paczki</td>
+            <td class="ra" colspan="2">
+                3,89 za jeden dzień                </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Magazynowanie palety</td>
+            <td class="ra" colspan="2">
+                16,09 za jeden dzień                 </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Kolejna próba doręczenia (druga nieskuteczna i każda kolejna)</td>
+            <td class="ra" width="180px">
+                14,09 zł                    <td class="ra" width="180px">
+                17,33 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Błędne dane adresowe odbiorcy </td>
+            <td class="ra" width="180px">
+                2,59 zł                    <td class="ra" width="180px">
+                3,19 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Opłata za przesyłkę niesortowalną</td>
+            <td class="ra" width="180px">
+                4,09 zł + 100,00% kwoty                    <td class="ra" width="180px">
+                5,03 zł + 100,00% kwoty                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Brak lub błędny numer telefonu do odbiorcy</td>
+            <td class="ra" width="180px">
+                2,59 zł                    <td class="ra" width="180px">
+                3,19 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Opłata za przeważenie i weryfikację wagi</td>
+            <td class="ra" width="180px">
+                11,09 zł                    <td class="ra" width="180px">
+                13,64 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Czas oczekiwania/10 minut</td>
+            <td class="ra" width="180px">
+                16,09 zł                    <td class="ra" width="180px">
+                19,79 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Dopłata za doręczenie paczki/palety krajowej do strefy 2 dla wagi powyżej 31,5 kg</td>
+            <td class="ra" width="180px">
+                26,59 zł                    <td class="ra" width="180px">
+                32,71 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Opłata za list ręczny</td>
+            <td class="ra" width="180px">
+                11,09 zł                    <td class="ra" width="180px">
+                13,64 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Dopłata za doręczenie paczki/palety krajowej do strefy 3 dla wagi powyżej 31,5 kg</td>
+            <td class="ra" width="180px">
+                42,34 zł                    <td class="ra" width="180px">
+                52,08 zł                    </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Dopłata za bezpośrednie interwencje i zlecenia w firmie kurierskiej (mailowe lub telefoniczne)</td>
+            <td class="ra" width="180px">
+                8,09 zł                    <td class="ra" width="180px">
+                9,95 zł                    </td>
+            </td>
+        </tr>
+    </table>#}
+{% endblock %}

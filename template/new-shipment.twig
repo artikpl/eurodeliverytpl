@@ -1,0 +1,460 @@
+{% extends "logged.twig" %}
+{% block breadcrumbs %}<a href="/">Strona główna</a> &gt; <a href="/panel-klienta">Nowa przesyłka</a>{% endblock %}
+{% block header %}{% if data.isTemplate === false %}Nowa przesyłka{% else %}Szablon{% endif %}{% endblock %}
+{% block inner %}
+    {% if data.isTemplate === false %}
+        <div class="row">
+            <div class="col-md-4 shipment-hint">
+                <div style="background-image: url('/img/opakowanie-wymiary-3.webp')">
+                    <p>Wymiary</p>
+                </div>
+            </div>
+            <div class="col-md-4 shipment-hint">
+                <div style="background-image: url('/img/opakowanie-standard-3.webp')">
+                    <p>Opakowanie standardowe <span class="material-icons" data-toggle="tooltip" data-html="true"  title="<strong>Paczka standardowa:</strong> To taka, która jest umieszczona w kartonie o kształcie prostopadłościanu, bez wystających elementów, zdeformowanych kształtów oraz mieszcząca się w wytycznych wagowych i wymiarowych konkretnej firmy kurierskiej.">info</span></p>
+                </div>
+            </div>
+            <div class="col-md-4 shipment-hint">
+                <div style="background-image: url('/img/opakowanie-niestandard-2.webp')">
+                    <p>Opakowanie niestandardowe <span class="material-icons" data-toggle="tooltip" data-html="true"  title="<strong>Paczka niestandardowa:</strong> To taka, która nie mieści się w określonych przez daną firmę kurierską wymiarach i wadze. Są to paczki o kształcie cylindrycznym, okrągłym, owalnym, z wystającymi elementami, a także składające się z kilku odrębnych części, połączonych w jedną, nieregularną całość.">info</span></p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    <form name="shipment">
+        {% if isset(data.shipment.id) %}
+            <input name="id" type="hidden" value="{{ data.shipment.id }}">
+        {% endif %}
+        <h2>Rodzaj przesyłki i wymiary</h2>
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="row p-1">
+                    <div class="col-12">
+                        <label class="shipment-type">
+                            <input type="radio" name="parcel-type" value="envelope" {% if data.shipment.parcels[0].type.code === 'envelope' %} checked {% endif %}>
+                            <span class="material-icons">email</span>
+                            Koperta
+                        </label>
+                    </div>
+                    <div class="col-12">
+                        <label class="shipment-type">
+                            <input type="radio" name="parcel-type" value="parcel" {% if data.shipment.parcels[0].type.code === 'parcel' %} checked {% endif %}>
+                            <span class="material-icons">inventory_2</span>
+                            Paczka
+                        </label>
+                    </div>
+                    <div class="col-12">
+                        <label class=" shipment-type">
+                            <input type="radio" name="parcel-type" value="pallet" {% if data.shipment.parcels[0].type.code === 'pallet' %} checked {% endif %}>
+                            <span class="material-icons">pallet</span>
+                            Paleta
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <div class="row">
+                    <div class="col-12 col-sm-5 col-md-6 parcels">
+                        {% if isset(data.shipment.parcels) %}
+                            {% set num = 0 %}
+                            {% for parcel in data.shipment.parcels %}
+                                {{ include('shipment-piece.twig', {parcel: parcel, num: num}) }}
+                                {% set num = num+1 %}
+                            {% endfor %}
+                        {% else %}
+                            {% set num = 1 %}
+                            {{ include('shipment-piece.twig', {parcel: parcel, num: num}) }}
+                        {% endif %}
+                        <button name="add-shipment-item" class="button" type="button">+ Dodaj kolejną paczkę do tego odbiorcy</button>
+                    </div>
+                    <div class="col-12 col-sm-7 col-md-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col">
+                                        <label>
+                                            <span>Kraj nadania</span>
+                                            <select name="sender.country">
+                                                {% for country in getEuCountries(data.shipment.addresses.sender.country.iso) %}
+                                                    <option value="{{ country.iso }}"{% if country.selected %} selected {% endif %}>{{ country.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div class="col">
+                                        <label>
+                                            <span>Kod pocztowy nadania</span>
+                                            <input name="sender.postcode" type="text" value="{{ data.shipment.addresses.sender.postcode }}">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label>
+                                            <span>Kraj doręczenia</span>
+                                            <select name="recipient.country">
+                                                {% for country in getEuCountries(data.shipment.addresses.recipient.country.iso) %}
+                                                    <option value="{{ country.iso }}"{% if country.selected %} selected {% endif %}>{{ country.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div class="col">
+                                        <label>
+                                            <span>Kod pocztowy doręczenia</span>
+                                            <input name="recipient.postcode" type="text" value="{{ data.shipment.addresses.recipient.postcode }}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Wybór kuriera</h2>
+        <div class="carriers-offers">
+        </div>
+
+        <div class="row d-none">
+            <div class="col-md-6 mb-2">
+                <h3>Sposób nadania</h3>
+                <div class="dispatch-methods">
+                    <label>
+                        <input name="dispatchMethod" type="radio" value="courier+pickup" {% if data.shipment.dispatchMethod.code==='courier' and isset(data.shipment.options.orderPickup) %}checked{% endif %}/>
+                        Kurier przyjedzie po przesyłkę
+                    </label>
+
+                    <label>
+                        <input name="dispatchMethod" type="radio" value="courier" {% if data.shipment.dispatchMethod.code==='courier' and notset(data.shipment.options.orderPickup) %}checked{% endif %}/>
+                        Nie zamawiaj podjazdu kuriera
+                    </label>
+
+                    <label>
+                        <input name="dispatchMethod" type="radio" value="locker" {% if data.shipment.dispatchMethod.code==='locker' %}checked{% endif %}/>
+                        Nadanie w automacie
+                    </label>
+
+                    <label>
+                        <input name="dispatchMethod" type="radio" value="point" {% if data.shipment.dispatchMethod.code==='point' %}checked{% endif %}/>
+                        Nadanie w punkcie obsługi
+                    </label>
+
+                    <label>
+                        <input name="dispatchMethod" type="radio" value="consolidation" {% if data.shipment.dispatchMethod.code==='consolidation' %}checked{% endif %}/>
+                        Konsolidacja
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <h3>Sposób doręczenia</h3>
+                <div class="delivery-methods">
+                    <label>
+                        <input name="deliveryMethod" type="radio" value="courier" {% if data.shipment.deliveryMethod.code==='courier' %}checked{% endif %}/>
+                        Kurier doręczy przesyłkę
+                    </label>
+
+                    <label>
+                        <input name="deliveryMethod" type="radio" value="locker" {% if data.shipment.deliveryMethod.code==='locker' %}checked{% endif %}/>
+                        Doręczenie do automatu
+                    </label>
+
+                    <label>
+                        <input name="deliveryMethod" type="radio" value="point" {% if data.shipment.deliveryMethod.code==='point' %}checked{% endif %}/>
+                        Doręczenie do punktu obsługi
+                    </label>
+                </div>
+            </div>
+        </div>
+
+
+        <h2>Informacje o przesyłce</h2>
+        {% if isset(data.consolidation.id) %}
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-warning">Przesyłka należy do konsolidacji <a href="/przesylki/konsolidacje/{{ data.consolidation.id }}">{{ data.consolidation.id }}</a>. Nie można edytować adresu odbiorcy.</div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-6">
+                <fieldset name="sender-point" class="d-none" disabled>
+                    <input type="hidden" name="points.sender.code" class="point-code" value="{{ data.shipment.points.sender.code }}"/>
+                    <label>
+                        Punkt nadania:
+                        <input class="point-search" name="points.sender.name" type="text" value="{{ pointName(data.shipment.points.sender) }}"/>
+                    </label>
+                    <button type="button" name="map-point-select" class="button">wybierz na mapie</button>
+                </fieldset>
+                <fieldset name="dispatch-datetime">
+                    <div>
+                        <label>
+                            Data nadania:
+                            <input name="dispatchDate" value="{{ data.shipment.dispatchDate }}" autocomplete="off" type="text"/>
+                        </label>
+                    </div>
+                    {# <fieldset name="dispatch-time">
+                        <label>
+                            Godziny nadania:
+                            <select name="dispatchHour">
+                                <option value="">-</option>
+                            </select>
+                        </label>
+                    </fieldset> #}
+                </fieldset>
+            </div>
+            <div class="col-md-6">
+                <fieldset name="recipient-point" class="d-none" disabled>
+                    <input type="hidden" name="points.recipient.code" class="point-code" value="{{ data.shipment.points.recipient.code }}"/>
+                    <label>
+                        Punkt odbioru:
+                        <input class="point-search" name="points.recipient.name" type="text" value="{{ pointName(data.shipment.points.recipient) }}"/>
+                    </label>
+                    <button type="button" name="map-point-select" class="button">wybierz na mapie</button>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <label>
+                    Zawartość przesyłki
+                    <input name="content" type="text" value="{{ data.shipment.content }}"/>
+                </label>
+            </div>
+            <div class="col-md-6">
+                <label>
+                    Uwagi
+                    <input name="comment" type="text" value="{{ data.shipment.comment }}"/>
+                </label>
+            </div>
+        </div>
+        <div class="additional-services d-none">
+            <h2>Usługi dodatkowe</h2>
+            <div class=" row">
+                <div class="col-md-6">
+                    <fieldset>
+                        <label class="title">
+                            <input type="checkbox" name="options.cod.enabled" value="1"> Pobranie
+                        </label>
+                        <label>
+                            Kwota
+                            <input type="number" min="0.01" step="0.01" name="options.cod.amount" value="{{ data.shipment.options.cod.amount }}">
+                        </label>
+                        <label>
+                            Numer konta
+                            <input type="text"  name="options.cod.iban" value="{{ iban2local(data.iban) }}">
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6">
+                    <fieldset>
+                        <label class="title">
+                            <input type="checkbox" name="options.insurance.enabled" value="1"> Ubezpieczenie
+                        </label>
+
+                        <label>
+                            Kwota
+                            <input type="number" min="0.01" step="0.01" name="options.insurance.amount" value="{{ data.shipment.options.insurance.amount }}">
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6">
+                    <fieldset>
+                        <label class="title">
+                            <input type="checkbox" name="options.rod.enabled" value="1"> Zwrot dokumentów
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6">
+                    <fieldset>
+                        <label class="title">
+                            <input type="checkbox" name="options.onhand.enabled" value="1"> Do rąk własnych
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6">
+                    <fieldset>
+                        <label class="title">
+                            <input type="checkbox" name="options.withReturn.enabled" value="1"> Dołącz etykietę zwrotną
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6">
+                    <fieldset>
+                        <label class="title">
+                            <input type="checkbox" name="options.saturdayDelivery.enabled" value="1"> Doręczenie w sobotę
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6">
+                    <fieldset>
+                        <label class="title">
+                            <input type="checkbox" name="options.pdi.enabled" value="1"> Powiadomienie przed dostarczeniem
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6">
+                    <fieldset>
+                        <label class="title">
+                            <input type="checkbox" name="options.pod.enabled" value="1"> Potwierdzenie dostarczenia
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6">
+                    <fieldset>
+                        <label class="title">
+                            <input type="checkbox" name="options.nextDay.enabled" value="1"> Następny dzień roboczy
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6">
+                    <fieldset>
+                        <label class="title">
+                            <input type="checkbox" name="options.shippingDocuments.enabled" value="1"> Dokumenty przewozowe
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6">
+                    <fieldset>
+                        <label class="title">
+                            <input type="checkbox" name="options.preprint.enabled" value="1"> Kurier z etykietą
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6">
+                    <fieldset>
+                        <label class="title">
+                            <input type="checkbox" name="options.sms.enabled" value="1"> Powiadomienie SMS
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6">
+                    <fieldset>
+                        <label class="title">
+                            <input type="checkbox" name="options.timeDelivery.enabled" value="1"> Doręczenie na godzinę
+                        </label>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <h2 class="mb-0 mt-3">Dane adresowe</h2>
+        <div class="row mb-2">
+            {{ include('shipment-address.twig', {
+                name: "Nadawca",
+                type: 'sender',
+                address: data.sender,
+                txt1: 'nadawcy',
+                readonly: false
+            }) }}
+            {{ include('shipment-address.twig', {
+                name: "Odbiorca",
+                type: 'recipient',
+                address: data.recipient,
+                txt1: 'odbiorcy',
+                readonly: isset(data.consolidation.id)
+            }) }}
+        </div>
+        <h2>Płatność</h2>
+        <fieldset name="payment-methods"></fieldset>
+        {% if data.isTemplate %}
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 text-center mb-2">
+                    {% if isset(data.template.id) %}
+                        <input type="hidden" name="template-id" value="{{ data.template.id }}">
+                    {% endif %}
+                    <label>
+                        <span class="title">Nazwa szablonu</span>
+                        <input type="text" name="template-name" value="{{ data.template.name }}">
+                    </label>
+                    <button type="submit" name="save-as-template">
+                        Zapisz
+                    </button>
+                </div>
+            </div>
+        {% else %}
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 text-center mb-2">
+                <button type="submit">
+                    Nadaj
+                </button>
+            </div>
+            <div class="col-md-3 text-center mb-2">
+                <button type="button" name="draft" class="mb-1">
+                    Zapisz roboczą
+                </button>
+                <button type="button" name="save-as-template2">
+                    Zapisz jako szablon
+                </button>
+            </div>
+        </div>
+        {% endif %}
+        <div class="sticked">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-end">
+                        <p style="font-size: 24px; font-weight: 700; line-height: 25px; margin: 0;">
+                            Cena: <span class="gross"></span>
+                        </p>
+                        <p style="margin: 0; font-size: 14px; line-height: 15px;">brutto</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <template id="addresses-modal">
+        <div class="modal address-select-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Wybierz adres</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="min-height: 400px;">
+                        <div class="mb-1">
+                            Fraza <input type="text" name="query">
+                        </div>
+
+                        <table class="table-details" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th>Nazwa</th>
+                                    <th>Nazwisko, Imię, Firma<br>Kraj, Miasto, Adres</th>
+                                    <th>Telefon</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+{% endblock %}
+
+
+{% block bottomcontent %}
+    <script type="text/javascript" src="/js/shipment.js?{{ time() }}"></script>
+    <script type="text/javascript">const originShipment = {{ data.shipment|json_encode|raw }};</script>
+{% endblock %}

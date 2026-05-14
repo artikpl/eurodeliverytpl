@@ -1,0 +1,258 @@
+{% extends "logged.twig" %}
+{% block breadcrumbs %}{% endblock %}
+{% block header %}Szczegóły przesyłki{% endblock %}
+{% block inner %}
+    <div class="shipment-detail">
+
+        <div class="row mb-1">
+            <div class="col">
+                <a href="/przesylki/{% if empty(data.shipment.waybill) %}robocze{% else %}wyslane{% endif %}" class="btn">Powrót do listy</a>
+                {% if isset(data.shipment.waybill) %}
+                    {% if empty(data.shipment.cancellation) %}
+
+                        <a href="/przesylki/{{ data.shipment.id }}/etykieta" class="btn" target="_blank">Etykieta</a>
+                        {% if data.shipment.service.carrier.code === 'DHL' %}
+                            <a href="/przesylki/{{ data.shipment.id }}/list" class="btn" target="_blank">List przewozowy</a>
+                        {% endif %}
+                        <a href="/przesylki/{{ data.shipment.id }}/protokol" class="btn" target="_blank">Protokół</a>
+                    {% endif %}
+                {% else %}
+                    <a href="/przesylki/{{ data.shipment.id }}/edycja" class="btn">Edytuj</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row {% if isset(data.shipment.cancellation.confirmed) %}opacity-50{% endif %}">
+            <div class="col-xl-6">
+                <div class="table-details-wrapper">
+                    <table class="table-details">
+                        <tbody>
+                            <tr>
+                                <td>ID:</td>
+                                <td>{{ data.shipment.id }}</td>
+                            </tr>
+                            <tr>
+                                <td>Kurier:</td>
+                                <td>{{ data.shipment.service.carrier.name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Serwis:</td>
+                                <td>{{ data.shipment.service.name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Data zamówienia:</td>
+                                <td>{{ date('Y-m-d H:i', data.shipment.added.time) }}</td>
+                            </tr>
+                            {% if isset(data.shipment.content) %}
+                            <tr>
+                                <td>Zawartość:</td>
+                                <td>{{ data.shipment.content }}</td>
+                            </tr>
+                            {% endif %}
+                            {% if isset(data.shipment.comment) %}
+                            <tr>
+                                <td>Uwagi:</td>
+                                <td>{{ data.shipment.comment }}</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-xl-6">
+                <div class="table-details-wrapper">
+                    <table class="table-details">
+                        <tbody>
+                            <tr>
+                                <td>Status:</td>
+                                <td>
+                                    {% if empty(data.shipment.waybill) %}
+                                        <span class="status-badge draft">Robocza</span>
+                                    {% elseif data.shipment.cancellation %}
+                                        <span class="status-badge cancelled">Anulowana</span>
+                                    {% else %}
+                                        <span class="status-badge sent">{{ data.shipment.waybill.status.name }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% if isset(data.shipment.waybill) %}
+                            <tr>
+                                <td>Numer listu:</td>
+                                <td>{% if isset(data.shipment.cancellation.confirmed) %}
+                                        <span style="text-decoration: line-through; color: red;">{{ data.shipment.waybill.number }}</span>
+                                    {% else %}
+                                        <a href="/sledzenie/{{ data.shipment.waybill.number }}/{{ data.shipment.waybill.service.carrier.code }}" target="_blank">{{ data.shipment.waybill.number }}</a>
+                                        {% if empty(data.shipment.cancellation) %}
+                                            <a href="/przesylki/{{ data.shipment.id }}/anuluj" class="action-link cancel" style="float: right;">Anuluj</a>
+                                        {% endif %}
+                                    {% endif %}</td>
+                            </tr>
+                            <tr>
+                                <td>Numer zlecenia podjazdu:</td>
+                                <td>{% if isset(data.shipment.waybill.pickups) %}
+                                        <ul class="pickup-list">
+                                            {% for pickup in data.shipment.waybill.pickups %}
+                                                <li>{{ pickup.number }}{% if isset(pickup.date) %}, {{ pickup.date }}{% if isset(pickup.since) %}, od {{ pickup.since }}{% endif %}{% if isset(pickup.till) %}, do {{ pickup.till }}{% endif %}{% endif %}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        BRAK <a href="/przesylki/{{ data.shipment.id }}/zamow-podjazd" class="action-link order">Zamów</a>
+                                    {% endif %}</td>
+                            </tr>
+                            {% endif %}
+                            <tr>
+                                <td>Planowany termin nadania:</td>
+                                <td>{{ data.shipment.dispatchDate }}</td>
+                            </tr>
+                            {% if isset(data.shipment.waybill) %}
+                            <tr>
+                                <td>Czas doręczenia:</td>
+                                <td>{{ data.shipment.waybill.delivered.time }}</td>
+                            </tr>
+                            {% endif %}
+
+
+                            {% if isset(data.shipment.consolidatedIn) %}
+                            <tr>
+                                <td>Konsolidacja:</td>
+                                <td><a href="/przesylki/konsolidacje/{{ data.shipment.consolidatedIn.id }}">{{ data.shipment.consolidatedIn.id }}</a>
+                                    {% if isset(data.shipment.consolidatedIn.shipment.waybill.number) %}
+                                        <p>Numer przesyłki: <a href="/sledzenie/{{ data.shipment.consolidatedIn.shipment.waybill.number }}">{{ data.shipment.consolidatedIn.shipment.waybill.number }}</a></p>
+                                    {% endif %}</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row {% if isset(data.shipment.cancellation.confirmed) %}opacity-50{% endif %}">
+            {% if isset(data.shipment.parcels) %}
+                <div class="col-xl-6">
+                    <h3>Paczki</h3>
+
+                    <div class="table-details-wrapper">
+                        <table class="table-details text-center">
+                            <thead>
+                                <tr>
+                                    <th class="wa"></th>
+                                    <th>Typ</th>
+                                    <th>Wymiary</th>
+                                    <th>Waga</th>
+                                    <th>Opakowanie</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for parcel in data.shipment.parcels %}
+                                <tr>
+                                    <td class="wa">{{ loop.index }}.</td>
+                                    <td>{% if parcel.type.code == 'parcel' %}Paczka{% elseif parcel.type.code == 'pallet' %}Paleta{% elseif parcel.type.code == 'envelope' %}Koperta{% endif %}</td>
+                                    <td>{{ parcel.dimensions.length.value }} x {{ parcel.dimensions.width.value }} x {{ parcel.dimensions.height.value }} cm</td>
+                                    <td>{{ parcel.weight.value }} kg</td>
+                                    <td>{% if isset(parcel.nonstandard) and parcel.nonstandard %}Niestandard{% else %}Standard{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+            {% if isset(data.shipment.priceItems) or isset(data.shipment.options) %}
+                <div class="col-xl-6">
+                    {% if isset(data.shipment.options) %}
+                        <h3>Usługi dodatkowe</h3>
+                            <div class="table-details-wrapper">
+                                <table class="table-details">
+                                    <thead>
+                                        <th>Nazwa</th>
+                                        <th>Numer</th>
+                                        <th>Kwota</th>
+                                        <th>Wartość</th>
+                                    </thead>
+                                    <tbody>
+                            {% for option, value in toArray(data.shipment.options) %}
+                                <tr>
+                                    <td>{% if option == 'cod' %}Pobranie{% elseif option == 'insurance' %}Ubezpieczenie{% elseif option == 'sms' %}SMS{% elseif option == 'orderPickup' %}Podjazd kuriera{% else %}{{ option }}{% endif %}</td>
+                                    <td>{{ iban2local(value.iban) }}</td>
+                                    <td class="text-end">{% if isset(value.amount) %}{{ number_format(value.amount) }}{% endif %}</td>
+                                    <td class="text-end">{{ value.content }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        </div>
+                    {% endif %}
+                    {% if isset(data.shipment.priceItems) %}
+                    <div class="table-details-wrapper">
+                        <table class="table-details">
+                            <thead>
+                                <tr>
+                                    <td>Pozycja</td>
+                                    <td class="text-end">Cena</td>
+                                    <td class="text-end">Ilość</td>
+                                    <td class="text-end">Wartość</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% set total=0 %}
+                                {% for item in data.shipment.priceItems %}
+                                    {% set worth = round(item.price.amount * item.quantity, 2) %}
+                                    {% set total = round(total+worth,2) %}
+                                    <tr>
+                                        <td style="white-space: normal; width: 100%">{{ item.variant.product.name }}{% if isset(item.variant.name) %}, {{ item.variant.name }}{% endif %}
+                                        {% if isset(item.price.originAmount) and isset(item.price.exchangeRate) %}
+                                            <span class="exchange-note">Przewalutowano z {{ number_format(item.price.originAmount) }} {{ item.price.exchangeRate.base.iso }} wg kursu {{ item.price.exchangeRate.rate }}, {{ item.price.exchangeRate.tableName }}</span>
+                                        {% endif %}
+                                        </td>
+                                        <td class="text-end">{{ number_format(item.price.amount) }}</td>
+                                        <td class="text-end">{{ item.quantity }}</td>
+                                        <td class="text-end">{{ number_format(worth) }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                {% set gross = round(total*1.23,2) %}
+                                {% set vat = round(gross-total,2) %}
+                                <tr>
+                                    <td colspan="3" class="text-end">Netto</td>
+                                    <td class="text-end">{{ number_format(total) }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-end">VAT</td>
+                                    <td class="text-end">{{ number_format(vat) }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-end">Brutto</td>
+                                    <td class="text-end">{{ number_format(gross) }}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+            </div>
+        <div class="row">
+            <div class="col">
+                {{ include('shipment-detail-address.twig', {
+                    address: data.shipment.addresses.sender,
+                    point: data.shipment.points.sender,
+                    method: data.shipment.dispatchMethod.code,
+                    title: 'Nadawca',
+                    title2: 'Sposób nadania'
+                }) }}
+            </div>
+            <div class="col">
+                {{ include('shipment-detail-address.twig', {
+                    address: data.shipment.addresses.recipient,
+                    point: data.shipment.points.recipient,
+                    method: data.shipment.deliveryMethod.code,
+                    title: 'Odbiorca',
+                    title2: 'Sposób doręczenia'
+                }) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "unlogged.twig" %}
+{% block breadcrumbs %}<a href="/">Strona główna</a> &gt; <a href="/strona/pomoc">Pomoc</a>{% endblock %}
+{% block header %}Konsolidacje{% endblock %}
+{% block inner %}
+    {% if empty(data.consolidations) %}
+        <div class="messages error">
+            <p>Brak utworzonych konsolidacji</p>
+        </div>
+    {% else %}
+    <div class="table-details-wrapper">
+        <table class="table-details" width="100%">
+            <thead>
+            <tr class="text-center">
+                <th>ID</th>
+                <th>Data</th>
+                <th>Przewoźnik<br>numer</th>
+                <th>Przesyłek</th>
+                <th>Przesyłki</th>
+                <th>Odebrano</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for consolidation in data.consolidations %}
+                    <tr>
+                        <td>{{ consolidation.id }}</td>
+                        <td>{{ date('Y-m-d H:i', consolidation.added.time / 1000000) }}</td>
+                        <td class="text-center">
+                            {% if(isset(consolidation.shipment.waybill.number)) %}
+                                {{ consolidation.carrier.name }}<br>{{ consolidation.shipment.waybill.number }}
+                            {% elseif isset(consolidation.shipment.id) %}
+                                Nie zarejestrowano<br>
+                                <a href="/przesylki/{{ consolidation.shipment.id }}/edycja">{{ consolidation.shipment.id }}</a>
+                            {% endif %}
+                        </td>
+                        <td>{{ count(consolidation.shipments) }}</td>
+                        <td>
+                            {% if(isset(consolidation.shipments)) %}
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td>Numer</td>
+                                            <td>Skan</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for shipment in consolidation.shipments %}
+                                        <tr>
+                                            <td><a href="/przesylki/{{ shipment.id }}">{{ shipment.waybill.number }}</a></td>
+                                            <td>{% if(isset(shipment.waybill.scans[0])) %} {{ date('Y-m-d H:i', shipment.waybill.scans[0].added.time/1000000) }}{% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            {% endif %}
+                        </td>
+                        <td>{% if(isset(consolidation.received.time)) %} {{ date('Y-m-d H:i', consolidation.received.time/1000000) }} {% else %}-{% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+{% endblock %}

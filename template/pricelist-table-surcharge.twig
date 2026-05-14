@@ -1,0 +1,1 @@
+<td class="text-end">{% if (surcharge.percentage) %}{{ number_format(surcharge.amount*100, 2) }}%{% elseif isset(surcharge.price.amount) %}{{ number_format(surcharge.price.amount, 2) }}{% else %}{% endif %}</td>

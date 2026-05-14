@@ -1,0 +1,192 @@
+{% extends "logged.twig" %}
+{% block breadcrumbs %}{% endblock %}
+{% block header %}Przesyłki{% endblock %}
+{% block inner %}
+    <div class="row mb-1">
+        <div class="col">
+            {% if data.registered is null or data.registered == true %}
+                <button name="download-labels" type="button" style="display: none;">Pobierz etykiety</button>
+                <button name="download-protocol" type="button" style="display: none;">Pobierz protkoły</button>
+                <button name="create-consolidation" type="button" style="display: none;">Konsolidacja</button>
+            {% endif %}
+            {% if data.registered is null or data.registered == false %}
+                <button name="register-shipments" type="button">Nadaj</button><br /><br />
+            {% endif %}
+        </div>
+    </div>
+    <div class="table-details-wrapper">
+        <table class="table-details" width="100%">
+            <thead>
+                <tr class="text-center">
+                    <th class="wa">
+                        <label>
+                            <input type="checkbox" name="check-all" value="1"/>
+                        </label>
+                    </th>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>
+                        <p>Kurier</p>
+                        <p>Nr listu</p>
+                    </th>
+                    <th>Odbiorca</th>
+                    <th class="text-end">
+                        <p>Cena</p>
+                        <p>Pobranie</p>
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for shipment in data.shipments %}
+                {% set total=0 %}
+                {% for item in shipment.priceItems %}
+                    {% set total = total+round(item.price.amount*item.quantity,2) %}
+                {% endfor %}
+                {% set gross=round(total*1.23,2) %}
+                <tr{% if isset(shipment.cancellation) %} style="opacity: 0.5; cursor: not-allowed"{% endif %}>
+                    <td class="wa text-center">
+                        {% if empty(shipment.cancellation) %}
+                        <label>
+                            <input type="checkbox" name="ids[]" value="{{ shipment.id }}"/>
+                        </label>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <a href="/przesylki/{{ shipment.id }}">{{ shipment.id }}</a>
+                    </td>
+                    <td class="text-center text-nowrap">
+                        <p>{{ date('Y-m-d H:i', shipment.added.time) }}</p>
+                        <p>{{ shipment.dispatchDate }}</p>
+                    </td>
+                    <td class="text-center">
+                        <p><span class="courier-name courier-name-1">{{ shipment.service.carrier.name }}</span></p>
+                        {% if isset(shipment.waybill.number) %}
+                            <p><a href="/sledzenie/{{ shipment.waybill.number }}/{{ shipment.waybill.service.carrier.code }}" target="_blank">{{ shipment.waybill.number }}</a></p>
+                        {% endif %}
+
+                        {% if isset(shipment.invoices) %}
+                            {% for invoice in shipment.invoices %}
+                                Faktura <strong>{{ invoice.invoice.number }}</strong>
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <strong>{{ shipment.addresses.recipient.firstname }} {{ shipment.addresses.recipient.lastname }} {{ shipment.addresses.recipient.company }}</strong><br>
+                        {{ shipment.addresses.recipient.city }}
+                        <p class="shipment-error"></p>
+                    </td>
+                    <td class="text-end">
+                        {# <span class="net"{% if total<=0 %} style="display: none;"{% endif %}>{{ number_format(total) }} zł</span><br> #}
+                        <p><strong class="gross text-nowrap"{% if total<=0 %} style="display: none;"{% endif %}>{{ number_format(gross) }} zł</strong></p>
+                        {% if isset(shipment.options.cod.amount) %}
+                            <p><em class="text-nowrap">{{ number_format(shipment.options.cod.amount)}} zł</em></p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if isset(shipment.cancellation) %}
+                            <strong>anulowana</strong>
+                        {% else %}
+                            <strong>{{ shipment.waybill.status.type.title }}</strong>
+                        {% endif %}
+                        {% if isset(shipment.waybill.scans[0]) %}
+                            <p class="internal-scan">Skan wewnętrzny: {{ date('Y-m-d H:i', shipment.waybill.scans[0].added.time/1000000) }}</p>
+                        {% endif %}
+                    </td>
+                    <td class="text-nowrap text-end">
+                        <p>
+                            <a href="/przesylki/{{ shipment.id }}">Szczegóły</a>
+                        </p>
+                        {% if isset(shipment.waybill.number) %}
+                            <p><a href="/przesylki/{{ shipment.id }}/ponow">Wyślij ponownie</a></p>
+                            {% if empty(shipment.cancellation) %}
+                            <p>
+                                <a href="/przesylki/{{ shipment.id }}/etykieta" target="_blank">Etykieta</a>
+                                <a href="/przesylki/{{ shipment.id }}/protokol" target="_blank">Protokół</a>
+                            </p>
+                            {% endif %}
+                        {% else %}
+                            <p>
+                                <a href="/przesylki/{{ shipment.id }}/edycja">Edytuj</a>
+                                <a href="#" data-delete_id="{{ shipment.id }}">Usuń</a>
+                            </p>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}</tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block bottomcontent %}<script type="text/javascript" src="/js/shipments.js?{{ time() }}"></script>
+    <template id="empty-modal"><div class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div></template>
+
+    <template id="consolidation-modal"><div class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Konsolidacja przesyłek</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="consolidation">
+                            <table>
+                                <tr style="display: none;">
+                                    <td>Własna umowa</td>
+                                    <td>
+                                        <select name="own">
+                                            <option value="0">Nie</option>
+                                            <option value="1">Tak</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr style="display: none;">
+                                    <td>
+                                        Kurier
+                                    </td>
+                                    <td>
+                                        <select name="carrier">
+                                            <option value="dhl">DHL</option>
+                                            <option value="inpost">InPost</option>
+                                            <option value="dpd">DPD</option>
+                                            <option value="ups">UPS</option>
+                                            <option value="fedex">FedEx</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr style="display: none;">
+                                    <td>
+                                        Numer przesyłki
+                                    </td>
+                                    <td>
+                                        <input type="text" name="number">
+                                    </td>
+                                </tr>
+                                <tr style="display: none;">
+                                    <td colspan="2" class="text-center">
+                                        <button type="submit">
+                                            Zatwierdź
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div></template>
+{% endblock %}

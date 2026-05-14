@@ -1,0 +1,15 @@
+{% extends "unlogged.twig" %}
+{% block breadcrumbs %}<a href="/">Strona główna</a> &gt; <a href="/strona/{{ data.slug }}">{{ data.title }}</a>{% endblock %}
+{% block header %}{{ data.title }}{% endblock %}
+{% block inner %}
+    <div class="row">
+        <div class="col-md-6 mx-md-auto">
+            {% if data.image|length %}
+            <div class="page-content-image">
+                <img src="{{ data.image }}" alt="" />
+            </div>
+            {% endif %}
+            {{ data.content|raw }}
+        </div>
+    </div>
+{% endblock %}

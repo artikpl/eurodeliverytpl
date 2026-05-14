@@ -1,0 +1,63 @@
+<div class="table-details-wrapper">
+    <table class="table-details">
+        <thead>
+        <tr>
+            <td colspan="2">{{ title }}</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="title">Imię i nazwisko:</td>
+            <td>{{ address.firstname }} {{ address.lastname }}</td>
+        </tr>
+        {% if isset(address.company) %}
+            <tr class="title">
+                <td>Firma:</td>
+                <td>{{ address.company }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="title">Adres:</td>
+            <td>{{ address.street }} {{ address.building }}{% if isset(address.apartment) %}/{{ address.apartment }}{% endif %}</td>
+        </tr>
+        <tr>
+            <td class="title">Miasto:</td>
+            <td>{{ address.postcode }} {{ address.city }}</td>
+        </tr>
+        <tr>
+            <td class="title">Kraj:</td>
+            <td>{{ address.country.iso }}</td>
+        </tr>
+        {% if isset(address.phone) %}
+            <tr>
+                <td class="title">Telefon:</td>
+                <td>{{ address.phone }}</td>
+            </tr>
+        {% endif %}
+        {% if isset(address.email) %}
+            <tr>
+                <td class="title">Email:</td>
+                <td>{{ address.email }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="title">{{ title2 }}:</td>
+            <td>
+                <strong>
+                    {% if method == 'point' %}Punkt
+                    {% elseif method == 'locker' %}Automat
+                    {% elseif method == 'courier' %}Kurier
+                    {% endif %}
+                </strong>
+                {% if isset(point) %}
+                    <br>{{ point.type.name }} <strong>{{ point.code }}</strong>
+                    <br>{{ point.street }} {{ point.building }}{% if isset(point.apartment) %}/{{ point.apartment }}{% endif %}
+                    <br>{{ point.postcode }} {{ point.city }}
+                    <br>{{ point.country.iso }}
+                    {% if isset(point.description) %}<br><i>{{ point.description }}</i>{% endif %}
+                {% endif %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

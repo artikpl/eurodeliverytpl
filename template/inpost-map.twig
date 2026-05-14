@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+    <title>EuroDelivery</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="" />
+    <meta name="language" content="pl" />
+</head>
+<body>
+<div id="content_iframe">
+    <div style="width: 100%; height: 600px;">
+        <inpost-geowidget onpoint="onpointselect" token="eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzQlpXVzFNZzVlQnpDYU1XU3JvTlBjRWFveFpXcW9Ua2FuZVB3X291LWxvIn0.eyJleHAiOjIwNjM4ODI4NjgsImlhdCI6MTc0ODUyMjg2OCwianRpIjoiNGRiYzkzOWYtMDVjOC00ZmNhLWEwYjItNmU1Y2E2M2VmZjQ3IiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5pbnBvc3QucGwvYXV0aC9yZWFsbXMvZXh0ZXJuYWwiLCJzdWIiOiJmOjEyNDc1MDUxLTFjMDMtNGU1OS1iYTBjLTJiNDU2OTVlZjUzNTpsTGZST0RzUlFBUzZqTGp6NDBYdGZDNURVUG1Mekd6ejltLU85a2Z6U0swIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoic2hpcHgiLCJzZXNzaW9uX3N0YXRlIjoiNjE0NjY3M2UtOTk2NC00Y2Q0LWEyNDUtMzFjNzNlZjdjMmVjIiwic2NvcGUiOiJvcGVuaWQgYXBpOmFwaXBvaW50cyIsInNpZCI6IjYxNDY2NzNlLTk5NjQtNGNkNC1hMjQ1LTMxYzczZWY3YzJlYyIsImFsbG93ZWRfcmVmZXJyZXJzIjoiIiwidXVpZCI6IjM3YWM5ZDE2LWRlNzMtNGI4Ni1iMDFhLTJmODU1M2JmZGJlMiJ9.kl1AalUn3YRXET-FMem2jCpiqFZoge13Jb0d1RLfrF5XN_shZVj9GApXqzsLVTwiJk1uoLOYol1C3ndn_bvblNbLhgd_LY7Ka2E7dfVusa8SpkHMkmw6TrP4bNgssExz022nG4r2bb7XtuWM11nNYTXpdNcImHj-EyANGY0S5vI_UPLmfU1c5uYylARh_uex5gpScjDJ2wAaRPpiD2AicdsVP7bDYgGK21vEUKBWM85BE9s-im0lVkX2lPVI8mOvsuNWK8Sxjkkc7qB6A9LK4I9a7q3FstMFKIhrHWNvXTjBZynpdX7kVz-4Ewx5ZdUeeJau5UfjofHxUzAtchJYPg" country='PL' language='pl' config='parcelcollect'></inpost-geowidget>
+    </div>
+
+    <script>
+        function setInpostDropOffPointFromMap(event)
+        {
+            pointDetails = prepareInpostPoint('Nadawca', event);
+        }
+        function setInpostDeliveryPointFromMap(event)
+        {
+            pointDetails = prepareInpostPoint('Odbiorca', event);
+        }
+
+        function prepareInpostPoint(type, e) {
+            parent.sform.setPoint.call(parent.sform, {
+                code: e.detail.name,
+                name: e.detail.address.line1 + ', ' + e.detail.address.line2 + ' (' + e.detail.name + ')'
+            });
+            return pointDetails;
+        }
+
+
+        document.addEventListener('onpointselect', {% if data.direction == 'nadawca' %}setInpostDropOffPointFromMap{% else %}setInpostDeliveryPointFromMap{% endif %});
+    </script>
+</div>
+<script type="text/javascript" src="/js/jquery-4.0.0.min.js"></script>
+<script type="text/javascript" src="https://geowidget.inpost-group.com/inpost-geowidget.js"></script></body>
+</html>

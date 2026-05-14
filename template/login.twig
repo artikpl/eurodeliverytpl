@@ -1,0 +1,59 @@
+
+{% extends "unlogged.twig" %}
+{% block breadcrumbs %}<a href="/">Strona główna</a> &gt; <a href="/logowanie">Logowanie {{ data.redirect }}</a>{% endblock %}
+{% block header %}Logowanie{% endblock %}
+{% block inner %}<div class="row">
+    <div class="col-lg-6">
+        <form action="/logowanie" method="post" name="login" style="display: none;" >
+            {% if data.redirect|length %}
+                <input type="hidden" name="redirect" value="{{ data.redirect }}"/>
+            {% endif %}
+            <label class="formrow">
+                <span>Email/Login:</span>
+                <input name="login" type="text" required="required"/>
+            </label>
+            <label class="formrow">
+                <span>Hasło:</span>
+                <input name="password" type="password" required="required"/>
+            </label>
+            <p>
+                <a href="/przypomnij-haslo">Zapomniałeś hasła?</a> |
+                <a href="/rejestracja" class="rejestracja">Załóż konto</a>
+            </p>
+            <button type="submit">Zaloguj</button>
+        </form>
+    </div>
+    <div class="col-lg-6 login-guide">
+        <div class="row mt-5 mt-lg-4">
+            <div class="col-md-6">
+                <div class="box">
+                    <div class="number">1</div>
+                    <div class="title">Podaj dokładne wymiary i wagę paczki</div>
+                    <div class="content">Dzięki temu unikniesz niespodziewanych dopłat i opóźnień w dostawie.</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box">
+                    <div class="number">2</div>
+                    <div class="title">Wypełnij wszystkie dane adresowe</div>
+                    <div class="content">Dokładność w tym kroku zwiększa szansę na szybką i bezpieczną dostawę.</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box">
+                    <div class="number">3</div>
+                    <div class="title">Wybierz sposób nadania przesyłki</div>
+                    <div class="content">Odbiór przez kuriera, nadanie w paczkomacie, nadanie w punkcie. Decyzja należy do Ciebie!</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box">
+                    <div class="number">4</div>
+                    <div class="title">Opłać wysyłkę, przygotuj paczkę i dokumenty</div>
+                    <div class="content">Wydrukuj etykietę, naklej ją na przesyłkę i przekaż kurierowi protokół do podpisu - to Twoje potwierdzenie odbioru.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>{% endblock %}
+{% block bottomcontent %}<script type="text/javascript" src="/js/login.js?{{ time() }}"></script>{% endblock %}

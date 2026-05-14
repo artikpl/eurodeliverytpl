@@ -1,0 +1,10 @@
+{% set net = round(variant.price.amount*(1+variant.fuelRate),2) %}
+{% set gross = round(net*1.23, 2) %}
+<tr>
+    <td>{{ variant.name }}</td>
+    <td class="text-end">{{ number_format(variant.price.amount) }}</td>
+    {% if isset(variant.fuelRate) and variant.fuelRate>0 %}
+        <td class="text-end">{{ number_format(net) }}</td>
+    {% endif %}
+    <td class="text-end">{{ number_format(gross) }}</td>
+</tr>

@@ -1,0 +1,283 @@
+{% extends "unlogged.twig" %}
+{% block breadcrumbs %}<a href="/">Strona główna</a> &gt; <a href="/strona/regulamin">Regulamin</a>{% endblock %}
+{% block header %}Regulaminn{% endblock %}
+{% block inner %}<div class="row">
+            <div class="col-md-6 mx-md-auto">
+
+
+
+                <p><strong>&sect;1 Definicje</strong></p>
+
+                <p><strong>{{ getSystemName() }}</strong>:&nbsp;Imię i nazwisko&nbsp;prowadzący działalność gospodarczą pod firmą&nbsp;..... Sp&oacute;łka z ograniczoną odpowiedzialnością &nbsp;z siedzibą w&nbsp;Miasto&nbsp;(01-234) przy&nbsp;Ulica 1/2.&nbsp; Sąd Rejonowy w Olsztynie, VIII Wydział Gospodarczy &ndash; NIP: 9876543210, KRS&nbsp;00000124334, REGON:&nbsp;280412432.</p>
+
+                <p>EuroDelivery posiada następujące dane kontaktowe - nr telefonu: ., adres e-mail:&nbsp;...; kontakt pisemny na adres:&nbsp;Nazwa firmy,&nbsp;.....</p>
+
+                <p><strong>Użytkownik</strong>: osoba fizyczna, kt&oacute;ra posiada pełną zdolność do czynności prawnych (w tym Konsument), osoba prawna lub jednostka organizacyjna nieposiadająca osobowości prawnej, dla kt&oacute;rej EuroDelivery utworzył zgodnie z nin. Regulaminem Konto Użytkownika w Serwisie EuroDelivery.</p>
+
+                <p>Konsument: osoba fizyczna w rozumieniu art. 221 Kodeksu Cywilny.</p>
+
+                <p><strong>Przewoźnik</strong>: podmiot prowadzący działalność gospodarczą w zakresie Usług Kurierskich, tj. przyjmowaniu do przewozu, przewozie i doręczaniu Przesyłek bez pobrania got&oacute;wki lub &bdquo;za pobraniem&rdquo; got&oacute;wki, zgodnie z obowiązującymi przepisami prawa i Regulaminem Przewoźnika</p>
+
+                <p><strong>Serwis EuroDelivery</strong>: serwis internetowy prowadzony przez EuroDelivery utrzymywany w domenie www.eurodelivery.</p>
+
+                <p><strong>Przesyłka</strong>: paczki, koperty, palety nadane w ramach jednego zam&oacute;wienia na Usługę Kurierską złożonego przez Użytkownika w Serwisie EuroDelivery.</p>
+
+                <p><strong>Umowa</strong>: umowa zawarta pomiędzy Użytkownikiem a EuroDelivery na wykonanie Usług określonych w niniejszym Regulaminie.</p>
+
+                <p><strong>Usługa</strong>: usługa świadczona na podstawie niniejszego Regulaminu przez EuroDelivery drogą elektroniczną przy pomocy Serwisu EuroDelivery, polegająca na umożliwieniu Użytkownikowi złożenia zam&oacute;wienia Usługi Kurierskiej.</p>
+
+                <p><strong>Usługa Kurierska</strong>: usługa polegająca na przyjmowaniu, przemieszczaniu i doręczaniu Przesyłek Adresatom wykonywana przez Przewoźnika w ramach jego działalności na podstawie Regulaminu Przewoźnika.</p>
+
+                <p>Czas realizacji Usługi Kurierskiej: czas, w jakim Przewoźnik przyjmie, przemieści i doręczy Przesyłkę Adresatowi.</p>
+
+                <p><strong>Dni Robocze</strong>: dni od poniedziałku do piątku, przy czym nie obejmują świąt państwowych, kościelnych oraz innych dni ustawowo wolnych od pracy.</p>
+
+                <p><strong>Cennik</strong>: dokument umieszczony w Serwisie EuroDelivery określający cenę za wykonanie Usługi.</p>
+
+                <p><strong>Dane Dostępowe</strong>: login, adres e-mail oraz hasło do konta Użytkownika.</p>
+
+                <p><strong>Konto Użytkownika</strong>: baza zawierająca dane Użytkownika służące m.in. do realizacji składanych zam&oacute;wień na Usługę Kurierską, historię zam&oacute;wień, dane dotyczące wpłat.</p>
+
+                <p><strong>Regulamin</strong>: niniejszy dokument, określający zasady korzystania z Serwisu EuroDelivery, dostępny w Serwisie EuroDelivery. Regulamin jest udostępniany nieodpłatnie za pośrednictwem Serwisu EuroDelivery, co zapewnia możliwość zapoznania się z jego treścią przed zawarciem Umowy. Regulamin udostępniany jest w formie pliku PDF, kt&oacute;ry umożliwia jego pobieranie, utrwalanie i wydrukowanie.</p>
+
+                <p><strong>Polityka Prywatności</strong> - załącznik do Regulaminu określający zasady pozyskiwania oraz przetwarzania danych osobowych oraz regulujący prawa i obowiązki Administratora danych oraz Użytkownika</p>
+
+                <p><strong>Adresat</strong>: osoba fizyczna (w tym Konsument), osoba prawna oraz jednostka organizacyjna nieposiadająca osobowości prawnej, do kt&oacute;rej skierowana jest Przesyłka.</p>
+
+                <p><strong>Informacja handlowa</strong>: rozpowszechniane przez EuroDelivery do Użytkownik&oacute;w informacje dotyczące oferowanych przez EuroDelivery Usług m.in. obniżki cen Usług.</p>
+
+                <p><strong>&sect;2 Rodzaj i zakres usług</strong></p>
+
+                <p>EuroDelivery świadczy na podstawie niniejszego Regulaminu drogą elektroniczną przy pomocy Serwisu EuroDelivery Usługę polegająca na umożliwieniu Użytkownikowi złożenia zam&oacute;wienia Usługi Kurierskiej.</p>
+
+                <p>EuroDelivery nie wykonuje Usługi Kurierskiej &ndash; jest ona wykonywana wyłącznie przez Przewoźnika, w ramach jego działalności gospodarczej, na jego ryzyko i odpowiedzialność, na podstawie Regulaminu Przewoźnika. Po zam&oacute;wieniu usługi Kurierskiej z Serwisu EuroDelivery Użytkownik może domagać się od Przewoźnika wykonania Usługi Kurierskiej zgodnie z warunkami Regulaminu Przewoźnika.</p>
+
+                <p>Użytkownik zobowiązuje się do zapoznania się z Regulaminem i Regulaminem Przewoźnika, z kt&oacute;rego Usług Kurierskich będzie korzystał, przed rozpoczęciem korzystania z Serwisu EuroDelivery. Akceptacja treści ww. Regulamin&oacute;w jest warunkiem korzystania z Serwisu EuroDelivery.</p>
+
+                <p><strong>&sect;3 Założenie i utrzymanie Konta Użytkownika w Serwisie EuroDelivery</strong></p>
+
+                <p>Celem złożenia zam&oacute;wienia na Usługę Kurierską Użytkownik rejestruje się w Serwisie EuroDelivery &ndash; rejestracja polega na utworzeniu w ramach Serwisu EuroDelivery Konta Użytkownika. Konto Użytkownika zakładane jest po wypełnieniu przez Użytkownika formularza dostępnego w Serwisie EuroDelivery. Przy wypełnianiu formularza Użytkownik potwierdza fakt zapoznania się z Regulaminem, Polityką Prywatności oraz Regulaminami Przewoźnik&oacute;w i zaakceptowanie niniejszego Regulaminu, Polityki Prywatności i Regulaminu Przewoźnik&oacute;w oraz dokonuje wskazania, iż zamierza, albo nie, korzystać z Serwisu EuroDelivery jako Konsument.</p>
+
+                <p>W przypadku Konsument&oacute;w, utworzenie konta jest r&oacute;wnoznaczne z wyrażeniem zgody przez Konsumenta na złożenie mu przez EuroDelivery propozycji zawarcia Umowy dotyczącej świadczenia Usług określonych w niniejszym Regulaminie.</p>
+
+                <p>Przy tworzeniu Konta Użytkownika w Serwisie EuroDelivery Użytkownik wyraża zgodę na przesyłanie mu Informacji handlowych dotyczących oferowanych przez EuroDelivery Usług na adres e-mail podany podczas zakładania Konta Użytkownika lub adres e-mail zaktualizowany przez Użytkownika.</p>
+
+                <p>Po zaakceptowaniu utworzenia Konta Użytkownika przez Użytkownika, EuroDelivery przesyła Użytkownikowi potwierdzenie założenia Konta Użytkownika na adres e-mail wskazany przez Użytkownika w procesie rejestracji w Serwisie EuroDelivery.</p>
+
+                <p>Wraz z potwierdzeniem o utworzeniu Konta Użytkownika Użytkownik otrzymuje Dane Dostępowe, kt&oacute;rych podanie jest każdorazowo wymagane, aby Użytkownik m&oacute;gł uzyskać dostęp do swojego Konta Użytkownika w Serwisie EuroDelivery i złożyć zm&oacute;wienie. Zalogowanie się w Serwisie EuroDelivery jest r&oacute;wnoznaczne z zawarciem Umowy na świadczenie usług elektronicznych na zasadach określonych w niniejszym Regulaminie pomiędzy EuroDelivery a Użytkownikiem.</p>
+
+                <p>Użytkownik zobowiązany jest chronić przed osobami nieupoważnionymi Dane Dostępowe.</p>
+
+                <p>Dostęp do Konta Użytkownika następuje po zalogowaniu się w Serwisie EuroDelivery poprzez podanie Danych Dostępowych Użytkownika we właściwym polu. Każdorazowe skorzystanie z Serwisu EuroDelivery jest r&oacute;wnoznaczne z zaakceptowaniem Regulaminu w jego obowiązującej w danym czasie wersji, dlatego Użytkownik jest zobowiązany zapoznać się z Regulaminem każdorazowo przed skorzystaniem z Serwisu EuroDelivery.</p>
+
+                <p>Po zalogowaniu się w Serwisie EuroDelivery Użytkownik ma prawo zmiany swoich danych podanych przy utworzeniu Konta Użytkownika &ndash; aktualizacja tych danych może być konieczna do prawidłowego korzystania z Usługi i wykonywania Usługi Kurierskiej przez Przewoźnika.</p>
+
+                <p><strong>&sect;4 Zlecenie wykonania Usługi Kurierskiej</strong></p>
+
+                <p>Zlecenie wykonania Usługi Kurierskiej wymaga:</p>
+
+                <p>zalogowania się Użytkownika do swojego Konta Użytkownika w Serwisie EuroDelivery,</p>
+
+                <p>dokonania przez Użytkownika wyboru Przewoźnika, z kt&oacute;rego Usługi Kurierskiej chce skorzystać oraz zapoznania się z Regulaminem tego Przewoźnika i jego akceptacji,</p>
+
+                <p>wypełnienia formularza, w kt&oacute;rym podaje informacje dotyczące Przesyłki ; ponadto Konsument jest zobligowany do podania wymiar&oacute;w, wagi i rodzaju opakowania zgodnie ze stanem faktycznym nadawanej Przesyłki,</p>
+
+                <p>wyboru przez Użytkownika rodzaju Usługi Kurierskiej, z kt&oacute;rej zamierza skorzystać,</p>
+
+                <p>zatwierdzenia zlecenia Usługi Kurierskiej &ndash; przed zatwierdzeniem zlecenia Usługi Kurierskiej Konsument otrzymuje dodatkowo informacje o cenie za świadczenie Usługi Kurierskiej wraz z podatkami</p>
+
+                <p>zapłaty ceny za Usługę Kurierską zgodnie z Cennikiem</p>
+
+                <p>Składanie zleceń na Usługi Kurierskie za pomocą Serwisu EuroDelivery możliwe jest 7 dni w tygodniu, 24 godziny na dobę, przy czym realizacja zleconych Usług Kurierskich przeprowadzana jest w Dni Robocze w godzinach 8-16. Zlecenie na Usługi Kurierskie, kt&oacute;re będzie złożone poza wskazanymi powyżej godzinami oraz w inne dni niż Dni Robocze będzie realizowane w najbliższym Dniu Roboczym.</p>
+
+                <p>Użytkownik w ramach Serwisu EuroDelivery może korzystać wyłącznie z Usług Kurierskich tych Przewoźnik&oacute;w, z kt&oacute;rymi w swoim własnym imieniu i bezpośrednio nie ma podpisanej umowy na wykonywanie Usług Kurierskich. Dokonanie przez Użytkownika wyboru Przewoźnika zgodnie z pkt. 1.2. powyżej przy pomocy Serwisu EuroDelivery jest r&oacute;wnoznaczne z oświadczeniem Użytkownika, że nie korzysta - na podstawie umowy zawartej bezpośrednio z Przewoźnikiem - z Usług Kurierskich wybranego Przewoźnika i z jego Usług Kurierskich chce skorzystać w ramach Serwisu EuroDelivery.</p>
+
+                <p>Zatwierdzenie zlecenia zgodnie z pkt. 1.5. powyżej przy pomocy Serwisu EuroDelivery jest r&oacute;wnoznaczne z potwierdzeniem przez Użytkownika, że zapoznał się i akceptuje obowiązujące w danym czasie Regulamin oraz Regulamin Przewoźnika.</p>
+
+                <p>Użytkownik odpowiada za wyb&oacute;r Przewoźnika i prawidłowość danych przekazanych Przewoźnikowi w celu wykonania Usługi Kurierskiej, ponieważ Usługi Kurierskie odbywają się zgodnie z Regulaminem Przewoźnika, Przewoźnikowi przysługuje prawo do weryfikacji każdej Przesyłki pod względem wagi oraz rozmiar&oacute;w. W przypadku stwierdzenia, że zadeklarowane przez Użytkownika dane Przesyłki (waga bądź gabaryty) są niezgodne ze stanem rzeczywistym Przesyłki, Usługa Kurierska zostanie wykonana, jednakże Użytkownik zostanie obciążony dodatkowymi opłatami, kt&oacute;re zgodnie z Cennikiem lub Regulaminem Przewoźnika odpowiadają rzeczywistej wadze lub rozmiarowi Przesyłki .</p>
+
+                <p>Użytkownik w celu prawidłowego wykonania Usługi Kurierskiej powinien postępować zgodnie z Regulaminem wybranego przez siebie Przewoźnika.</p>
+
+                <p>Użytkownik zostanie powiadomiony przez EuroDelivery na adres e-mail podany w trakcie zakładania Konta Użytkownika lub adres e-mail zaktualizowany przez Użytkownika o przyjęciu realizacji Usługi Kurierskiej i czasie realizacji Usługi Kurierskiej. Wraz z tym powiadomieniem Użytkownikowi zostaje dostarczony wygenerowany przez Serwis EuroDelivery list przewozowy i/lub etykieta. Użytkownik drukuje ten dokument/te dokumenty i przekazuje Przewoźnikowi podczas odbioru Przesyłki przed przystąpieniem przez Przewoźnika do wykonania Usługi Kurierskiej. Realizacja Usługi Kurierskiej liczona jest od daty fizycznego odebrania paczki od Nadawcy - do daty doręczenia jej do Odbiorcy. Odbi&oacute;r paczki nie jest gwarantowany przez Przewoźnika i może ulec zmianie ze względu na możliwości logistyczne.</p>
+
+                <p>Realizacja powyższej usługi jest możliwa, jeżeli adres email Użytkownika jest aktywny i nie jest dodany do żadnej z list antyspamowych.</p>
+
+                <p>Z zastrzeżeniem postanowień poniższych, Użytkownik może anulować złożone zam&oacute;wienie na Usługę Kurierską w przeciągu 2 tygodni od złożenia zlecenia. W przypadku anulowania przez Użytkownika opłaconego już zam&oacute;wienia cena zostanie zwr&oacute;cona Użytkownikowi niezwłocznie. Można anulować jedynie takie zam&oacute;wienia na Usługę Kurierską, w trakcie realizacji kt&oacute;rych nie podjęto jeszcze pr&oacute;by odebrania Przesyłki - w przypadku jednak, gdy Przewoźnik podjął już pr&oacute;bę odebrania Przesyłki i poni&oacute;sł związane z tym koszty, Przewoźnik może mieć prawo do żądania zapłaty odpowiedniej części ceny zgodnie z obowiązującymi w danym czasie Regulaminem Przewoźnika oraz prawem.</p>
+
+                <p>Modyfikowanie danych zam&oacute;wienia Usługi Kurierskiej odbywa się poprzez anulowanie zam&oacute;wienia (zgodnie z pkt. 8 powyżej), a następnie złożenia zam&oacute;wienia wykonania nowej Usługi Kurierskiej. Nie jest dopuszczalne modyfikowanie danych zam&oacute;wienia, kt&oacute;re jest już w trakcie wykonywania przez Przewoźnika, tj. po odbiorze przez Przewoźnika Przesyłki celem wykonania Usługi Kurierskiej.</p>
+
+                <p>Usługi Kurierskie &bdquo;za pobraniem&rdquo;. W przypadku wybrania przez Użytkownika Usługi Kurierskiej związanej z doręczeniem Przesyłki &bdquo;za pobraniem&rdquo; EuroDelivery przekazuje Użytkownikowi pobraną przez Przewoźnika od Adresata kwotę należną Użytkownikowi w ciągu 5-14 dni roboczych (w zależności od zasad firmy kurierskiej, z kt&oacute;rej skorzystał Użytkownik). Przekazanie kwoty należnej Użytkownikowi następuje na konto, kt&oacute;rego numer został wskazany przez Użytkownika w dniu złożenia zlecenia na Usługę Kurierską związaną z doręczeniem Przesyłki &bdquo;za pobraniem&rdquo;.</p>
+
+                <p>Za dzień zwrotu należności z usługi pobraniowej uznaje się dzień zaksięgowania wypłaty na rachunek bankowy Klienta, widoczny na bankowym potwierdzeniu transakcji z banku Serwisu.</p>
+
+                <p><strong>&sect;5 Podstawowe wymagania techniczne konieczne do korzystania z Serwisu EuroDelivery</strong></p>
+
+                <p>Do korzystania z Serwisu EuroDelivery wymagane jest posiadanie przez Użytkownika:</p>
+
+                <p>- dostępu do Internetu,</p>
+
+                <p>- sprawnej drukarki np. atramentowej lub laserowej,</p>
+
+                <p>- przeglądarki internetowej standardowego typu.</p>
+
+                <p><strong>&sect;6 Płatności i rozliczenia</strong></p>
+
+                <p>Prowadzenie Konta Użytkownika w Serwisie EuroDelivery jest bezpłatne.</p>
+
+                <p>Użytkownik zobowiązuje się zapłacić EuroDelivery za Usługę Kurierską cenę, w wysokości właściwej dla rodzaju Przesyłki (według jej wagi lub rozmiar&oacute;w) i wybranej Usługi Kurierskiej, kt&oacute;ra to cena jest określona w Cenniku, zamieszczonym w Serwisie EuroDelivery.</p>
+
+                <p>Klient może dokonać płatności elektronicznie i poprzez płatności kartą płatniczą za pośrednictwem operatora Tpay S.A. Rozliczenia transakcji płatnościami elektronicznymi przeprowadzane są zgodnie z wyborem Klienta za pośrednictwem serwisu Tpay S.A. Operatorem płatności jest Tpay S.A.&nbsp;</p>
+
+                <p>W przypadku gdyby cena zapłacona przez Użytkownika nie odpowiadała wynikającej z Cennika cenie właściwej dla rodzaju wybranych Przesyłki i Usługi Kurierskiej (np. na skutek nieprawidłowo podanej przez Użytkownika wagi i wymiar&oacute;w Przesyłki) lub w przypadku gdyby z wykonaniem Usługi Kurierskiej było połączone konieczne wykonanie dodatkowych usług przez Przewoźnika (np. zwrot Przesyłki, kt&oacute;rej odbioru odm&oacute;wił Adresat, brak palet dla zam&oacute;wionej Przesyłki) Użytkownik zobowiązuje się zapłacić EuroDelivery r&oacute;żnicę pomiędzy ceną zapłaconą, a ceną należną wynikającą z Cennika. Jeżeli usługa dodatkowa zrealizowana dla przesyłki nie ma odzwierciedlenia w Cenniku, Serwis pobiera opłatę za realizację takiej usługi w wysokości r&oacute;wnej opłacie wynikającej z cennika Przewoźnika powiększoną o 20 % marżę. Koszt paczki naliczony przez Przewoźnika stanowi Cenę paczki i jest traktowany jako płatność należna dla Serwisu. Może zostać rozliczony z aktualnym saldem konta Skarbonka Użytkownika.</p>
+
+                <p>EuroDelivery pobiera cenę za wykonanie Usługi Kurierskiej i rozlicza ją z Przewoźnikiem.</p>
+
+                <p>Zapłata ceny za Usługę Kurierską dokonywana jest &bdquo;z g&oacute;ry&rdquo; e-przelewem, za pośrednictwem platformy internetowej przelewy24.pl albo &quot;z dołu&quot; jako płatność odroczona.</p>
+
+                <p>Zasadą jest zapłata ceny &bdquo;z g&oacute;ry&rdquo;.</p>
+
+                <p>Płatność &bdquo;z dołu&rdquo; jest możliwa tylko wtedy, gdy Użytkownik podczas zakładania Konta Użytkownika w Serwisie EuroDelivery powiadomi EuroDelivery o wyborze płatności za Usługi Kurierskie &bdquo;z dołu&rdquo; i prześle do EuroDelivery drogą elektroniczną następujące dokumenty:</p>
+
+                <p>w przypadku jednoosobowej działalności gospodarczej &ndash; zaświadczenie o wpisie do ewidencji działalności gospodarczej i decyzję o nadaniu nr NIP;</p>
+
+                <p>w przypadku sp&oacute;łek, fundacji i stowarzyszeń wpisanych do rejestru przedsiębiorc&oacute;w &ndash; odpis z Krajowego Rejestru Sądowego i decyzję o nadaniu nr NIP;</p>
+
+                <p>w przypadku sp&oacute;łki cywilnej - umowę sp&oacute;łki i decyzję o nadaniu nr NIP oraz dokumenty wskazane w pkt. 7.1. każdego ze wsp&oacute;lnik&oacute;w.</p>
+
+                <p>Serwis ma prawo do odmowy udostępnienia lub wyłączenia udostępnionej opcji płatności &quot;z dołu&quot; bez podania przyczyny.</p>
+
+                <p>Serwis ma prawo do odmowy udostępnienia lub wyłączenia udostępnionej opcji płatności &quot;z g&oacute;ry&quot; oraz &quot;z dołu&quot; w przypadku zaistnienia nieuregulowanych zobowiązań wobec Serwisu.</p>
+
+                <p>W ciągu 10 dni po miesiącu, kt&oacute;rego rozliczenie dotyczy , dla Użytkownik&oacute;w z płatnością ceny &bdquo;z g&oacute;ry&rdquo; EuroDelivery wystawia fakturę VAT, kt&oacute;rą otrzymuje Użytkownik. Użytkownik, kt&oacute;ry korzysta z opcji płatności &bdquo;z dołu&rdquo; otrzymuje raz na dwa tygodnie fakturę (chyba, że indywidualne ustalenia z Użytkownikiem są inne) obejmującą wszystkie wykonane w danym tygodniu Usługi Kurierskie &ndash; taka faktura wskazuje odroczony terminem płatności wynoszący 7 dni.</p>
+
+                <p>Jeżeli obowiązujące przepisy dopuszczają otrzymywanie faktur drogą elektroniczną i Użytkownik wyrazi na to zgodę, będzie otrzymywał faktury VAT drogą elektroniczną na adres e-mail podany podczas zakładania Konta Użytkownika w Serwisie EuroDelivery lub adres e-mail zaktualizowany przez Użytkownika. Po zalogowaniu do Serwisu EuroDelivery Użytkownik może w każdej chwili cofnąć zgodę na przesyłanie mu przez EuroDelivery faktury VAT drogą elektroniczną.</p>
+
+                <p>W przypadku rezygnacji przez Użytkownika z przesyłania mu przez EuroDelivery faktur VAT drogą elektroniczną, faktury VAT będą wysłane drogą pocztową na adres wskazany przez Użytkownika podczas zakładania Konta Użytkownika w Serwisie EuroDelivery lub adres zaktualizowany przez Użytkownika.</p>
+
+                <p>Reklamacje wynikające z tytułu niewykonania lub niewłaściwego wykonania obsługi płatności ceny za Usługi Kurierskie za pośrednictwem platformy internetowej przelewy24.pl Użytkownik kieruje bezpośrednio do przelewy24.pl, zgodnie z regulaminem przelewy24.pl dotyczącym świadczenia usług w zakresie płatności elektronicznych.</p>
+
+                <p>Zwrot wpłaconej ceny stosownie do okoliczności odbywa się na podstawie korekty faktury VAT.</p>
+
+                <p>Niezapłacone należności Usługobiorcy na rzecz Usługodawcy mogą być potrącone przez Serwis z należnościami na rzecz Usługobiorcy &ndash; zar&oacute;wno z tytułu pobrania, jak i z tytułu uznania Reklamacji Usługi Przewozu lub Odwołania od Decyzji Reklamacyjnej (nie dotyczy klient&oacute;w, kt&oacute;rzy są konsumentami). W przypadku Usługobiorc&oacute;w będących konsumentami, dopuszczalność potrącenia regulowana jest przez odpowiednie przepisy Kodeksu Cywilnego. Potrącenie, odbywa się poprzez złożenie oświadczenia, kt&oacute;re może mieć także postać elektroniczną. Należność na rzecz Serwisu , może zostać pobrana r&oacute;wnież z salda konta Skarbonka Usługobiorcy.</p>
+
+                <p>W przypadku braku płatności w terminie (zgodnie z ustawą z dnia 8 marca 2013r. o przeciwdziałaniu nadmiernym op&oacute;źnieniom w transakcjach handlowych ) Usługodawcy przysługuje od Usługobiorcy rekompensata za koszty odzyskiwania należności stanowiąca r&oacute;wnowartość kwoty:</p>
+
+                <p>40 euro &ndash; gdy wartość świadczenia pieniężnego nie przekracza 5000 złotych,</p>
+
+                <p>70 euro &ndash; gdy wartość świadczenia pieniężnego jest wyższa niż 5000 złotych, ale niższa niż 50 000 złotych,</p>
+
+                <p>100 euro &ndash; gdy wartość świadczenia pieniężnego jest r&oacute;wna lub wyższa od 50 000 złotych.</p>
+
+                <p>Kwota rekompensaty ustalana jest przy zastosowaniu średniego kursu euro ogłoszonego przez Narodowy Bank Polski ostatniego dnia roboczego miesiąca poprzedzającego miesiąc, w kt&oacute;rym świadczenie pieniężne stało się wymagalne. Powyższy punkt nie dotyczy klient&oacute;w będących konsumentami.</p>
+
+                <p>W przypadku klient&oacute;w będących konsumentami, przy braku płatności w terminie, Usługodawcy przysługuje rekompensata, w związku z koniecznością windykacji należności. Do kwoty gł&oacute;wnej należności zostanie doliczony koszt 30 zł brutto.</p>
+
+                <p><strong>&sect;7 Konto Skarbonka</strong></p>
+
+                <p>Każdy z Użytkownik&oacute;w może korzystać z dostępnego w Serwisie konta Skarbonka</p>
+
+                <p>Konto Skarbonka polega na tym, że Użytkownik płaci EuroDelivery &bdquo;z g&oacute;ry&rdquo; określoną kwotę, z kt&oacute;rej korzysta zlecając Usługi Kurierskie o wartości nie przekraczającej wpłaconej kwocie przez okres 3 miesięcy następujących po dniu zapłaty. Po upływie wyżej wymienionego okresu wpłacona kwota, kt&oacute;ra nie została wykorzystana na zlecenie wykonania Usług Kurierskich, nie podlega zwrotowi. Może być ona wykorzystana na złożenie zleceń kurierskich w ramach Serwisu.</p>
+
+                <p>Kwota będąca na saldzie konta Skarbonka może zostać zwr&oacute;cona Klientowi będącym konsumentem.</p>
+
+                <p><strong>&sect;8 Reklamacje</strong></p>
+
+                <p>Użytkownik może składać reklamacje związane z Usługami oferowanymi przez EuroDelivery, bezpośrednio u Przewoźnika lub za pomocą formularza kontaktowego dostępnego w Serwisie EuroDelivery lub pisemnie.</p>
+
+                <p>Reklamacja powinna zawierać co najmniej:</p>
+
+                <p>dane identyfikacyjne Użytkownika,</p>
+
+                <p>numer transakcji lub inne dane określające działania EuroDelivery pozwalające na identyfikacje reklamowanej Usługi,</p>
+
+                <p>określenie przedmiotu reklamacji i roszczenia w stosunku do EuroDelivery.</p>
+
+                <p>W przypadku, gdy podane w reklamacji dane lub informacje będą niewystarczające do rozpatrzenia reklamacji EuroDelivery zwr&oacute;ci się niezwłocznie do Użytkownika o ich uzupełnienie.</p>
+
+                <p>EuroDelivery rozpatruje reklamacje w terminie 14 dni, licząc od dnia otrzymania reklamacji zawierającej elementy określone w pkt. 2 powyżej.</p>
+
+                <p>Wszelkie reklamacje dotyczące Usługi Przewozu przyjmuje i rozpatruje Przewoźnik realizujący Usługę Kurierską. Jako strona umowy z Przewoźnikiem Usługodawca wykonuje przysługujące mu uprawnienia z Usługi Kurierskie w swoim imieniu, lecz na rzecz Użytkownika, w oparciu o informacje i materiały dostarczone przez Użytkownika.</p>
+
+                <p>Reklamacje dotyczące Usług Kurierskich powinny być zgłaszane bezpośrednio do Przewoźnika zgodnie z zasadami wskazanymi w odpowiednim Regulaminie Przewoźnika.</p>
+
+                <p>Złożenie reklamacji poprzez Serwis skutkuje powiadomieniem Przewoźnika przez Usługodawcę o zakwestionowaniu wykonanej przez niego Usługi Kurierskie oraz stanowi zgłoszenie przez Użytkownika żądania rozpoczęcia przez Usługodawcę właściwej procedury reklamacyjnej u Przewoźnika, kt&oacute;ry realizował Usługę Kurierską</p>
+
+                <p>Reklamacje składane do Przewoźnika za pośrednictwem Serwisu EuroDelivery przekazywane są niezwłocznie, maksymalnie do 7 dni od momentu ich wpłynięcia do Serwisu. Przekazanie reklamacji do Przewoźnika potwierdzone jest informacją zwrotną. Przewoźnik potwierdza przyjęcie reklamacji w odpowiedniej formie dla kuriera. Za termin przyjęcia reklamacji do rozpatrzenia przyjmuje się termin potwierdzenia przyjęcia reklamacji przez Przewoźnika.</p>
+
+                <p>Usługodawca nie bierze odpowiedzialności za niewykonanie lub nienależyte wykonanie Usługi.</p>
+
+                <p>W przypadku niewykonania zam&oacute;wienia przez Partnera Użytkownik powinien zgłosić ten fakt administracji serwisu w ciągu 14 dni od złożenia zam&oacute;wienia przez formularz kontaktowy.</p>
+
+                <p>Złożenie reklamacji nie zwalnia Użytkownika z obowiązku niezwłocznego uregulowania zobowiązań na saldzie wobec Usługodawcy.</p>
+
+                <p>Użytkownik otrzymuje informacje o sposobie rozpatrzenia reklamacji pocztą elektroniczną na adres e-mail podany podczas zakładania Konta Użytkownika lub adres e-mail zaktualizowany przez Użytkownika.</p>
+
+                <p>Jeżeli będzie to konieczne do dochodzenia roszczeń przez Użytkownika wobec Partnera w zakresie uszkodzenia, ubytku, zagubienia i op&oacute;źnienia przesyłki, Usługodawca dokona na żądanie Użytkownika nieodpłatnej i pisemnej cesji uprawnień nadawcy wobec Przewoźnika. Nieuzasadniona odmowa cesji skutkuje odpowiedzialnością Usługodawcy wobec Użytkownika za szkodę w przesyłce. Dokonanie cesji nie jest możliwe w przypadku dochodzenia roszczeń ze względu na opłaty dodatkowe oraz płatności dotyczących zam&oacute;wienia.</p>
+
+                <p>W przypadku reklamacji związanych z uszkodzeniem lub zagubieniem przesyłki ubezpieczyciel zaspokaja roszczenia z tytułu poniesionej straty według rzeczywistej wartości szkody &ndash; według wartości netto (bez podatku VAT). Płatnik podatku VAT ma możliwość uzyskania zwrotu podatku VAT (dokonania stosownego odliczenia podatku). Reklamacje te rozpatrywane są na podstawie przedłożonych przez Użytkownika dokument&oacute;w potwierdzających wielkość szkody. W przypadku braku możliwości udokumentowania rzeczywistych koszt&oacute;w wytworzenia lub zakupu ubezpieczyciel uznaje marżę handlową sprzedawcy na poziomie 30 %.</p>
+
+                <p><strong>&sect;9 Działanie Serwisu EuroDelivery</strong></p>
+
+                <p>EuroDelivery gwarantuje dostęp do Serwisu EuroDelivery, na zasadach określonych w niniejszym Regulaminie, 24 godziny na dobę, 7 dni w tygodniu.</p>
+
+                <p>EuroDelivery informuje, że mogą wystąpić przerwy techniczne w dostępie do Serwisu EuroDelivery spowodowane w szczeg&oacute;lności koniecznością wykonania konserwacji infrastruktury i oprogramowania Serwisu EuroDelivery, jak r&oacute;wnież w przypadku awarii. W przypadku wystąpienia takich okoliczności EuroDelivery będzie informował o nich na stronie Serwisu podając także informacje o przewidywanym okresie trwania utrudnień.</p>
+
+                <p><strong>&sect; 10 Czas trwania Umowy i Rozwiązanie Umowy</strong></p>
+
+                <p>Umowa zostaje zawarta na czas nieokreślony.</p>
+
+                <p>Osoba fizyczna, będąca konsumentem w rozumieniu kodeksu cywilnego, zgodnie z ustawą z 2 marca 2000 r. o ochronie niekt&oacute;rych praw konsument&oacute;w oraz o odpowiedzialności za szkodę wyrządzoną przez produkt niebezpieczny, kt&oacute;ra zawarła umowę z EuroDelivery, może od niej odstąpić bez podania przyczyn, po uprzednim rozliczeniu się ze zobowiązań na rzecz Usługodawcy.</p>
+
+                <p>Użytkownik, po uprzednim uregulowaniu należności wobec Zleceniodawcy, &nbsp;może w każdym czasie usunąć Konto Użytkownika z Serwisu EuroDelivery i tym samym rozwiązać Umowę z EuroDelivery.</p>
+
+                <p>W przypadku naruszenia postanowień Regulaminu oraz nieterminowego regulowania należności za Usługi Kurierskie, po wcześniejszym wezwaniu Użytkownika do zaprzestania naruszania Regulaminu lub uiszczenia zaległych należności, EuroDelivery ma prawo - w przypadku nie ustosunkowania się przez Użytkownika w ciągu 7 dni od dnia otrzymania ww. wezwania &ndash; do:</p>
+
+                <p>rozwiązania Umowy z Użytkownikiem ze skutkiem natychmiastowym. Rozwiązanie Umowy staje się skuteczne z chwilą wysłania przez EuroDelivery Użytkownikowi oświadczenia o rozwiązaniu Umowy pocztą elektroniczną na adres e-mail, podany podczas zakładania Konta Użytkownika lub adres e-mail zaktualizowany przez Użytkownika; lub</p>
+
+                <p>zablokowania Konta Użytkownika w Serwisie EuroDelivery, o czym Użytkownik jest informowany niezwłocznie pocztą elektroniczną na adres e-mail, podany podczas zakładania Konta lub adres e-mail zaktualizowany przez Użytkownika.</p>
+
+                <p><strong>&sect;11 Odpowiedzialność EuroDelivery</strong></p>
+
+                <p>EuroDelivery odpowiada przed Użytkownikiem za zrealizowanie Usługi tzn. za przekazanie wskazanemu przez Użytkownika Przewoźnikowi zlecenia Usługi Kurierskiej oraz za prawidłowe funkcjonowanie Serwisu Internetowego.</p>
+
+                <p>EuroDelivery nie świadczy usług przewozu przesyłek. Za dostarczenie przesyłek odpowiada wybrany przez Użytkownika Przewoźnik</p>
+
+                <p>EuroDelivery nie ponosi odpowiedzialności za nie swoje działania:</p>
+
+                <p>za działania Użytkownika, w tym wyb&oacute;r Przewoźnika lub podanie nierzetelnych danych dot. Przesyłki, brak nadania przez Użytkownika Przewoźnikowi przesyłki w celu wykonania zam&oacute;wionej Usługi Kurierskiej;</p>
+
+                <p>za działania Przewoźnika, w tym niewykonanie lub nienależyte wykonanie Usługi Kurierskiej;</p>
+
+                <p>za działania Adresata, w tym za przyjęcie lub odmowę przyjęcia przez niego Przesyłki lub zapłatę bądź brak zapłaty kwoty należnej przy doręczeniu Przesyłki &bdquo;za pobraniem&rdquo;.</p>
+
+                <p><strong>&sect;12 Ochrona danych osobowych</strong></p>
+
+                <p>Podanie EuroDelivery danych osobowych Użytkownika i Adresata jest dobrowolne.</p>
+
+                <p>Użytkownik z chwilą założenia Konta Użytkownika w Serwisie EuroDelivery wyraża zgodę na przetwarzanie jego danych osobowych, na zasadach określonych w Polityce Prywatności, w celu świadczenia przez EuroDelivery Usług, a dokonując wyboru Przewoźnika w Serwisie EuroDelivery Użytkownik wyraża zgodę na to, aby jego dane osobowe m&oacute;gł przetwarzać Przewoźnik w zakresie wymaganym do wykonania Usługi Kurierskiej.</p>
+
+                <p>Zasady zbierania, przetwarzania oraz udostępniania danych osobowych reguluje Polityka Prywatności Serwisu EuroDelivery, kt&oacute;ra stanowi załącznik do Regulaminu</p>
+
+                <p>W zakresie realizacji Usługi EuroDelivery zapewnia ochronę przetwarzanych danych osobowych, w szczeg&oacute;lności zabezpiecza dane przed ich udostępnieniem osobom nieupoważnionym, zabraniem przez osobę nieuprawnioną, przetwarzaniem z naruszeniem aktualnie obowiązującego prawa oraz zmianą, utratą, uszkodzeniem lub zniszczeniem.</p>
+
+                <p><strong>&sect; 13 Postanowienia końcowe</strong></p>
+
+                <p>Zakazane jest dostarczanie przez Użytkownika treści o charakterze bezprawnym.</p>
+
+                <p>Użytkownik i EuroDelivery przy realizacji Usług są związani treścią Regulaminu obowiązującego w dniu złożenia zam&oacute;wienia na Usługę Kurierską, zgodnie z &sect;4 pkt. 4 powyżej. Zmiana Regulaminu dokonana przez EuroDelivery nie jest skuteczna wobec zam&oacute;wień na Usługi Kurierskie złożone przez Użytkownika przed zmianą Regulaminu, chyba że EuroDelivery i Użytkownik wyrażą zgodę na stosowanie w takim przypadku aktualnie obowiązującej wersji Regulaminu.</p>
+
+                <p>O każdej zmianie Regulaminu EuroDelivery informuje, z odpowiednim wyprzedzeniem umieszczając informacje na stronie Serwisu EuroDelivery oraz zawiadamiając Użytkownika poprzez wysłanie informacji na adres e-mail podany przez Użytkownika podczas zakładania Konta Użytkownika lub adres e-mail zaktualizowany przez Użytkownika. Zmiany wchodzą w życie w terminie wskazanym przez EuroDelivery nie kr&oacute;cej jednak niż 3 dni od dnia udostępnienia ich w Serwisie EuroDelivery. W przypadku, gdy Użytkownik nie akceptuje zmian Regulaminu powinien rozwiązać Umowę z EuroDelivery. Brak oświadczenia o rozwiązaniu umowy jest r&oacute;wnoznaczny z akceptacją zmienionego Regulaminu.</p>
+
+                <p>Postanowienia zawarte w &sect;4 pkt. 8 zd. pierwsze, &sect;4 pkt. 9 zd. ostatnie, w &sect;6 pkt. 7, w &sect;6 pkt. 13 oraz w &sect;7 pkt. 4 i &sect;7 pkt. 5 zd. drugie nie mają zastosowania do Konsument&oacute;w. W szczeg&oacute;lności: w przypadku Konsument&oacute;w cena wpłacona na konto Skarbonka jest zwracana w części niewykorzystanej po upływie okresu 6 miesięcy od dnia jej zapłaty.</p>
+
+                <p>Ewentualne spory pomiędzy Użytkownikiem, a EuroDelivery zostaną poddane rozstrzygnięciu sądu powszechnego właściwego zgodnie z Kodeksem postępowania cywilnego.</p>
+
+                <p>W sprawach nieuregulowanych w niniejszym Regulaminie mają zastosowanie m.in. przepisy kodeks cywilnego o zleceniu, ustawy o świadczeniu usług drogą elektroniczną, ustawy o ochronie danych osobowych i ustawy o prawach konsumenta oraz o odpowiedzialności za szkodę wyrządzoną przez produkt niebezpieczny.</p>
+
+                <p>EuroDelivery informuje Konsument&oacute;w, że w ramach świadczonych Usług stosuje kodeks dobrych praktyk, o kt&oacute;rym mowa w art. 2 pkt. 5 ustawy z 23 sierpnia 2007 r. o przeciwdziałaniu nieuczciwym praktykom rynkowym.</p>
+
+                <p>Regulamin obowiązuje od dnia 01-01-2025 r.</p>
+
+
+            </div>
+        </div>{% endblock %}

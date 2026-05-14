@@ -1,0 +1,32 @@
+{% extends "unlogged.twig" %}
+{% block usermenu %}
+    <div class="container">
+        <ul class="logged-menu d-none d-lg-flex">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/przesylki/robocze"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Przesyłki
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/przesylki/nowa">Nowa</a></li>
+                    <li><a class="dropdown-item" href="/przesylki/robocze">Robocze</a></li>
+                    <li><a class="dropdown-item" href="/przesylki/wyslane">Wysłane</a></li>
+                    <li><a class="dropdown-item" href="/przesylki/konsolidacje">Konsolidacje</a></li>
+                </ul>
+            </li>
+            <li><a href="/zwroty" >Zwroty</a></li>
+            {# <li><a href="/szablon" >Szablony</a></li>  #}
+            <li><a href="/finanse/doladuj" >Doładuj</a></li>
+            <li><a href="/kontakty" >Książka adresowa</a></li>
+            <li><a href="/szablony" >Szablony</a></li>
+            {# <li><a href="/allegro" >Allegro2</a></li> #}
+            <li><a href="/integracje" >Integracje</a></li>
+            <li><a href="/profil" >Profil</a></li>
+            {# <li><a href="/platnosc" >Płatności</li></a></li>  #}
+            <li><a href="/finanse/saldo" >Saldo</a></li>
+            <li><a href="/faktury" >Faktury</a></li>
+            <li><a href="/api" >API</a></li>
+            {# <li><a href="/reklamacja" >Reklamacje</a></li> #}
+            {# <li><a href="/uzytkownik/api" >API</a></li>  #}
+        </ul>
+    </div>
+{% endblock %}

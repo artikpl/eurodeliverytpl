@@ -1,0 +1,1301 @@
+{% extends "logged.twig" %}
+{% block breadcrumbs %}<a href="/">Strona główna</a> &gt; <a href="/panel-klienta">Panel klienta</a> &gt; <a href="/szablon/dodaj">Dodaj szablon</a>{% endblock %}
+{% block header %}Dodaj szablonn2{% endblock %}
+{% block inner %}<form action="/szablon/dodaj" class="mainform order-form" novalidate="novalidate" id="SzablonDodajForm" method="post" accept-charset="utf-8"><div style="display:none;"><input type="hidden" name="_method" value="POST"/></div><input type="hidden" name="data[Szablon][id]" id="SzablonId"/><input type="hidden" name="data[Szablon][liczba_paczek]" id="SzablonLiczbaPaczek"/>
+    <a href="/szablon" class="button">Powrót do listy</a><br /><br />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input text required"><label for="SzablonNazwa">Nazwa szablonu:</label><input name="data[Szablon][nazwa]" maxlength="50" type="text" id="SzablonNazwa" required="required"/></div>    </div>
+        <div class="col-md-6 pt-md-4">
+            <div class="input checkbox"><input type="hidden" name="data[Szablon][domyslny]" id="SzablonDomyslny_" value="0"/><input type="checkbox" name="data[Szablon][domyslny]" value="1" id="SzablonDomyslny"/><label for="SzablonDomyslny">Szablon domyślny</label></div>    </div>
+    </div>
+
+    <div class="mb-5 mt-5">
+        <h2>Rodzaj przesyłki i wymiary</h2>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-lg-2 package-type-box">
+            <input id="SzablonRodzajWysylkiKoperta" type="radio" name="data[Szablon][rodzaj_wysylki]" value="koperta"
+            />
+            <label for="SzablonRodzajWysylkiKoperta" class="envelopeType">
+                <img src="/img/mp-pricebox-letter.png"> Koperta
+            </label>
+            <input id="SzablonRodzajWysylkiPaczka" type="radio" name="data[Szablon][rodzaj_wysylki]" value="paczka"
+                   checked="checked" />
+            <label for="SzablonRodzajWysylkiPaczka" class="SzablonRodzajWysylkiPaczka">
+                <img src="/img/mp-pricebox-package.png"> Paczka
+            </label>
+            <input id="SzablonRodzajWysylkiPaleta" type="radio" name="data[Szablon][rodzaj_wysylki]" value="paleta"
+            />
+            <label for="SzablonRodzajWysylkiPaleta" class="SzablonRodzajWysylkiPaleta">
+                <img src="/img/mp-pricebox-pallette.png"> Paleta
+            </label>
+        </div>
+        <div class="col-md-7 col-lg-5">
+            <div class="parcels">
+                <div class="parcel" id="parcel0">
+                    <div class="param-double-col"><label for="SzablonPaczka0nonstandard">Opakowanie</label><select name="data[SzablonPaczka][0][nonstandard]" id="SzablonPaczka0nonstandard">
+                            <option value="0">Standardowe</option>
+                            <option value="1">Niestandardowe</option>
+                        </select></div>
+                    <div class="input text"><label for="SzablonPaczka0Ilosc">Ilość</label><input name="data[SzablonPaczka][0][ilosc]" value="1" type="text" id="SzablonPaczka0Ilosc"/></div>
+                    <a href="#" class="remove-parcel button">usuń</a>
+                    <div class="input text"><label for="SzablonPaczka0Length">Długość</label><input name="data[SzablonPaczka][0][length]" placeholder="cm" maxlength="5" type="text" id="SzablonPaczka0Length"/></div>
+                    <div class="input text"><label for="SzablonPaczka0Width">Szerokość</label><input name="data[SzablonPaczka][0][width]" placeholder="cm" maxlength="5" type="text" id="SzablonPaczka0Width"/></div>
+                    <div class="input text"><label for="SzablonPaczka0Height">Wysokość</label><input name="data[SzablonPaczka][0][height]" placeholder="cm" maxlength="5" type="text" id="SzablonPaczka0Height"/></div>
+                    <div class="input text"><label for="SzablonPaczka0Weight">Waga</label><input name="data[SzablonPaczka][0][waga]" placeholder="kg" maxlength="6" type="text" id="SzablonPaczka0Weight"/></div>
+                </div>
+            </div>
+            <a href="#" class="add-parcel button">+ Dodaj kolejne opakowanie do przesyłki</a>
+        </div>
+        <div class="col-md-5 col-lg-5">
+            <div class="order-basic-addresses">
+                <div class="input select"><label for="SzablonNadawcaKrajTmp">Skąd</label><select name="data[Szablon][nadawca_kraj_tmp]" id="SzablonNadawcaKrajTmp">
+                        <option value="AF">Afganistan</option>
+                        <option value="AL">Albania</option>
+                        <option value="DZ">Algieria</option>
+                        <option value="AD">Andora</option>
+                        <option value="AO">Angola</option>
+                        <option value="AI">Anguilla</option>
+                        <option value="AQ">Antarktyka</option>
+                        <option value="AG">Antigua i Barbuda</option>
+                        <option value="AN">Antyle Holenderskie</option>
+                        <option value="SA">Arabia Saudyjska</option>
+                        <option value="AR">Argentyna</option>
+                        <option value="AM">Armenia</option>
+                        <option value="AW">Aruba</option>
+                        <option value="AU">Australia</option>
+                        <option value="AT">Austria</option>
+                        <option value="AZ">Azerbejdżan</option>
+                        <option value="BS">Bahamy</option>
+                        <option value="BH">Bahrajn</option>
+                        <option value="BD">Bangladesz</option>
+                        <option value="BB">Barbados</option>
+                        <option value="BE">Belgia</option>
+                        <option value="BZ">Belize</option>
+                        <option value="BJ">Benin</option>
+                        <option value="BM">Bermudy</option>
+                        <option value="BT">Bhutan</option>
+                        <option value="BY">Białoruś</option>
+                        <option value="BO">Boliwia</option>
+                        <option value="BQ">Bonaire, Sint Eustatius i Saba</option>
+                        <option value="BA">Bośnia i Hercegowina</option>
+                        <option value="BW">Botswana</option>
+                        <option value="BR">Brazylia</option>
+                        <option value="BN">Brunei</option>
+                        <option value="IO">Brytyjskie Terytorium Oceanu Indyjskiego</option>
+                        <option value="VG">Brytyjskie Wyspy Dziewicze</option>
+                        <option value="BG">Bułgaria</option>
+                        <option value="BF">Burkina Faso</option>
+                        <option value="BI">Burundi</option>
+                        <option value="CL">Chile</option>
+                        <option value="CN">Chiny</option>
+                        <option value="HR">Chorwacja</option>
+                        <option value="CW">Curaçao</option>
+                        <option value="CY">Cypr</option>
+                        <option value="TD">Czad</option>
+                        <option value="ME">Czarnogóra</option>
+                        <option value="CZ">Czechy</option>
+                        <option value="UM">Dalekie Wyspy Mniejsze Stanów Zjednoczonych</option>
+                        <option value="DK">Dania</option>
+                        <option value="CD">Demokratyczna Republika Konga</option>
+                        <option value="DM">Dominika</option>
+                        <option value="DO">Dominikana</option>
+                        <option value="DJ">Dżibuti</option>
+                        <option value="EG">Egipt</option>
+                        <option value="EC">Ekwador</option>
+                        <option value="ER">Erytrea</option>
+                        <option value="EE">Estonia</option>
+                        <option value="ET">Etiopia</option>
+                        <option value="FK">Falklandy</option>
+                        <option value="FJ">Fidżi</option>
+                        <option value="PH">Filipiny</option>
+                        <option value="FI">Finlandia</option>
+                        <option value="FR">Francja</option>
+                        <option value="TF">Francuskie Terytoria Południowe i Antarktyczne</option>
+                        <option value="GA">Gabon</option>
+                        <option value="GM">Gambia</option>
+                        <option value="GS">Georgia Południowa i Sandwich Południowy</option>
+                        <option value="GH">Ghana</option>
+                        <option value="GI">Gibraltar</option>
+                        <option value="GR">Grecja</option>
+                        <option value="GD">Grenada</option>
+                        <option value="GL">Grenlandia</option>
+                        <option value="GE">Gruzja</option>
+                        <option value="GU">Guam</option>
+                        <option value="GG">Guernsey</option>
+                        <option value="GY">Gujana</option>
+                        <option value="GF">Gujana Francuska</option>
+                        <option value="GP">Gwadelupa</option>
+                        <option value="GT">Gwatemala</option>
+                        <option value="GN">Gwinea</option>
+                        <option value="GW">Gwinea Bissau</option>
+                        <option value="GQ">Gwinea Równikowa</option>
+                        <option value="HT">Haiti</option>
+                        <option value="ES">Hiszpania</option>
+                        <option value="NL">Holandia</option>
+                        <option value="HN">Honduras</option>
+                        <option value="HK">Hongkong</option>
+                        <option value="IN">Indie</option>
+                        <option value="ID">Indonezja</option>
+                        <option value="IQ">Irak</option>
+                        <option value="IR">Iran</option>
+                        <option value="IE">Irlandia</option>
+                        <option value="IP">Irlandia Północna</option>
+                        <option value="IS">Islandia</option>
+                        <option value="IL">Izrael</option>
+                        <option value="JM">Jamajka</option>
+                        <option value="JP">Japonia</option>
+                        <option value="YE">Jemen</option>
+                        <option value="JE">Jersey</option>
+                        <option value="JO">Jordania</option>
+                        <option value="KY">Kajmany</option>
+                        <option value="KH">Kambodża</option>
+                        <option value="CM">Kamerun</option>
+                        <option value="CA">Kanada</option>
+                        <option value="QA">Katar</option>
+                        <option value="KZ">Kazachstan</option>
+                        <option value="KE">Kenia</option>
+                        <option value="KG">Kirgistan</option>
+                        <option value="KI">Kiribati</option>
+                        <option value="CO">Kolumbia</option>
+                        <option value="KM">Komory</option>
+                        <option value="CG">Kongo</option>
+                        <option value="KR">Korea Południowa</option>
+                        <option value="KP">Korea Północna</option>
+                        <option value="XK">Kosowo</option>
+                        <option value="CR">Kostaryka</option>
+                        <option value="CU">Kuba</option>
+                        <option value="KW">Kuwejt</option>
+                        <option value="LA">Laos</option>
+                        <option value="LS">Lesotho</option>
+                        <option value="LB">Liban</option>
+                        <option value="LR">Liberia</option>
+                        <option value="LY">Libia</option>
+                        <option value="LI">Liechtenstein</option>
+                        <option value="LT">Litwa</option>
+                        <option value="LU">Luksemburg</option>
+                        <option value="LV">Łotwa</option>
+                        <option value="MK">Macedonia</option>
+                        <option value="MG">Madagaskar</option>
+                        <option value="YT">Majotta</option>
+                        <option value="MO">Makau</option>
+                        <option value="MW">Malawi</option>
+                        <option value="MV">Malediwy</option>
+                        <option value="MY">Malezja</option>
+                        <option value="ML">Mali</option>
+                        <option value="MT">Malta</option>
+                        <option value="MP">Mariany Północne</option>
+                        <option value="MA">Maroko</option>
+                        <option value="MQ">Martynika</option>
+                        <option value="MR">Mauretania</option>
+                        <option value="MU">Mauritius</option>
+                        <option value="MX">Meksyk</option>
+                        <option value="FM">Mikronezja</option>
+                        <option value="MM">Mjanma</option>
+                        <option value="MD">Mołdawia</option>
+                        <option value="MC">Monako</option>
+                        <option value="MN">Mongolia</option>
+                        <option value="MS">Montserrat</option>
+                        <option value="MZ">Mozambik</option>
+                        <option value="NA">Namibia</option>
+                        <option value="NR">Nauru</option>
+                        <option value="NP">Nepal</option>
+                        <option value="DE">Niemcy</option>
+                        <option value="NE">Niger</option>
+                        <option value="NG">Nigeria</option>
+                        <option value="NI">Nikaragua</option>
+                        <option value="NU">Niue</option>
+                        <option value="NF">Norfolk</option>
+                        <option value="NO">Norwegia</option>
+                        <option value="NC">Nowa Kaledonia</option>
+                        <option value="NZ">Nowa Zelandia</option>
+                        <option value="OM">Oman</option>
+                        <option value="PK">Pakistan</option>
+                        <option value="PW">Palau</option>
+                        <option value="PS">Palestyna</option>
+                        <option value="PA">Panama</option>
+                        <option value="PG">Papua-Nowa Gwinea</option>
+                        <option value="PY">Paragwaj</option>
+                        <option value="PE">Peru</option>
+                        <option value="PN">Pitcairn</option>
+                        <option value="PF">Polinezja Francuska</option>
+                        <option value="PL">Polska</option>
+                        <option value="PR">Portoryko</option>
+                        <option value="PT">Portugalia</option>
+                        <option value="ZA">Republika Południowej Afryki</option>
+                        <option value="CF">Republika Środkowoafrykańska</option>
+                        <option value="CV">Republika Zielonego Przylądka</option>
+                        <option value="RE">Reunion</option>
+                        <option value="RU">Rosja</option>
+                        <option value="RO">Rumunia</option>
+                        <option value="RW">Rwanda</option>
+                        <option value="EH">Sahara Zachodnia</option>
+                        <option value="KN">Saint Kitts i Nevis</option>
+                        <option value="LC">Saint Lucia</option>
+                        <option value="VC">Saint Vincent i Grenadyny</option>
+                        <option value="BL">Saint-Barthélemy</option>
+                        <option value="MF">Saint-Martin</option>
+                        <option value="PM">Saint-Pierre i Miquelon</option>
+                        <option value="SV">Salwador</option>
+                        <option value="WS">Samoa</option>
+                        <option value="AS">Samoa Amerykańskie</option>
+                        <option value="SM">San Marino</option>
+                        <option value="SN">Senegal</option>
+                        <option value="RS">Serbia</option>
+                        <option value="SC">Seszele</option>
+                        <option value="SL">Sierra Leone</option>
+                        <option value="SG">Singapur</option>
+                        <option value="SX">Sint Maarten</option>
+                        <option value="SK">Słowacja</option>
+                        <option value="SI">Słowenia</option>
+                        <option value="SO">Somalia</option>
+                        <option value="LK">Sri Lanka</option>
+                        <option value="US">Stany Zjednoczone</option>
+                        <option value="SZ">Suazi</option>
+                        <option value="SD">Sudan</option>
+                        <option value="SS">Sudan Południowy</option>
+                        <option value="SR">Surinam</option>
+                        <option value="SJ">Svalbard i Jan Mayen</option>
+                        <option value="SY">Syria</option>
+                        <option value="CH">Szwajcaria</option>
+                        <option value="SE">Szwecja</option>
+                        <option value="TJ">Tadżykistan</option>
+                        <option value="TH">Tajlandia</option>
+                        <option value="TW">Tajwan</option>
+                        <option value="TZ">Tanzania</option>
+                        <option value="TL">Timor Wschodni</option>
+                        <option value="TG">Togo</option>
+                        <option value="TK">Tokelau</option>
+                        <option value="TO">Tonga</option>
+                        <option value="TT">Trynidad i Tobago</option>
+                        <option value="TN">Tunezja</option>
+                        <option value="TR">Turcja</option>
+                        <option value="TM">Turkmenistan</option>
+                        <option value="TC">Turks i Caicos</option>
+                        <option value="TV">Tuvalu</option>
+                        <option value="UG">Uganda</option>
+                        <option value="UA">Ukraina</option>
+                        <option value="UY">Urugwaj</option>
+                        <option value="UZ">Uzbekistan</option>
+                        <option value="VU">Vanuatu</option>
+                        <option value="WF">Wallis i Futuna</option>
+                        <option value="VA">Watykan</option>
+                        <option value="VE">Wenezuela</option>
+                        <option value="HU">Węgry</option>
+                        <option value="GB">Wielka Brytania</option>
+                        <option value="VN">Wietnam</option>
+                        <option value="IT">Włochy</option>
+                        <option value="CI">Wybrzeże Kości Słoniowej</option>
+                        <option value="BV">Wyspa Bouveta</option>
+                        <option value="CX">Wyspa Bożego Narodzenia</option>
+                        <option value="IM">Wyspa Man</option>
+                        <option value="SH">Wyspa Świętej Heleny, Wyspa Wniebowstąpienia i Tristan da Cunha</option>
+                        <option value="AX">Wyspy Alandzkie</option>
+                        <option value="CK">Wyspy Cooka</option>
+                        <option value="VI">Wyspy Dziewicze Stanów Zjednoczonych</option>
+                        <option value="HM">Wyspy Heard i McDonalda</option>
+                        <option value="IC">Wyspy Kanaryjskie</option>
+                        <option value="CC">Wyspy Kokosowe</option>
+                        <option value="MH">Wyspy Marshalla</option>
+                        <option value="FO">Wyspy Owcze</option>
+                        <option value="SB">Wyspy Salomona</option>
+                        <option value="ST">Wyspy Świętego Tomasza i Książęca</option>
+                        <option value="ZM">Zambia</option>
+                        <option value="ZW">Zimbabwe</option>
+                        <option value="AE">Zjednoczone Emiraty Arabskie</option>
+                    </select></div>
+                <div class="input text"><label for="SzablonNadawcaKod3">Kod nadawcy</label><input name="data[Szablon][nadawca_kod3]" class="wycena-kod-pocztowy" placeholder="00-000" type="text" id="SzablonNadawcaKod3"/></div>
+                <div class="input select"><label for="SzablonOdbiorcaKrajTmp">Dokąd</label><select name="data[Szablon][odbiorca_kraj_tmp]" id="SzablonOdbiorcaKrajTmp">
+                        <option value="AF">Afganistan</option>
+                        <option value="AL">Albania</option>
+                        <option value="DZ">Algieria</option>
+                        <option value="AD">Andora</option>
+                        <option value="AO">Angola</option>
+                        <option value="AI">Anguilla</option>
+                        <option value="AQ">Antarktyka</option>
+                        <option value="AG">Antigua i Barbuda</option>
+                        <option value="AN">Antyle Holenderskie</option>
+                        <option value="SA">Arabia Saudyjska</option>
+                        <option value="AR">Argentyna</option>
+                        <option value="AM">Armenia</option>
+                        <option value="AW">Aruba</option>
+                        <option value="AU">Australia</option>
+                        <option value="AT">Austria</option>
+                        <option value="AZ">Azerbejdżan</option>
+                        <option value="BS">Bahamy</option>
+                        <option value="BH">Bahrajn</option>
+                        <option value="BD">Bangladesz</option>
+                        <option value="BB">Barbados</option>
+                        <option value="BE">Belgia</option>
+                        <option value="BZ">Belize</option>
+                        <option value="BJ">Benin</option>
+                        <option value="BM">Bermudy</option>
+                        <option value="BT">Bhutan</option>
+                        <option value="BY">Białoruś</option>
+                        <option value="BO">Boliwia</option>
+                        <option value="BQ">Bonaire, Sint Eustatius i Saba</option>
+                        <option value="BA">Bośnia i Hercegowina</option>
+                        <option value="BW">Botswana</option>
+                        <option value="BR">Brazylia</option>
+                        <option value="BN">Brunei</option>
+                        <option value="IO">Brytyjskie Terytorium Oceanu Indyjskiego</option>
+                        <option value="VG">Brytyjskie Wyspy Dziewicze</option>
+                        <option value="BG">Bułgaria</option>
+                        <option value="BF">Burkina Faso</option>
+                        <option value="BI">Burundi</option>
+                        <option value="CL">Chile</option>
+                        <option value="CN">Chiny</option>
+                        <option value="HR">Chorwacja</option>
+                        <option value="CW">Curaçao</option>
+                        <option value="CY">Cypr</option>
+                        <option value="TD">Czad</option>
+                        <option value="ME">Czarnogóra</option>
+                        <option value="CZ">Czechy</option>
+                        <option value="UM">Dalekie Wyspy Mniejsze Stanów Zjednoczonych</option>
+                        <option value="DK">Dania</option>
+                        <option value="CD">Demokratyczna Republika Konga</option>
+                        <option value="DM">Dominika</option>
+                        <option value="DO">Dominikana</option>
+                        <option value="DJ">Dżibuti</option>
+                        <option value="EG">Egipt</option>
+                        <option value="EC">Ekwador</option>
+                        <option value="ER">Erytrea</option>
+                        <option value="EE">Estonia</option>
+                        <option value="ET">Etiopia</option>
+                        <option value="FK">Falklandy</option>
+                        <option value="FJ">Fidżi</option>
+                        <option value="PH">Filipiny</option>
+                        <option value="FI">Finlandia</option>
+                        <option value="FR">Francja</option>
+                        <option value="TF">Francuskie Terytoria Południowe i Antarktyczne</option>
+                        <option value="GA">Gabon</option>
+                        <option value="GM">Gambia</option>
+                        <option value="GS">Georgia Południowa i Sandwich Południowy</option>
+                        <option value="GH">Ghana</option>
+                        <option value="GI">Gibraltar</option>
+                        <option value="GR">Grecja</option>
+                        <option value="GD">Grenada</option>
+                        <option value="GL">Grenlandia</option>
+                        <option value="GE">Gruzja</option>
+                        <option value="GU">Guam</option>
+                        <option value="GG">Guernsey</option>
+                        <option value="GY">Gujana</option>
+                        <option value="GF">Gujana Francuska</option>
+                        <option value="GP">Gwadelupa</option>
+                        <option value="GT">Gwatemala</option>
+                        <option value="GN">Gwinea</option>
+                        <option value="GW">Gwinea Bissau</option>
+                        <option value="GQ">Gwinea Równikowa</option>
+                        <option value="HT">Haiti</option>
+                        <option value="ES">Hiszpania</option>
+                        <option value="NL">Holandia</option>
+                        <option value="HN">Honduras</option>
+                        <option value="HK">Hongkong</option>
+                        <option value="IN">Indie</option>
+                        <option value="ID">Indonezja</option>
+                        <option value="IQ">Irak</option>
+                        <option value="IR">Iran</option>
+                        <option value="IE">Irlandia</option>
+                        <option value="IP">Irlandia Północna</option>
+                        <option value="IS">Islandia</option>
+                        <option value="IL">Izrael</option>
+                        <option value="JM">Jamajka</option>
+                        <option value="JP">Japonia</option>
+                        <option value="YE">Jemen</option>
+                        <option value="JE">Jersey</option>
+                        <option value="JO">Jordania</option>
+                        <option value="KY">Kajmany</option>
+                        <option value="KH">Kambodża</option>
+                        <option value="CM">Kamerun</option>
+                        <option value="CA">Kanada</option>
+                        <option value="QA">Katar</option>
+                        <option value="KZ">Kazachstan</option>
+                        <option value="KE">Kenia</option>
+                        <option value="KG">Kirgistan</option>
+                        <option value="KI">Kiribati</option>
+                        <option value="CO">Kolumbia</option>
+                        <option value="KM">Komory</option>
+                        <option value="CG">Kongo</option>
+                        <option value="KR">Korea Południowa</option>
+                        <option value="KP">Korea Północna</option>
+                        <option value="XK">Kosowo</option>
+                        <option value="CR">Kostaryka</option>
+                        <option value="CU">Kuba</option>
+                        <option value="KW">Kuwejt</option>
+                        <option value="LA">Laos</option>
+                        <option value="LS">Lesotho</option>
+                        <option value="LB">Liban</option>
+                        <option value="LR">Liberia</option>
+                        <option value="LY">Libia</option>
+                        <option value="LI">Liechtenstein</option>
+                        <option value="LT">Litwa</option>
+                        <option value="LU">Luksemburg</option>
+                        <option value="LV">Łotwa</option>
+                        <option value="MK">Macedonia</option>
+                        <option value="MG">Madagaskar</option>
+                        <option value="YT">Majotta</option>
+                        <option value="MO">Makau</option>
+                        <option value="MW">Malawi</option>
+                        <option value="MV">Malediwy</option>
+                        <option value="MY">Malezja</option>
+                        <option value="ML">Mali</option>
+                        <option value="MT">Malta</option>
+                        <option value="MP">Mariany Północne</option>
+                        <option value="MA">Maroko</option>
+                        <option value="MQ">Martynika</option>
+                        <option value="MR">Mauretania</option>
+                        <option value="MU">Mauritius</option>
+                        <option value="MX">Meksyk</option>
+                        <option value="FM">Mikronezja</option>
+                        <option value="MM">Mjanma</option>
+                        <option value="MD">Mołdawia</option>
+                        <option value="MC">Monako</option>
+                        <option value="MN">Mongolia</option>
+                        <option value="MS">Montserrat</option>
+                        <option value="MZ">Mozambik</option>
+                        <option value="NA">Namibia</option>
+                        <option value="NR">Nauru</option>
+                        <option value="NP">Nepal</option>
+                        <option value="DE">Niemcy</option>
+                        <option value="NE">Niger</option>
+                        <option value="NG">Nigeria</option>
+                        <option value="NI">Nikaragua</option>
+                        <option value="NU">Niue</option>
+                        <option value="NF">Norfolk</option>
+                        <option value="NO">Norwegia</option>
+                        <option value="NC">Nowa Kaledonia</option>
+                        <option value="NZ">Nowa Zelandia</option>
+                        <option value="OM">Oman</option>
+                        <option value="PK">Pakistan</option>
+                        <option value="PW">Palau</option>
+                        <option value="PS">Palestyna</option>
+                        <option value="PA">Panama</option>
+                        <option value="PG">Papua-Nowa Gwinea</option>
+                        <option value="PY">Paragwaj</option>
+                        <option value="PE">Peru</option>
+                        <option value="PN">Pitcairn</option>
+                        <option value="PF">Polinezja Francuska</option>
+                        <option value="PL">Polska</option>
+                        <option value="PR">Portoryko</option>
+                        <option value="PT">Portugalia</option>
+                        <option value="ZA">Republika Południowej Afryki</option>
+                        <option value="CF">Republika Środkowoafrykańska</option>
+                        <option value="CV">Republika Zielonego Przylądka</option>
+                        <option value="RE">Reunion</option>
+                        <option value="RU">Rosja</option>
+                        <option value="RO">Rumunia</option>
+                        <option value="RW">Rwanda</option>
+                        <option value="EH">Sahara Zachodnia</option>
+                        <option value="KN">Saint Kitts i Nevis</option>
+                        <option value="LC">Saint Lucia</option>
+                        <option value="VC">Saint Vincent i Grenadyny</option>
+                        <option value="BL">Saint-Barthélemy</option>
+                        <option value="MF">Saint-Martin</option>
+                        <option value="PM">Saint-Pierre i Miquelon</option>
+                        <option value="SV">Salwador</option>
+                        <option value="WS">Samoa</option>
+                        <option value="AS">Samoa Amerykańskie</option>
+                        <option value="SM">San Marino</option>
+                        <option value="SN">Senegal</option>
+                        <option value="RS">Serbia</option>
+                        <option value="SC">Seszele</option>
+                        <option value="SL">Sierra Leone</option>
+                        <option value="SG">Singapur</option>
+                        <option value="SX">Sint Maarten</option>
+                        <option value="SK">Słowacja</option>
+                        <option value="SI">Słowenia</option>
+                        <option value="SO">Somalia</option>
+                        <option value="LK">Sri Lanka</option>
+                        <option value="US">Stany Zjednoczone</option>
+                        <option value="SZ">Suazi</option>
+                        <option value="SD">Sudan</option>
+                        <option value="SS">Sudan Południowy</option>
+                        <option value="SR">Surinam</option>
+                        <option value="SJ">Svalbard i Jan Mayen</option>
+                        <option value="SY">Syria</option>
+                        <option value="CH">Szwajcaria</option>
+                        <option value="SE">Szwecja</option>
+                        <option value="TJ">Tadżykistan</option>
+                        <option value="TH">Tajlandia</option>
+                        <option value="TW">Tajwan</option>
+                        <option value="TZ">Tanzania</option>
+                        <option value="TL">Timor Wschodni</option>
+                        <option value="TG">Togo</option>
+                        <option value="TK">Tokelau</option>
+                        <option value="TO">Tonga</option>
+                        <option value="TT">Trynidad i Tobago</option>
+                        <option value="TN">Tunezja</option>
+                        <option value="TR">Turcja</option>
+                        <option value="TM">Turkmenistan</option>
+                        <option value="TC">Turks i Caicos</option>
+                        <option value="TV">Tuvalu</option>
+                        <option value="UG">Uganda</option>
+                        <option value="UA">Ukraina</option>
+                        <option value="UY">Urugwaj</option>
+                        <option value="UZ">Uzbekistan</option>
+                        <option value="VU">Vanuatu</option>
+                        <option value="WF">Wallis i Futuna</option>
+                        <option value="VA">Watykan</option>
+                        <option value="VE">Wenezuela</option>
+                        <option value="HU">Węgry</option>
+                        <option value="GB">Wielka Brytania</option>
+                        <option value="VN">Wietnam</option>
+                        <option value="IT">Włochy</option>
+                        <option value="CI">Wybrzeże Kości Słoniowej</option>
+                        <option value="BV">Wyspa Bouveta</option>
+                        <option value="CX">Wyspa Bożego Narodzenia</option>
+                        <option value="IM">Wyspa Man</option>
+                        <option value="SH">Wyspa Świętej Heleny, Wyspa Wniebowstąpienia i Tristan da Cunha</option>
+                        <option value="AX">Wyspy Alandzkie</option>
+                        <option value="CK">Wyspy Cooka</option>
+                        <option value="VI">Wyspy Dziewicze Stanów Zjednoczonych</option>
+                        <option value="HM">Wyspy Heard i McDonalda</option>
+                        <option value="IC">Wyspy Kanaryjskie</option>
+                        <option value="CC">Wyspy Kokosowe</option>
+                        <option value="MH">Wyspy Marshalla</option>
+                        <option value="FO">Wyspy Owcze</option>
+                        <option value="SB">Wyspy Salomona</option>
+                        <option value="ST">Wyspy Świętego Tomasza i Książęca</option>
+                        <option value="ZM">Zambia</option>
+                        <option value="ZW">Zimbabwe</option>
+                        <option value="AE">Zjednoczone Emiraty Arabskie</option>
+                    </select></div>
+                <div class="input text"><label for="SzablonOdbiorcaKod3">Kod odbiorcy</label><input name="data[Szablon][odbiorca_kod3]" class="wycena-kod-pocztowy" placeholder="00-000" type="text" id="SzablonOdbiorcaKod3"/></div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Wybór kuriera</h2>
+    <div class="prices-message" id="mainError"></div>
+    <div class="courier-offers mb-5 mt-5">
+        <div class="courier-offer" id="courier-offer-1">
+
+
+            <input type="radio" name="data[Szablon][kurier_id]" id="SzablonKurierId1" value="1" class="kurierId"  />
+            <label for="SzablonKurierId1">
+                <span class="courier-name">DPD</span>
+                <span class="courier-prices" id="courier-prices-1"></span>
+            </label>
+            <div class="courier-message"></div>
+        </div>
+        <div class="courier-offer" id="courier-offer-3">
+
+
+            <input type="radio" name="data[Szablon][kurier_id]" id="SzablonKurierId3" value="3" class="kurierId"  />
+            <label for="SzablonKurierId3">
+                <span class="courier-name">UPS</span>
+                <span class="courier-prices" id="courier-prices-3"></span>
+            </label>
+            <div class="courier-message"></div>
+        </div>
+        <div class="courier-offer" id="courier-offer-4">
+
+
+            <input type="radio" name="data[Szablon][kurier_id]" id="SzablonKurierId4" value="4" class="kurierId"  />
+            <label for="SzablonKurierId4">
+                <span class="courier-name">GLS</span>
+                <span class="courier-prices" id="courier-prices-4"></span>
+            </label>
+            <div class="courier-message"></div>
+        </div>
+        <div class="courier-offer" id="courier-offer-6">
+
+
+            <input type="radio" name="data[Szablon][kurier_id]" id="SzablonKurierId6" value="6" class="kurierId"  />
+            <label for="SzablonKurierId6">
+                <span class="courier-name">InPost Paczkomaty</span>
+                <span class="courier-prices" id="courier-prices-6"></span>
+            </label>
+            <div class="courier-message"></div>
+        </div>
+        <div class="courier-offer" id="courier-offer-8">
+
+
+            <input type="radio" name="data[Szablon][kurier_id]" id="SzablonKurierId8" value="8" class="kurierId"  />
+            <label for="SzablonKurierId8">
+                <span class="courier-name">DHL</span>
+                <span class="courier-prices" id="courier-prices-8"></span>
+            </label>
+            <div class="courier-message"></div>
+        </div>
+        <div class="courier-offer" id="courier-offer-11">
+
+
+            <input type="radio" name="data[Szablon][kurier_id]" id="SzablonKurierId11" value="11" class="kurierId"  />
+            <label for="SzablonKurierId11">
+                <span class="courier-name">Orlen Paczka</span>
+                <span class="courier-prices" id="courier-prices-11"></span>
+            </label>
+            <div class="courier-message"></div>
+        </div>
+        <div class="courier-offer" id="courier-offer-12">
+
+
+            <input type="radio" name="data[Szablon][kurier_id]" id="SzablonKurierId12" value="12" class="kurierId"  />
+            <label for="SzablonKurierId12">
+                <span class="courier-name">InPost Kurier</span>
+                <span class="courier-prices" id="courier-prices-12"></span>
+            </label>
+            <div class="courier-message"></div>
+        </div>
+        <div class="courier-offer" id="courier-offer-36">
+
+
+            <input type="radio" name="data[Szablon][kurier_id]" id="SzablonKurierId36" value="36" class="kurierId"  />
+            <label for="SzablonKurierId36">
+                <span class="courier-name">Szybkie Zwroty</span>
+                <span class="courier-prices" id="courier-prices-36"></span>
+            </label>
+            <div class="courier-message"></div>
+        </div>
+    </div>
+
+    <div id="courier-services-block" class="hidden">
+        <div class="mb-5 mt-5">
+            <h2>Wybór serwisu</h2>
+        </div>
+        <div class="courier-services mb-4"><input type="hidden" name="data[Szablon][serwis_id]" id="SzablonSerwisId"/> </div>
+    </div>
+
+    <div class="mb-5 mt-5">
+        <h2>Informacje o przesyłce</h2>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <div class="input text"><label for="SzablonZawartosc">Zawartość przesyłki</label><input name="data[Szablon][zawartosc]" maxlength="100" type="text" id="SzablonZawartosc"/></div>	</div>
+        <div class="col-md-6">
+            <div class="input text"><label for="SzablonUwagi">Uwagi</label><input name="data[Szablon][uwagi]" type="text" id="SzablonUwagi"/></div>	</div>
+    </div>
+
+    <div class="mb-5 mt-5">
+        <h2>Dodatkowe usługi</h2>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][1][on]" id="SzablonUsluga1On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][1][on]" class="additional-service-cod additional-service" value="1" id="SzablonUsluga1On"/><label for="SzablonUsluga1On">Pobranie</label></div>        <div class="cod-details">
+                <div class="input number"><label for="SzablonPobranieKwota">Wartość pobrania:</label><input name="data[Szablon][pobranie_kwota]" step="any" type="number" id="SzablonPobranieKwota"/></div>            <div class="input text"><label for="SzablonPobranieKonto">Konto bankowe:</label><input name="data[Szablon][pobranie_konto]" maxlength="40" type="text" id="SzablonPobranieKonto"/></div>        </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][2][on]" id="SzablonUsluga2On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][2][on]" class="additional-service" value="1" id="SzablonUsluga2On"/><label for="SzablonUsluga2On">Ubezpieczenie</label></div>        <div class="ins-details">
+                <div class="input number"><label for="SzablonWartosc">Wartość przesyłki:</label><input name="data[Szablon][wartosc]" step="any" type="number" id="SzablonWartosc"/></div>            <input type="hidden" name="data[Szablon][ubezpieczenieWlaczoneRecznie]" id="SzablonUbezpieczenieWlaczoneRecznie"/>        </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][10][on]" id="SzablonUsluga10On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][10][on]" class="additional-service" value="1" id="SzablonUsluga10On"/><label for="SzablonUsluga10On">Doręczenie 9:00</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][11][on]" id="SzablonUsluga11On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][11][on]" class="additional-service" value="1" id="SzablonUsluga11On"/><label for="SzablonUsluga11On">Doręczenie 9:30</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][12][on]" id="SzablonUsluga12On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][12][on]" class="additional-service" value="1" id="SzablonUsluga12On"/><label for="SzablonUsluga12On">Doręczenie 10:00</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][13][on]" id="SzablonUsluga13On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][13][on]" class="additional-service" value="1" id="SzablonUsluga13On"/><label for="SzablonUsluga13On">Doręczenie 12:00</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][14][on]" id="SzablonUsluga14On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][14][on]" class="additional-service" value="1" id="SzablonUsluga14On"/><label for="SzablonUsluga14On">Doręczenie 17:00</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][15][on]" id="SzablonUsluga15On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][15][on]" class="additional-service" value="1" id="SzablonUsluga15On"/><label for="SzablonUsluga15On">Doręczenie 18:00 - 22:00</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][16][on]" id="SzablonUsluga16On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][16][on]" class="additional-service" value="1" id="SzablonUsluga16On"/><label for="SzablonUsluga16On">Doręczenie w sobotę</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][17][on]" id="SzablonUsluga17On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][17][on]" class="additional-service" value="1" id="SzablonUsluga17On"/><label for="SzablonUsluga17On">Doręczenie 17:00 - 19:00</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][18][on]" id="SzablonUsluga18On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][18][on]" class="additional-service" value="1" id="SzablonUsluga18On"/><label for="SzablonUsluga18On">Doręczenie 19:00 - 22:00</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][19][on]" id="SzablonUsluga19On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][19][on]" class="additional-service" value="1" id="SzablonUsluga19On"/><label for="SzablonUsluga19On">Doręczenie 13:00</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][20][on]" id="SzablonUsluga20On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][20][on]" class="additional-service" value="1" id="SzablonUsluga20On"/><label for="SzablonUsluga20On">Doręczenie na dzień następny</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][21][on]" id="SzablonUsluga21On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][21][on]" class="additional-service" value="1" id="SzablonUsluga21On"/><label for="SzablonUsluga21On">Doręczenie na godzinę</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][22][on]" id="SzablonUsluga22On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][22][on]" class="additional-service" value="1" id="SzablonUsluga22On"/><label for="SzablonUsluga22On">Doręczenie 17:00 - 20:00</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][31][on]" id="SzablonUsluga31On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][31][on]" class="additional-service" value="1" id="SzablonUsluga31On"/><label for="SzablonUsluga31On">Nadanie 17:00 - 19:00</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][32][on]" id="SzablonUsluga32On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][32][on]" class="additional-service" value="1" id="SzablonUsluga32On"/><label for="SzablonUsluga32On">Nadanie 18:00 - 22:00</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][50][on]" id="SzablonUsluga50On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][50][on]" class="additional-service" value="1" id="SzablonUsluga50On"/><label for="SzablonUsluga50On">Powiadomienie SMS</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][51][on]" id="SzablonUsluga51On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][51][on]" class="additional-service" value="1" id="SzablonUsluga51On"/><label for="SzablonUsluga51On">Awizacja SMS</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][53][on]" id="SzablonUsluga53On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][53][on]" class="additional-service" value="1" id="SzablonUsluga53On"/><label for="SzablonUsluga53On">Powiadomienie SMS przed dostarczeniem</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][54][on]" id="SzablonUsluga54On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][54][on]" class="additional-service" value="1" id="SzablonUsluga54On"/><label for="SzablonUsluga54On">Powiadomienie Email</label></div>    </div>
+        <div class="col-md-6">
+            <div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][70][on]" id="SzablonUsluga70On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][70][on]" class="additional-service" value="1" id="SzablonUsluga70On"/><label for="SzablonUsluga70On">Dokumenty zwrotne</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][71][on]" id="SzablonUsluga71On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][71][on]" class="additional-service" value="1" id="SzablonUsluga71On"/><label for="SzablonUsluga71On">Doręczenie do rąk własnych</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][72][on]" id="SzablonUsluga72On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][72][on]" class="additional-service" value="1" id="SzablonUsluga72On"/><label for="SzablonUsluga72On">Brak drukarki - kurier z etykietą</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][74][on]" id="SzablonUsluga74On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][74][on]" class="additional-service" value="1" id="SzablonUsluga74On"/><label for="SzablonUsluga74On">Doręczenie do sieci handlowych</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][75][on]" id="SzablonUsluga75On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][75][on]" class="additional-service" value="1" id="SzablonUsluga75On"/><label for="SzablonUsluga75On">Zwrot palety</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][76][on]" id="SzablonUsluga76On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][76][on]" class="additional-service" value="1" id="SzablonUsluga76On"/><label for="SzablonUsluga76On">Potwierdzenie doręczenia</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][77][on]" id="SzablonUsluga77On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][77][on]" class="additional-service" value="1" id="SzablonUsluga77On"/><label for="SzablonUsluga77On">Odbiór własny</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][79][on]" id="SzablonUsluga79On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][79][on]" class="additional-service" value="1" id="SzablonUsluga79On"/><label for="SzablonUsluga79On">Samochód z windą</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][80][on]" id="SzablonUsluga80On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][80][on]" class="additional-service" value="1" id="SzablonUsluga80On"/><label for="SzablonUsluga80On">Priorytet</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][82][on]" id="SzablonUsluga82On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][82][on]" class="additional-service" value="1" id="SzablonUsluga82On"/><label for="SzablonUsluga82On">Doręczenie pod adres prywatny</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][84][on]" id="SzablonUsluga84On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][84][on]" class="additional-service" value="1" id="SzablonUsluga84On"/><label for="SzablonUsluga84On">Wniesienie</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][85][on]" id="SzablonUsluga85On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][85][on]" class="additional-service" value="1" id="SzablonUsluga85On"/><label for="SzablonUsluga85On">Dokumenty przewozowe</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][88][on]" id="SzablonUsluga88On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][88][on]" class="additional-service" value="1" id="SzablonUsluga88On"/><label for="SzablonUsluga88On">Podpis osoby dorosłej przy doręczeniu</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][89][on]" id="SzablonUsluga89On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][89][on]" class="additional-service" value="1" id="SzablonUsluga89On"/><label for="SzablonUsluga89On">Sprawdzenie przed doręczeniem</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][90][on]" id="SzablonUsluga90On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][90][on]" class="additional-service" value="1" id="SzablonUsluga90On"/><label for="SzablonUsluga90On">Dokumenty zwrotne - przesyłka listowa</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][91][on]" id="SzablonUsluga91On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][91][on]" class="additional-service" value="1" id="SzablonUsluga91On"/><label for="SzablonUsluga91On">Elektroniczne potwierdzenie odbioru</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][92][on]" id="SzablonUsluga92On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][92][on]" class="additional-service" value="1" id="SzablonUsluga92On"/><label for="SzablonUsluga92On">Potwierdzenie odbioru - formularz druku</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][93][on]" id="SzablonUsluga93On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][93][on]" class="additional-service" value="1" id="SzablonUsluga93On"/><label for="SzablonUsluga93On">Potwierdzenie odbioru - kurier</label></div><div class="input checkbox"><input type="hidden" name="data[SzablonUsluga][94][on]" id="SzablonUsluga94On_" value="0"/><input type="checkbox" name="data[SzablonUsluga][94][on]" class="additional-service" value="1" id="SzablonUsluga94On"/><label for="SzablonUsluga94On">Ostrożnie</label></div>    </div>
+    </div>
+
+
+    <div class="mb-5 mt-5">
+        <h2>Dane adresowe</h2>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <h3>Nadawca</h3>
+            <br>
+            <div class="input select"><label for="SzablonNadawcaKraj">Kraj nadawcy</label><select name="data[Szablon][nadawca_kraj]" id="SzablonNadawcaKraj">
+                    <option value="AF">Afganistan</option>
+                    <option value="AL">Albania</option>
+                    <option value="DZ">Algieria</option>
+                    <option value="AD">Andora</option>
+                    <option value="AO">Angola</option>
+                    <option value="AI">Anguilla</option>
+                    <option value="AQ">Antarktyka</option>
+                    <option value="AG">Antigua i Barbuda</option>
+                    <option value="AN">Antyle Holenderskie</option>
+                    <option value="SA">Arabia Saudyjska</option>
+                    <option value="AR">Argentyna</option>
+                    <option value="AM">Armenia</option>
+                    <option value="AW">Aruba</option>
+                    <option value="AU">Australia</option>
+                    <option value="AT">Austria</option>
+                    <option value="AZ">Azerbejdżan</option>
+                    <option value="BS">Bahamy</option>
+                    <option value="BH">Bahrajn</option>
+                    <option value="BD">Bangladesz</option>
+                    <option value="BB">Barbados</option>
+                    <option value="BE">Belgia</option>
+                    <option value="BZ">Belize</option>
+                    <option value="BJ">Benin</option>
+                    <option value="BM">Bermudy</option>
+                    <option value="BT">Bhutan</option>
+                    <option value="BY">Białoruś</option>
+                    <option value="BO">Boliwia</option>
+                    <option value="BQ">Bonaire, Sint Eustatius i Saba</option>
+                    <option value="BA">Bośnia i Hercegowina</option>
+                    <option value="BW">Botswana</option>
+                    <option value="BR">Brazylia</option>
+                    <option value="BN">Brunei</option>
+                    <option value="IO">Brytyjskie Terytorium Oceanu Indyjskiego</option>
+                    <option value="VG">Brytyjskie Wyspy Dziewicze</option>
+                    <option value="BG">Bułgaria</option>
+                    <option value="BF">Burkina Faso</option>
+                    <option value="BI">Burundi</option>
+                    <option value="CL">Chile</option>
+                    <option value="CN">Chiny</option>
+                    <option value="HR">Chorwacja</option>
+                    <option value="CW">Curaçao</option>
+                    <option value="CY">Cypr</option>
+                    <option value="TD">Czad</option>
+                    <option value="ME">Czarnogóra</option>
+                    <option value="CZ">Czechy</option>
+                    <option value="UM">Dalekie Wyspy Mniejsze Stanów Zjednoczonych</option>
+                    <option value="DK">Dania</option>
+                    <option value="CD">Demokratyczna Republika Konga</option>
+                    <option value="DM">Dominika</option>
+                    <option value="DO">Dominikana</option>
+                    <option value="DJ">Dżibuti</option>
+                    <option value="EG">Egipt</option>
+                    <option value="EC">Ekwador</option>
+                    <option value="ER">Erytrea</option>
+                    <option value="EE">Estonia</option>
+                    <option value="ET">Etiopia</option>
+                    <option value="FK">Falklandy</option>
+                    <option value="FJ">Fidżi</option>
+                    <option value="PH">Filipiny</option>
+                    <option value="FI">Finlandia</option>
+                    <option value="FR">Francja</option>
+                    <option value="TF">Francuskie Terytoria Południowe i Antarktyczne</option>
+                    <option value="GA">Gabon</option>
+                    <option value="GM">Gambia</option>
+                    <option value="GS">Georgia Południowa i Sandwich Południowy</option>
+                    <option value="GH">Ghana</option>
+                    <option value="GI">Gibraltar</option>
+                    <option value="GR">Grecja</option>
+                    <option value="GD">Grenada</option>
+                    <option value="GL">Grenlandia</option>
+                    <option value="GE">Gruzja</option>
+                    <option value="GU">Guam</option>
+                    <option value="GG">Guernsey</option>
+                    <option value="GY">Gujana</option>
+                    <option value="GF">Gujana Francuska</option>
+                    <option value="GP">Gwadelupa</option>
+                    <option value="GT">Gwatemala</option>
+                    <option value="GN">Gwinea</option>
+                    <option value="GW">Gwinea Bissau</option>
+                    <option value="GQ">Gwinea Równikowa</option>
+                    <option value="HT">Haiti</option>
+                    <option value="ES">Hiszpania</option>
+                    <option value="NL">Holandia</option>
+                    <option value="HN">Honduras</option>
+                    <option value="HK">Hongkong</option>
+                    <option value="IN">Indie</option>
+                    <option value="ID">Indonezja</option>
+                    <option value="IQ">Irak</option>
+                    <option value="IR">Iran</option>
+                    <option value="IE">Irlandia</option>
+                    <option value="IP">Irlandia Północna</option>
+                    <option value="IS">Islandia</option>
+                    <option value="IL">Izrael</option>
+                    <option value="JM">Jamajka</option>
+                    <option value="JP">Japonia</option>
+                    <option value="YE">Jemen</option>
+                    <option value="JE">Jersey</option>
+                    <option value="JO">Jordania</option>
+                    <option value="KY">Kajmany</option>
+                    <option value="KH">Kambodża</option>
+                    <option value="CM">Kamerun</option>
+                    <option value="CA">Kanada</option>
+                    <option value="QA">Katar</option>
+                    <option value="KZ">Kazachstan</option>
+                    <option value="KE">Kenia</option>
+                    <option value="KG">Kirgistan</option>
+                    <option value="KI">Kiribati</option>
+                    <option value="CO">Kolumbia</option>
+                    <option value="KM">Komory</option>
+                    <option value="CG">Kongo</option>
+                    <option value="KR">Korea Południowa</option>
+                    <option value="KP">Korea Północna</option>
+                    <option value="XK">Kosowo</option>
+                    <option value="CR">Kostaryka</option>
+                    <option value="CU">Kuba</option>
+                    <option value="KW">Kuwejt</option>
+                    <option value="LA">Laos</option>
+                    <option value="LS">Lesotho</option>
+                    <option value="LB">Liban</option>
+                    <option value="LR">Liberia</option>
+                    <option value="LY">Libia</option>
+                    <option value="LI">Liechtenstein</option>
+                    <option value="LT">Litwa</option>
+                    <option value="LU">Luksemburg</option>
+                    <option value="LV">Łotwa</option>
+                    <option value="MK">Macedonia</option>
+                    <option value="MG">Madagaskar</option>
+                    <option value="YT">Majotta</option>
+                    <option value="MO">Makau</option>
+                    <option value="MW">Malawi</option>
+                    <option value="MV">Malediwy</option>
+                    <option value="MY">Malezja</option>
+                    <option value="ML">Mali</option>
+                    <option value="MT">Malta</option>
+                    <option value="MP">Mariany Północne</option>
+                    <option value="MA">Maroko</option>
+                    <option value="MQ">Martynika</option>
+                    <option value="MR">Mauretania</option>
+                    <option value="MU">Mauritius</option>
+                    <option value="MX">Meksyk</option>
+                    <option value="FM">Mikronezja</option>
+                    <option value="MM">Mjanma</option>
+                    <option value="MD">Mołdawia</option>
+                    <option value="MC">Monako</option>
+                    <option value="MN">Mongolia</option>
+                    <option value="MS">Montserrat</option>
+                    <option value="MZ">Mozambik</option>
+                    <option value="NA">Namibia</option>
+                    <option value="NR">Nauru</option>
+                    <option value="NP">Nepal</option>
+                    <option value="DE">Niemcy</option>
+                    <option value="NE">Niger</option>
+                    <option value="NG">Nigeria</option>
+                    <option value="NI">Nikaragua</option>
+                    <option value="NU">Niue</option>
+                    <option value="NF">Norfolk</option>
+                    <option value="NO">Norwegia</option>
+                    <option value="NC">Nowa Kaledonia</option>
+                    <option value="NZ">Nowa Zelandia</option>
+                    <option value="OM">Oman</option>
+                    <option value="PK">Pakistan</option>
+                    <option value="PW">Palau</option>
+                    <option value="PS">Palestyna</option>
+                    <option value="PA">Panama</option>
+                    <option value="PG">Papua-Nowa Gwinea</option>
+                    <option value="PY">Paragwaj</option>
+                    <option value="PE">Peru</option>
+                    <option value="PN">Pitcairn</option>
+                    <option value="PF">Polinezja Francuska</option>
+                    <option value="PL" selected="selected">Polska</option>
+                    <option value="PR">Portoryko</option>
+                    <option value="PT">Portugalia</option>
+                    <option value="ZA">Republika Południowej Afryki</option>
+                    <option value="CF">Republika Środkowoafrykańska</option>
+                    <option value="CV">Republika Zielonego Przylądka</option>
+                    <option value="RE">Reunion</option>
+                    <option value="RU">Rosja</option>
+                    <option value="RO">Rumunia</option>
+                    <option value="RW">Rwanda</option>
+                    <option value="EH">Sahara Zachodnia</option>
+                    <option value="KN">Saint Kitts i Nevis</option>
+                    <option value="LC">Saint Lucia</option>
+                    <option value="VC">Saint Vincent i Grenadyny</option>
+                    <option value="BL">Saint-Barthélemy</option>
+                    <option value="MF">Saint-Martin</option>
+                    <option value="PM">Saint-Pierre i Miquelon</option>
+                    <option value="SV">Salwador</option>
+                    <option value="WS">Samoa</option>
+                    <option value="AS">Samoa Amerykańskie</option>
+                    <option value="SM">San Marino</option>
+                    <option value="SN">Senegal</option>
+                    <option value="RS">Serbia</option>
+                    <option value="SC">Seszele</option>
+                    <option value="SL">Sierra Leone</option>
+                    <option value="SG">Singapur</option>
+                    <option value="SX">Sint Maarten</option>
+                    <option value="SK">Słowacja</option>
+                    <option value="SI">Słowenia</option>
+                    <option value="SO">Somalia</option>
+                    <option value="LK">Sri Lanka</option>
+                    <option value="US">Stany Zjednoczone</option>
+                    <option value="SZ">Suazi</option>
+                    <option value="SD">Sudan</option>
+                    <option value="SS">Sudan Południowy</option>
+                    <option value="SR">Surinam</option>
+                    <option value="SJ">Svalbard i Jan Mayen</option>
+                    <option value="SY">Syria</option>
+                    <option value="CH">Szwajcaria</option>
+                    <option value="SE">Szwecja</option>
+                    <option value="TJ">Tadżykistan</option>
+                    <option value="TH">Tajlandia</option>
+                    <option value="TW">Tajwan</option>
+                    <option value="TZ">Tanzania</option>
+                    <option value="TL">Timor Wschodni</option>
+                    <option value="TG">Togo</option>
+                    <option value="TK">Tokelau</option>
+                    <option value="TO">Tonga</option>
+                    <option value="TT">Trynidad i Tobago</option>
+                    <option value="TN">Tunezja</option>
+                    <option value="TR">Turcja</option>
+                    <option value="TM">Turkmenistan</option>
+                    <option value="TC">Turks i Caicos</option>
+                    <option value="TV">Tuvalu</option>
+                    <option value="UG">Uganda</option>
+                    <option value="UA">Ukraina</option>
+                    <option value="UY">Urugwaj</option>
+                    <option value="UZ">Uzbekistan</option>
+                    <option value="VU">Vanuatu</option>
+                    <option value="WF">Wallis i Futuna</option>
+                    <option value="VA">Watykan</option>
+                    <option value="VE">Wenezuela</option>
+                    <option value="HU">Węgry</option>
+                    <option value="GB">Wielka Brytania</option>
+                    <option value="VN">Wietnam</option>
+                    <option value="IT">Włochy</option>
+                    <option value="CI">Wybrzeże Kości Słoniowej</option>
+                    <option value="BV">Wyspa Bouveta</option>
+                    <option value="CX">Wyspa Bożego Narodzenia</option>
+                    <option value="IM">Wyspa Man</option>
+                    <option value="SH">Wyspa Świętej Heleny, Wyspa Wniebowstąpienia i Tristan da Cunha</option>
+                    <option value="AX">Wyspy Alandzkie</option>
+                    <option value="CK">Wyspy Cooka</option>
+                    <option value="VI">Wyspy Dziewicze Stanów Zjednoczonych</option>
+                    <option value="HM">Wyspy Heard i McDonalda</option>
+                    <option value="IC">Wyspy Kanaryjskie</option>
+                    <option value="CC">Wyspy Kokosowe</option>
+                    <option value="MH">Wyspy Marshalla</option>
+                    <option value="FO">Wyspy Owcze</option>
+                    <option value="SB">Wyspy Salomona</option>
+                    <option value="ST">Wyspy Świętego Tomasza i Książęca</option>
+                    <option value="ZM">Zambia</option>
+                    <option value="ZW">Zimbabwe</option>
+                    <option value="AE">Zjednoczone Emiraty Arabskie</option>
+                </select></div>        <br>
+            <div class="row">
+                <div class="col-lg">
+                    <div class="input text"><label for="SzablonNadawcaImie">Imię nadawcy</label><input name="data[Szablon][nadawca_imie]" maxlength="50" type="text" value="Sebastian" id="SzablonNadawcaImie"/></div>            </div>
+                <div class="col-lg">
+                    <div class="input text"><label for="SzablonNadawcaNazwisko">Nazwisko nadawcy</label><input name="data[Szablon][nadawca_nazwisko]" maxlength="100" type="text" value="Poddubiuk" id="SzablonNadawcaNazwisko"/></div>            </div>
+            </div>
+            <div class="input text"><label for="SzablonNadawcaFirma">Firma nadawcy</label><input name="data[Szablon][nadawca_firma]" maxlength="200" type="text" value="ARTIK" id="SzablonNadawcaFirma"/></div>        <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input text"><label for="SzablonNadawcaUlica">Ulica nadawcy</label><input name="data[Szablon][nadawca_ulica]" maxlength="100" type="text" value="Browarna" id="SzablonNadawcaUlica"/></div>            </div>
+                <div class="col-lg-3">
+                    <div class="input text"><label for="SzablonNadawcaNrdomu">Numer domu</label><input name="data[Szablon][nadawca_nrdomu]" maxlength="7" type="text" value="91" id="SzablonNadawcaNrdomu"/></div>            </div>
+                <div class="col-lg-3">
+                    <div class="input text"><label for="SzablonNadawcaNrlokalu">Numer lokalu</label><input name="data[Szablon][nadawca_nrlokalu]" maxlength="7" type="text" value="" id="SzablonNadawcaNrlokalu"/></div>            </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="input text"><label for="SzablonNadawcaKod">Kod pocztowy</label><input name="data[Szablon][nadawca_kod]" maxlength="10" type="text" value="82-300" id="SzablonNadawcaKod"/></div>            </div>
+                <div class="col-lg-8">
+                    <div class="input text"><label for="SzablonNadawcaMiasto">Miasto nadawcy</label><input name="data[Szablon][nadawca_miasto]" maxlength="100" type="text" value="Elbląg" id="SzablonNadawcaMiasto"/></div>            </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg">
+                    <div class="input text"><label for="SzablonNadawcaTelefon">Telefon nadawcy</label><input name="data[Szablon][nadawca_telefon]" maxlength="15" type="text" value="517448761" id="SzablonNadawcaTelefon"/></div>            </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Odbiorca</h3>
+            <br>
+            <div class="input select"><label for="SzablonOdbiorcaKraj">Kraj odbiorcy</label><select name="data[Szablon][odbiorca_kraj]" id="SzablonOdbiorcaKraj">
+                    <option value="AF">Afganistan</option>
+                    <option value="AL">Albania</option>
+                    <option value="DZ">Algieria</option>
+                    <option value="AD">Andora</option>
+                    <option value="AO">Angola</option>
+                    <option value="AI">Anguilla</option>
+                    <option value="AQ">Antarktyka</option>
+                    <option value="AG">Antigua i Barbuda</option>
+                    <option value="AN">Antyle Holenderskie</option>
+                    <option value="SA">Arabia Saudyjska</option>
+                    <option value="AR">Argentyna</option>
+                    <option value="AM">Armenia</option>
+                    <option value="AW">Aruba</option>
+                    <option value="AU">Australia</option>
+                    <option value="AT">Austria</option>
+                    <option value="AZ">Azerbejdżan</option>
+                    <option value="BS">Bahamy</option>
+                    <option value="BH">Bahrajn</option>
+                    <option value="BD">Bangladesz</option>
+                    <option value="BB">Barbados</option>
+                    <option value="BE">Belgia</option>
+                    <option value="BZ">Belize</option>
+                    <option value="BJ">Benin</option>
+                    <option value="BM">Bermudy</option>
+                    <option value="BT">Bhutan</option>
+                    <option value="BY">Białoruś</option>
+                    <option value="BO">Boliwia</option>
+                    <option value="BQ">Bonaire, Sint Eustatius i Saba</option>
+                    <option value="BA">Bośnia i Hercegowina</option>
+                    <option value="BW">Botswana</option>
+                    <option value="BR">Brazylia</option>
+                    <option value="BN">Brunei</option>
+                    <option value="IO">Brytyjskie Terytorium Oceanu Indyjskiego</option>
+                    <option value="VG">Brytyjskie Wyspy Dziewicze</option>
+                    <option value="BG">Bułgaria</option>
+                    <option value="BF">Burkina Faso</option>
+                    <option value="BI">Burundi</option>
+                    <option value="CL">Chile</option>
+                    <option value="CN">Chiny</option>
+                    <option value="HR">Chorwacja</option>
+                    <option value="CW">Curaçao</option>
+                    <option value="CY">Cypr</option>
+                    <option value="TD">Czad</option>
+                    <option value="ME">Czarnogóra</option>
+                    <option value="CZ">Czechy</option>
+                    <option value="UM">Dalekie Wyspy Mniejsze Stanów Zjednoczonych</option>
+                    <option value="DK">Dania</option>
+                    <option value="CD">Demokratyczna Republika Konga</option>
+                    <option value="DM">Dominika</option>
+                    <option value="DO">Dominikana</option>
+                    <option value="DJ">Dżibuti</option>
+                    <option value="EG">Egipt</option>
+                    <option value="EC">Ekwador</option>
+                    <option value="ER">Erytrea</option>
+                    <option value="EE">Estonia</option>
+                    <option value="ET">Etiopia</option>
+                    <option value="FK">Falklandy</option>
+                    <option value="FJ">Fidżi</option>
+                    <option value="PH">Filipiny</option>
+                    <option value="FI">Finlandia</option>
+                    <option value="FR">Francja</option>
+                    <option value="TF">Francuskie Terytoria Południowe i Antarktyczne</option>
+                    <option value="GA">Gabon</option>
+                    <option value="GM">Gambia</option>
+                    <option value="GS">Georgia Południowa i Sandwich Południowy</option>
+                    <option value="GH">Ghana</option>
+                    <option value="GI">Gibraltar</option>
+                    <option value="GR">Grecja</option>
+                    <option value="GD">Grenada</option>
+                    <option value="GL">Grenlandia</option>
+                    <option value="GE">Gruzja</option>
+                    <option value="GU">Guam</option>
+                    <option value="GG">Guernsey</option>
+                    <option value="GY">Gujana</option>
+                    <option value="GF">Gujana Francuska</option>
+                    <option value="GP">Gwadelupa</option>
+                    <option value="GT">Gwatemala</option>
+                    <option value="GN">Gwinea</option>
+                    <option value="GW">Gwinea Bissau</option>
+                    <option value="GQ">Gwinea Równikowa</option>
+                    <option value="HT">Haiti</option>
+                    <option value="ES">Hiszpania</option>
+                    <option value="NL">Holandia</option>
+                    <option value="HN">Honduras</option>
+                    <option value="HK">Hongkong</option>
+                    <option value="IN">Indie</option>
+                    <option value="ID">Indonezja</option>
+                    <option value="IQ">Irak</option>
+                    <option value="IR">Iran</option>
+                    <option value="IE">Irlandia</option>
+                    <option value="IP">Irlandia Północna</option>
+                    <option value="IS">Islandia</option>
+                    <option value="IL">Izrael</option>
+                    <option value="JM">Jamajka</option>
+                    <option value="JP">Japonia</option>
+                    <option value="YE">Jemen</option>
+                    <option value="JE">Jersey</option>
+                    <option value="JO">Jordania</option>
+                    <option value="KY">Kajmany</option>
+                    <option value="KH">Kambodża</option>
+                    <option value="CM">Kamerun</option>
+                    <option value="CA">Kanada</option>
+                    <option value="QA">Katar</option>
+                    <option value="KZ">Kazachstan</option>
+                    <option value="KE">Kenia</option>
+                    <option value="KG">Kirgistan</option>
+                    <option value="KI">Kiribati</option>
+                    <option value="CO">Kolumbia</option>
+                    <option value="KM">Komory</option>
+                    <option value="CG">Kongo</option>
+                    <option value="KR">Korea Południowa</option>
+                    <option value="KP">Korea Północna</option>
+                    <option value="XK">Kosowo</option>
+                    <option value="CR">Kostaryka</option>
+                    <option value="CU">Kuba</option>
+                    <option value="KW">Kuwejt</option>
+                    <option value="LA">Laos</option>
+                    <option value="LS">Lesotho</option>
+                    <option value="LB">Liban</option>
+                    <option value="LR">Liberia</option>
+                    <option value="LY">Libia</option>
+                    <option value="LI">Liechtenstein</option>
+                    <option value="LT">Litwa</option>
+                    <option value="LU">Luksemburg</option>
+                    <option value="LV">Łotwa</option>
+                    <option value="MK">Macedonia</option>
+                    <option value="MG">Madagaskar</option>
+                    <option value="YT">Majotta</option>
+                    <option value="MO">Makau</option>
+                    <option value="MW">Malawi</option>
+                    <option value="MV">Malediwy</option>
+                    <option value="MY">Malezja</option>
+                    <option value="ML">Mali</option>
+                    <option value="MT">Malta</option>
+                    <option value="MP">Mariany Północne</option>
+                    <option value="MA">Maroko</option>
+                    <option value="MQ">Martynika</option>
+                    <option value="MR">Mauretania</option>
+                    <option value="MU">Mauritius</option>
+                    <option value="MX">Meksyk</option>
+                    <option value="FM">Mikronezja</option>
+                    <option value="MM">Mjanma</option>
+                    <option value="MD">Mołdawia</option>
+                    <option value="MC">Monako</option>
+                    <option value="MN">Mongolia</option>
+                    <option value="MS">Montserrat</option>
+                    <option value="MZ">Mozambik</option>
+                    <option value="NA">Namibia</option>
+                    <option value="NR">Nauru</option>
+                    <option value="NP">Nepal</option>
+                    <option value="DE">Niemcy</option>
+                    <option value="NE">Niger</option>
+                    <option value="NG">Nigeria</option>
+                    <option value="NI">Nikaragua</option>
+                    <option value="NU">Niue</option>
+                    <option value="NF">Norfolk</option>
+                    <option value="NO">Norwegia</option>
+                    <option value="NC">Nowa Kaledonia</option>
+                    <option value="NZ">Nowa Zelandia</option>
+                    <option value="OM">Oman</option>
+                    <option value="PK">Pakistan</option>
+                    <option value="PW">Palau</option>
+                    <option value="PS">Palestyna</option>
+                    <option value="PA">Panama</option>
+                    <option value="PG">Papua-Nowa Gwinea</option>
+                    <option value="PY">Paragwaj</option>
+                    <option value="PE">Peru</option>
+                    <option value="PN">Pitcairn</option>
+                    <option value="PF">Polinezja Francuska</option>
+                    <option value="PL" selected="selected">Polska</option>
+                    <option value="PR">Portoryko</option>
+                    <option value="PT">Portugalia</option>
+                    <option value="ZA">Republika Południowej Afryki</option>
+                    <option value="CF">Republika Środkowoafrykańska</option>
+                    <option value="CV">Republika Zielonego Przylądka</option>
+                    <option value="RE">Reunion</option>
+                    <option value="RU">Rosja</option>
+                    <option value="RO">Rumunia</option>
+                    <option value="RW">Rwanda</option>
+                    <option value="EH">Sahara Zachodnia</option>
+                    <option value="KN">Saint Kitts i Nevis</option>
+                    <option value="LC">Saint Lucia</option>
+                    <option value="VC">Saint Vincent i Grenadyny</option>
+                    <option value="BL">Saint-Barthélemy</option>
+                    <option value="MF">Saint-Martin</option>
+                    <option value="PM">Saint-Pierre i Miquelon</option>
+                    <option value="SV">Salwador</option>
+                    <option value="WS">Samoa</option>
+                    <option value="AS">Samoa Amerykańskie</option>
+                    <option value="SM">San Marino</option>
+                    <option value="SN">Senegal</option>
+                    <option value="RS">Serbia</option>
+                    <option value="SC">Seszele</option>
+                    <option value="SL">Sierra Leone</option>
+                    <option value="SG">Singapur</option>
+                    <option value="SX">Sint Maarten</option>
+                    <option value="SK">Słowacja</option>
+                    <option value="SI">Słowenia</option>
+                    <option value="SO">Somalia</option>
+                    <option value="LK">Sri Lanka</option>
+                    <option value="US">Stany Zjednoczone</option>
+                    <option value="SZ">Suazi</option>
+                    <option value="SD">Sudan</option>
+                    <option value="SS">Sudan Południowy</option>
+                    <option value="SR">Surinam</option>
+                    <option value="SJ">Svalbard i Jan Mayen</option>
+                    <option value="SY">Syria</option>
+                    <option value="CH">Szwajcaria</option>
+                    <option value="SE">Szwecja</option>
+                    <option value="TJ">Tadżykistan</option>
+                    <option value="TH">Tajlandia</option>
+                    <option value="TW">Tajwan</option>
+                    <option value="TZ">Tanzania</option>
+                    <option value="TL">Timor Wschodni</option>
+                    <option value="TG">Togo</option>
+                    <option value="TK">Tokelau</option>
+                    <option value="TO">Tonga</option>
+                    <option value="TT">Trynidad i Tobago</option>
+                    <option value="TN">Tunezja</option>
+                    <option value="TR">Turcja</option>
+                    <option value="TM">Turkmenistan</option>
+                    <option value="TC">Turks i Caicos</option>
+                    <option value="TV">Tuvalu</option>
+                    <option value="UG">Uganda</option>
+                    <option value="UA">Ukraina</option>
+                    <option value="UY">Urugwaj</option>
+                    <option value="UZ">Uzbekistan</option>
+                    <option value="VU">Vanuatu</option>
+                    <option value="WF">Wallis i Futuna</option>
+                    <option value="VA">Watykan</option>
+                    <option value="VE">Wenezuela</option>
+                    <option value="HU">Węgry</option>
+                    <option value="GB">Wielka Brytania</option>
+                    <option value="VN">Wietnam</option>
+                    <option value="IT">Włochy</option>
+                    <option value="CI">Wybrzeże Kości Słoniowej</option>
+                    <option value="BV">Wyspa Bouveta</option>
+                    <option value="CX">Wyspa Bożego Narodzenia</option>
+                    <option value="IM">Wyspa Man</option>
+                    <option value="SH">Wyspa Świętej Heleny, Wyspa Wniebowstąpienia i Tristan da Cunha</option>
+                    <option value="AX">Wyspy Alandzkie</option>
+                    <option value="CK">Wyspy Cooka</option>
+                    <option value="VI">Wyspy Dziewicze Stanów Zjednoczonych</option>
+                    <option value="HM">Wyspy Heard i McDonalda</option>
+                    <option value="IC">Wyspy Kanaryjskie</option>
+                    <option value="CC">Wyspy Kokosowe</option>
+                    <option value="MH">Wyspy Marshalla</option>
+                    <option value="FO">Wyspy Owcze</option>
+                    <option value="SB">Wyspy Salomona</option>
+                    <option value="ST">Wyspy Świętego Tomasza i Książęca</option>
+                    <option value="ZM">Zambia</option>
+                    <option value="ZW">Zimbabwe</option>
+                    <option value="AE">Zjednoczone Emiraty Arabskie</option>
+                </select></div>        <br>
+            <div class="row">
+                <div class="col-lg">
+                    <div class="input text"><label for="SzablonOdbiorcaImie">Imię odbiorcy</label><input name="data[Szablon][odbiorca_imie]" maxlength="50" type="text" id="SzablonOdbiorcaImie"/></div>            </div>
+                <div class="col-lg">
+                    <div class="input text"><label for="SzablonOdbiorcaNazwisko">Nazwisko odbiorcy</label><input name="data[Szablon][odbiorca_nazwisko]" maxlength="100" type="text" id="SzablonOdbiorcaNazwisko"/></div>            </div>
+            </div>
+            <div class="input text"><label for="SzablonOdbiorcaFirma">Firma odbiorcy</label><input name="data[Szablon][odbiorca_firma]" maxlength="200" type="text" id="SzablonOdbiorcaFirma"/></div>        <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input text"><label for="SzablonOdbiorcaUlica">Ulica odbiorcy</label><input name="data[Szablon][odbiorca_ulica]" maxlength="100" type="text" id="SzablonOdbiorcaUlica"/></div>            </div>
+                <div class="col-lg-3">
+                    <div class="input text"><label for="SzablonOdbiorcaNrdomu">Numer domu</label><input name="data[Szablon][odbiorca_nrdomu]" maxlength="7" type="text" id="SzablonOdbiorcaNrdomu"/></div>            </div>
+                <div class="col-lg-3">
+                    <div class="input text"><label for="SzablonOdbiorcaNrlokalu">Numer lokalu</label><input name="data[Szablon][odbiorca_nrlokalu]" maxlength="7" type="text" id="SzablonOdbiorcaNrlokalu"/></div>            </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="input text"><label for="SzablonOdbiorcaKod">Kod pocztowy</label><input name="data[Szablon][odbiorca_kod]" maxlength="10" type="text" id="SzablonOdbiorcaKod"/></div>            </div>
+                <div class="col-lg-8">
+                    <div class="input text"><label for="SzablonOdbiorcaMiasto">Miasto odbiorcy</label><input name="data[Szablon][odbiorca_miasto]" maxlength="100" type="text" id="SzablonOdbiorcaMiasto"/></div>            </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg">
+                    <div class="input text"><label for="SzablonOdbiorcaTelefon">Telefon odbiorcy</label><input name="data[Szablon][odbiorca_telefon]" maxlength="15" type="text" id="SzablonOdbiorcaTelefon"/></div>            </div>
+                <div class="col-lg">
+                    <div class="input text"><label for="SzablonOdbiorcaEmail">Email odbiorcy</label><input name="data[Szablon][odbiorca_email]" maxlength="200" type="text" id="SzablonOdbiorcaEmail"/></div>            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-6 mb-3">
+            <h3>Sposób nadania</h3>
+            <div class="pickup-delivery-type-box"><input type="radio" name="data[Szablon][sposob_nadania_id]" id="SzablonSposobNadaniaId100" value="100" class="chra sposobNadaniaDoreczenia sposobNadania" /><label for="SzablonSposobNadaniaId100">Kurier przyjedzie po przesyłkę</label><input type="radio" name="data[Szablon][sposob_nadania_id]" id="SzablonSposobNadaniaId101" value="101" class="chra sposobNadaniaDoreczenia sposobNadania" /><label for="SzablonSposobNadaniaId101">Nie zamawiaj podjazdu kuriera</label><input type="radio" name="data[Szablon][sposob_nadania_id]" id="SzablonSposobNadaniaId102" value="102" class="chra sposobNadaniaDoreczenia sposobNadania" /><label for="SzablonSposobNadaniaId102">Nadanie w automacie</label><input type="radio" name="data[Szablon][sposob_nadania_id]" id="SzablonSposobNadaniaId103" value="103" class="chra sposobNadaniaDoreczenia sposobNadania" /><label for="SzablonSposobNadaniaId103">Nadanie w punkcie obsługi</label></div>	</div>
+        <div class="col-md-6 mb-3">
+            <h3>Sposób doręczenia</h3>
+            <div class="pickup-delivery-type-box"><input type="radio" name="data[Szablon][sposob_doreczenia_id]" id="SzablonSposobDoreczeniaId200" value="200" class="chra sposobNadaniaDoreczenia sposobDoreczenia" /><label for="SzablonSposobDoreczeniaId200">Kurier doręczy przesyłkę</label><input type="radio" name="data[Szablon][sposob_doreczenia_id]" id="SzablonSposobDoreczeniaId201" value="201" class="chra sposobNadaniaDoreczenia sposobDoreczenia" /><label for="SzablonSposobDoreczeniaId201">Doręczenie do automatu</label><input type="radio" name="data[Szablon][sposob_doreczenia_id]" id="SzablonSposobDoreczeniaId202" value="202" class="chra sposobNadaniaDoreczenia sposobDoreczenia" /><label for="SzablonSposobDoreczeniaId202">Doręczenie do punktu obsługi</label></div>	</div>
+    </div>
+
+    <div class="text-end">
+        <div class="submit"><input class="button" type="submit" value="Zapisz szablon"/></div></div>
+</form>
+{% endblock %}
+{% block bottomcontent %}
+    <script type="text/javascript" src="/js/template.js?1746613108"></script>        <script>
+
+    TemplateForm.domyslneKontoPobrania = '25 1010 1270 0008 2422 3100 0000';
+    TemplateForm.swieta = {"2026-04-06":"2026-04-06","2026-05-01":"2026-05-01","2026-06-04":"2026-06-04","2026-08-15":"2026-08-15","2026-11-11":"2026-11-11","2026-12-25":"2026-12-25","2026-12-26":"2026-12-26","2027-01-01":"2027-01-01","2027-01-06":"2027-01-06","2027-03-29":"2027-03-29","2027-05-01":"2027-05-01","2027-05-03":"2027-05-03","2027-08-15":"2027-08-15","2027-11-01":"2027-11-01","2027-11-11":"2027-11-11","2027-12-25":"2027-12-25"};
+
+    TemplateForm.paczkomatNadawcyInit = '';
+    TemplateForm.paczkomatOdbiorcyInit = '';
+
+    TemplateForm.kurierIds = {"1":"dpd","3":"ups","4":"gls","6":"inpost","8":"dhl","11":"orlenPaczka","12":"inpostKurier","36":"szybkieZwroty"};
+
+    $(document).ready(function(){
+        TemplateForm.init(1);
+    });
+
+</script>{% endblock %}

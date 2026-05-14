@@ -1,0 +1,37 @@
+{% extends "logged.twig" %}
+{% block title %}Historia salda{% endblock %}
+{% block header %}Saldo{% endblock %}
+{% block breadcrumbs %}<a href="/">Strona główna</a> &gt; <a href="/panel-klienta">Panel klienta</a> &gt; <a href="/finanse/saldo">Saldo</a>{% endblock %}
+{% block inner %}
+    <p>Aktualny stan Twojego salda: <strong>{{ number_format(data.balance) }} zł </strong></p>
+    <div class="row mb-1">
+        <div class="col">
+            <a href="/finanse/doladuj" class="btn">doładuj</a>
+        </div>
+    </div>
+
+    {% if isset(data.history) %}
+
+        <div class="table-details-wrapper mb-1">
+            <table class="table-details">
+                <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Data</th>
+                        <th>Opis</th>
+                        <th class="text-end">Kwota</th>
+                        <th class="text-end">Saldo</th>
+                    </tr>
+                </thead>
+
+            {% for entry in data.history %}
+                {{ include('balance-entry-row.twig', {entry: entry}) }}
+            {% endfor %}
+        </table>
+        </div>
+    {% endif %}
+        {# <div class="pager">
+            <span class="prev"> </span><span class="current">1</span> | <span><a href="/finanse/saldo/index/page:2/sort:Saldo.data/direction:DESC">2</a></span><span class="next"><a href="/finanse/saldo/index/page:2/sort:Saldo.data/direction:DESC" rel="next"> »</a></span><span><a href="/finanse/saldo/index/page:2/sort:Saldo.data/direction:DESC" rel="last"> »»</a></span><br />
+            <div class="counter">Strona 1 z 2, wyświetlono pozycje od 1 do 40, łącznie pozycji: 60.</div>
+        </div>  #}
+{% endblock %}
