@@ -110,8 +110,8 @@
     </div>
 {% endblock %}
 {% block bottomcontent %}
-    <script type="text/javascript" src="/js/Modal.js?{{ time() }}"></script>
-    <script type="text/javascript" src="/js/orders.js?{{ time() }}"></script>
+    <script type="text/javascript" src="/assets/js/Modal.js?{{ time() }}"></script>
+    <script type="text/javascript" src="/assets/js/orders.js?{{ time() }}"></script>
     <script type="text/javascript">const integrations = {{ data.integrations|json_encode|raw }};</script>
     <template>Celem ułatwienia Waszej pracy udostępniamy dwa sposoby integracji z naszymi usługami:
         <p><strong>Wewnętrzne</strong> - Zamówienia pobierane są do naszego systemu i z jego poziomu następuje rejestracja przesyłek</p>

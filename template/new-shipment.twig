@@ -128,7 +128,7 @@
                     </label>
 
                     <label>
-                        <input name="dispatchMethod" type="radio" value="courier" {% if data.shipment.dispatchMethod.code==='courier' and notset(data.shipment.options.orderPickup) %}checked{% endif %}/>
+                        <input name="dispatchMethod" type="radio" value="courier" {% if data.shipment.dispatchMethod.code==='courier' and empty(data.shipment.options.orderPickup) %}checked{% endif %}/>
                         Nie zamawiaj podjazdu kuriera
                     </label>
 
@@ -455,6 +455,6 @@
 
 
 {% block bottomcontent %}
-    <script type="text/javascript" src="/js/shipment.js?{{ time() }}"></script>
+    <script type="text/javascript" src="/assets/js/shipment.js?{{ time() }}"></script>
     <script type="text/javascript">const originShipment = {{ data.shipment|json_encode|raw }};</script>
 {% endblock %}

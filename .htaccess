@@ -1,0 +1,10 @@
+RewriteCond %{DOCUMENT_ROOT}/template%{REQUEST_URI} -f
+RewriteCond %{REQUEST_URI} assets/(.*)\.(css|js|jpg|png|gif|ico|svg)$ [NC]
+RewriteRule ^(.*)$ /template%{REQUEST_URI} [L]
+
+RewriteCond %{REQUEST_URI} \.php$ [NC]
+RewriteCond %{REQUEST_URI} !^/index\.php$ [NC]
+RewriteRule ^.* /index.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^.* /index.php [L]

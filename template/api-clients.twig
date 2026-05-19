@@ -27,9 +27,9 @@
     </div>
 {% endblock %}
 {% block bottomcontent %}
-    <script type="text/javascript" src="/js/Modal.js?{{ time() }}"></script>
+    <script type="text/javascript" src="/assets/js/Modal.js?{{ time() }}"></script>
     <script type="text/javascript">const clients = {{ data.clients|json_encode|raw }};</script>
-    <script type="text/javascript" src="/js/api-clients.js?{{ time() }}"></script></script>
+    <script type="text/javascript" src="/assets/js/api-clients.js?{{ time() }}"></script></script>
     <template>
         <form name="new-client">
             <table class="text-center">

@@ -3,12 +3,6 @@
 {% block header %}Książka adresowa{% endblock %}
 {% block title %}Książka adresowa{% endblock %}
 {% block inner %}
-{# <form action="/kontakty" class="filter-form" id="AdresIndexForm" method="post" accept-charset="utf-8"><div style="display:none;"><input type="hidden" name="_method" value="POST"/></div><input type="hidden" name="data[Adres][usun_filtr]" id="clear-filter-field" value="0"/><div class="input text"><label for="AdresTekst">Wyszukaj adres:</label><input name="data[Adres][tekst]" value="" type="text" id="AdresTekst"/></div><div>
-                <input class="button" type="submit" value="Filtruj"/><button class="button button-grey clear-filter-button" type="submit">Usuń filtr</button></div>
-        </form>
-
-        <a href="/kontakty/import" class="button">Importuj</a>
-        <a href="/kontakty/eksport" class="button">Eksportuj</a><br /><br /> #}
 
     <div class="mb-1">
          <form>
@@ -35,16 +29,6 @@
                         <th>Nazwisko, Imię, Firma<br>Kraj, Miasto, Adres</th>
                         <th>Telefon</th>
                         <th></th>
-                        {#
-                        <th>
-                            <a href="/kontakty/index/sort:Adres.nazwa/direction:desc" class="asc">Nazwa</a>			</th>
-                        <th>
-                            <a href="/kontakty/index/sort:Adres.nazwisko/direction:asc">Nazwisko</a>
-                            <a href="/kontakty/index/sort:Adres.imie/direction:asc">Imię</a>,
-                            <a href="/kontakty/index/sort:Adres.firma/direction:asc">Firma</a><br />
-                            <a href="/kontakty/index/sort:Adres.miasto/direction:asc">Miasto</a>, <a href="/kontakty/index/sort:Adres.ulica/direction:asc">Ulica</a>			</th>
-                        <th class="ca"><a href="/kontakty/index/sort:Adres.telefon/direction:asc">Telefon</a></th>
-                        <th></th> #}
                     </tr>
                 </thead>
                 <tbody>
@@ -66,9 +50,5 @@
                 </tbody>
         </table>
         </div>
-        {# <div class="pager">
-            <span class="prev"> </span><span class="next"> </span><br />
-            <div class="counter">Strona 1 z 1, wyświetlono pozycje od 1 do 1, łącznie pozycji: 1.</div>
-        </div>  #}
     {% endif %}
 {% endblock %}
