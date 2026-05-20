@@ -11,7 +11,7 @@ class ShowNewShipmentForm extends ShowShipmentForm
     {
         $account = $this->getAccount();
         $sender = $account->addresses->sender ?? $account->addresses->billing;
-        $shipment = [];
+        $shipment = $_SESSION['shipment'] ?? [];
         $recipient = $_SESSION['recipient'] ?? null;
         return $this->twig->render('new-shipment.twig', [
             'sender' => $sender,
