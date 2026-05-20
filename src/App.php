@@ -92,8 +92,6 @@ class App
     {
         $routes = $this->getRoutes();
         if (empty($routes)) {
-            print_r($_SERVER);
-            exit;
             http_response_code(404);
             exit;
         }
