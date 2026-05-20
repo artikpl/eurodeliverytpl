@@ -59,7 +59,7 @@
                         <a href="/przesylki/{{ shipment.id }}">{{ shipment.id }}</a>
                     </td>
                     <td class="text-center text-nowrap">
-                        <p>{{ date('Y-m-d H:i', shipment.added.time) }}</p>
+                        <p>{{ date('Y-m-d H:i', shipment.added.time/1000000) }}</p>
                         <p>{{ shipment.dispatchDate }}</p>
                     </td>
                     <td class="text-center">

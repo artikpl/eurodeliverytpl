@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Route;
 
-#[Route('/przesylki/(?<id>.*)','GET')]
+#[Route('/przesylki/(?<id>[0-9]+)','GET')]
 class ShowShipmentDetails extends AuthenticatedController
 {
     public function __invoke(array $vars)

@@ -41,7 +41,7 @@
                             </tr>
                             <tr>
                                 <td>Data zamówienia:</td>
-                                <td>{{ date('Y-m-d H:i', data.shipment.added.time) }}</td>
+                                <td>{{ date('Y-m-d H:i', data.shipment.added.time/1000000) }}</td>
                             </tr>
                             {% if isset(data.shipment.content) %}
                             <tr>
